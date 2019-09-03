@@ -1,11 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import Timer from './timer'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <PaperProvider theme={theme}>
+      <View style={styles.container}>
+        <Timer initialTimeInSeconds={60} initialIsActive={true} />
+      </View>
+    </PaperProvider>
   );
 }
 
@@ -17,3 +21,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'tomato',
+    accent: 'yellow',
+  },
+};
