@@ -1,14 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-import Timer from './timer'
+import WorkoutScreen from './WorkoutScreen';
+
+let dummyData: Workout = {
+  exercises: [{
+    title: "Barbell Rows",
+    sets: 5,
+    repetitions: 6,
+    weightInKg: 60
+  }]
+}
 
 export default function App() {
   return (
     <PaperProvider theme={theme}>
-      <View style={styles.container}>
-        <Timer initialTimeInSeconds={60} initialIsActive={true} />
-      </View>
+      <WorkoutScreen workout={dummyData} />
     </PaperProvider>
   );
 }
