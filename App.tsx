@@ -4,17 +4,6 @@ import { NativeRouter, Route, Switch } from "react-router-native";
 import Workout from "./Workout";
 import Home from "./Home";
 
-let dummyData: Workout = {
-    exercises: [
-        {
-            title: "Barbell Rows",
-            sets: 5,
-            repetitions: 6,
-            weightInKg: 60
-        }
-    ]
-};
-
 export default function App() {
     return (
         <PaperProvider theme={theme}>
@@ -25,7 +14,7 @@ export default function App() {
                         exact
                         path="/Workout"
                         render={props => (
-                            <Workout {...props} workout={dummyData} />
+                            <Workout {...props} workout={dummyData[0]} />
                         )}
                     />
                 </Switch>
