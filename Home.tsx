@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, FlatList } from "react-native";
-import { List, Divider } from "react-native-paper";
+import { List, Divider, FAB } from "react-native-paper";
 import { DummyData } from "./DummyData";
 
 const Home = ({ history }) => {
@@ -14,6 +14,11 @@ const Home = ({ history }) => {
                 keyExtractor={item => item.title}
                 ItemSeparatorComponent={Divider}
                 data={DummyData}
+            />
+            <FAB
+                style={styles.fab}
+                icon="add"
+                onPress={() => console.log("Pressed")}
             />
         </View>
     );
@@ -34,5 +39,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "center"
+    },
+    fab: {
+        position: "absolute",
+        margin: 24,
+        right: 0,
+        bottom: 0
     }
 });
