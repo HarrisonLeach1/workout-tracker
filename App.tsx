@@ -1,7 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, Switch } from "react-native";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import { NativeRouter, Route } from "react-router-native";
+import { NativeRouter, Route, Switch } from "react-router-native";
 import Workout from "./Workout";
 import Home from "./Home";
 
@@ -20,13 +19,16 @@ export default function App() {
     return (
         <PaperProvider theme={theme}>
             <NativeRouter>
-                {/*TODO: Figure out why <Switch/> component is pushing Home elements to top left */}
-                <Route exact path="/" component={Home} />
-                <Route
-                    exact
-                    path="/Workout"
-                    render={props => <Workout {...props} workout={dummyData} />}
-                />
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route
+                        exact
+                        path="/Workout"
+                        render={props => (
+                            <Workout {...props} workout={dummyData} />
+                        )}
+                    />
+                </Switch>
             </NativeRouter>
         </PaperProvider>
     );
