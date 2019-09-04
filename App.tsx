@@ -3,6 +3,7 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { NativeRouter, Route, Switch } from "react-router-native";
 import Workout from "./Workout";
 import Home from "./Home";
+import { DummyData } from "./DummyData";
 
 export default function App() {
     return (
@@ -14,7 +15,7 @@ export default function App() {
                         exact
                         path="/Workout"
                         render={props => (
-                            <Workout {...props} workout={dummyData[0]} />
+                            <Workout {...props} workout={DummyData[0]} />
                         )}
                     />
                 </Switch>
