@@ -3,11 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import Timer from './Timer'
 
-interface IWorkoutScreenProps {
+interface IWorkoutProps {
     workout: Workout
 }
 
-const WorkoutScreen = ({ workout }: IWorkoutScreenProps) => {
+const Workout = ({ workout }: IWorkoutProps) => {
     const [currentExercise, setCurrentExercise] = useState<Exercise>(workout.exercises[0]);
     const [currentSet, setCurrentSet] = useState(1);
 
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default WorkoutScreen;
+export default Workout;
