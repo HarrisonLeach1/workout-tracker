@@ -1,31 +1,12 @@
 import React, { useState } from "react";
-import {
-    View,
-    StyleSheet,
-    KeyboardAvoidingView,
-    ScrollView,
-    FlatList
-} from "react-native";
-import {
-    TextInput,
-    Appbar,
-    List,
-    Divider,
-    Subheading,
-    Headline,
-    Title
-} from "react-native-paper";
+import { StyleSheet, KeyboardAvoidingView, FlatList } from "react-native";
+import { TextInput, List, Divider, Title } from "react-native-paper";
 import useForm from "react-hook-form";
 import { DummyData } from "./DummyData";
 
 const CreateWorkout = ({ history }) => {
-    const [exercises, setExercises] = useState<Exercise[]>(
-        DummyData[0].exercises
-    );
-    const { register, handleSubmit } = useForm();
-    const onSubmit = console.log;
-
-    const handleBackPress = () => history.push("/");
+    const [exercises] = useState<Exercise[]>(DummyData[0].exercises);
+    const { register } = useForm();
 
     return (
         <React.Fragment>
