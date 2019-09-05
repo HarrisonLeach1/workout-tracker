@@ -1,37 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     View,
     StyleSheet,
     KeyboardAvoidingView,
-    ScrollView
+    ScrollView,
+    FlatList
 } from "react-native";
-import { TextInput } from "react-native-paper";
+import {
+    TextInput,
+    Appbar,
+    List,
+    Divider,
+    Subheading,
+    Headline,
+    Title
+} from "react-native-paper";
 import useForm from "react-hook-form";
+import { DummyData } from "./DummyData";
 
-const CreateWorkout = () => {
+const CreateWorkout = ({ history }) => {
+    const [exercises, setExercises] = useState<Exercise[]>(
+        DummyData[0].exercises
+    );
     const { register, handleSubmit } = useForm();
     const onSubmit = console.log;
 
+    const handleBackPress = () => history.push("/");
+
     return (
-        <KeyboardAvoidingView
-            style={styles.wrapper}
-            behavior="padding"
-            keyboardVerticalOffset={80}
-        >
-            <ScrollView
-                style={styles.container}
-                keyboardShouldPersistTaps={"always"}
-                removeClippedSubviews={false}
+        <React.Fragment>
+            <KeyboardAvoidingView
+                style={styles.wrapper}
+                behavior="padding"
+                keyboardVerticalOffset={80}
             >
-                {/*TODO: Is a Form component needed here? For semantics?*/}
                 <TextInput
                     style={styles.inputContainerStyle}
                     label="Workout Name"
                     placeholder="Type something"
                     ref={register}
                 />
-            </ScrollView>
-        </KeyboardAvoidingView>
+                <Title style={styles.exerciseTitle}>Exercises</Title>
+                <Divider />
+                <FlatList
+                    renderItem={({ item }) => <List.Item title={item.title} />}
+                    keyExtractor={item => item.title}
+                    ItemSeparatorComponent={Divider}
+                    data={exercises}
+                    ListFooterComponent={
+                        <React.Fragment>
+                            <Divider />
+                            <List.Item
+                                title="Add Exercise"
+                                left={props => (
+                                    <List.Icon {...props} icon="add" />
+                                )}
+                                onPress={() =>
+                                    console.log("Pressed add exercise")
+                                }
+                            />
+                            <Divider />
+                        </React.Fragment>
+                    }
+                />
+            </KeyboardAvoidingView>
+        </React.Fragment>
     );
 };
 
@@ -47,7 +80,8 @@ const styles = StyleSheet.create({
     },
     inputContainerStyle: {
         margin: 8
-    }
+    },
+    exerciseTitle: { margin: 16 }
 });
 
 export default CreateWorkout;
