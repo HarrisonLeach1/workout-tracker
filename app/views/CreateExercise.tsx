@@ -1,11 +1,8 @@
 import React from "react";
-import useForm from "react-hook-form";
 import { StyleSheet, KeyboardAvoidingView, ScrollView } from "react-native";
-import { TextInput } from "react-native-paper";
+import { TextInput, Button } from "react-native-paper";
 
 const CreateExercise = ({ history }) => {
-    const { register } = useForm();
-
     return (
         <KeyboardAvoidingView
             style={styles.wrapper}
@@ -21,30 +18,29 @@ const CreateExercise = ({ history }) => {
                     style={styles.inputContainerStyle}
                     label="Exercise Name"
                     placeholder="Type something"
-                    ref={register}
                 />
 
                 <TextInput
                     style={styles.inputContainerStyle}
                     label="Number of Sets"
                     placeholder="Type something"
-                    ref={register}
                 />
 
                 <TextInput
                     style={styles.inputContainerStyle}
                     label="Goal Repetitions"
                     placeholder="Type something"
-                    ref={register}
                 />
 
                 <TextInput
                     style={styles.inputContainerStyle}
                     label="Goal Weight (Kg)"
                     placeholder="Type something"
-                    ref={register}
                 />
             </ScrollView>
+            <Button mode="contained" onPress={console.log}>
+                Create Exercise
+            </Button>
         </KeyboardAvoidingView>
     );
 };

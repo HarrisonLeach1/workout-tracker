@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, KeyboardAvoidingView, FlatList } from "react-native";
 import { TextInput, List, Divider, Title } from "react-native-paper";
-import useForm from "react-hook-form";
 import { DummyData } from "../modules/DummyData";
 
 const CreateWorkout = ({ history }) => {
     const [exercises] = useState<Exercise[]>(DummyData[0].exercises);
-    const { register } = useForm();
 
     return (
         <React.Fragment>
@@ -19,7 +17,6 @@ const CreateWorkout = ({ history }) => {
                     style={styles.inputContainerStyle}
                     label="Workout Name"
                     placeholder="Type something"
-                    ref={register}
                 />
                 <Title style={styles.exerciseTitle}>Exercises</Title>
                 <Divider />
