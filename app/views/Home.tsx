@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View, Button, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import { List, Divider, FAB } from "react-native-paper";
-import { DummyData } from "./DummyData";
+import { DummyData } from "../modules/DummyData";
 
 const Home = ({ history }) => {
     return (

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, KeyboardAvoidingView, FlatList } from "react-native";
 import { TextInput, List, Divider, Title } from "react-native-paper";
 import useForm from "react-hook-form";
-import { DummyData } from "./DummyData";
+import { DummyData } from "../modules/DummyData";
 
 const CreateWorkout = ({ history }) => {
     const [exercises] = useState<Exercise[]>(DummyData[0].exercises);

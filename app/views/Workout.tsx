@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
-import Timer from "./Timer";
+import Timer from "../components/Timer";
 import { RouteComponentProps } from "react-router-native";
 
 interface IWorkoutProps extends RouteComponentProps {

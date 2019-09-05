@@ -1,10 +1,10 @@
 import React from "react";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { NativeRouter, Route, Switch } from "react-router-native";
-import Workout from "./Workout";
-import Home from "./Home";
-import { DummyData } from "./DummyData";
-import CreateWorkout from "./CreateWorkout";
+import Workout from "./views/Workout";
+import Home from "./views/Home";
+import { DummyData } from "./modules/DummyData";
+import CreateWorkout from "./views/CreateWorkout";
 
 export default function App() {
     return (
