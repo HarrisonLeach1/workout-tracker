@@ -18,7 +18,7 @@ const Home = ({ history }) => {
             <FAB
                 style={styles.fab}
                 icon="add"
-                onPress={() => console.log("Pressed")}
+                onPress={() => history.push("/CreateWorkout")}
             />
         </View>
     );

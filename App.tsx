@@ -4,6 +4,7 @@ import { NativeRouter, Route, Switch } from "react-router-native";
 import Workout from "./Workout";
 import Home from "./Home";
 import { DummyData } from "./DummyData";
+import CreateWorkout from "./CreateWorkout";
 
 export default function App() {
     return (
@@ -17,6 +18,11 @@ export default function App() {
                         render={props => (
                             <Workout {...props} workout={DummyData[0]} />
                         )}
+                    />
+                    <Route
+                        exact
+                        path="/CreateWorkout"
+                        component={CreateWorkout}
                     />
                 </Switch>
             </NativeRouter>
