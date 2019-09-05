@@ -36,9 +36,7 @@ const CreateWorkout = ({ history }) => {
                                 left={props => (
                                     <List.Icon {...props} icon="add" />
                                 )}
-                                onPress={() =>
-                                    console.log("Pressed add exercise")
-                                }
+                                onPress={() => history.push("/CreateExercise")}
                             />
                             <Divider />
                         </React.Fragment>
