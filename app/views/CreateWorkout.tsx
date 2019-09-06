@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, KeyboardAvoidingView, FlatList } from "react-native";
 import { TextInput, List, Divider, Title } from "react-native-paper";
 import { DummyData } from "../modules/DummyData";
+import { WorkoutContext, WorkoutContextProps } from "../modules/WorkoutContext";
 
 const CreateWorkout = ({ history }) => {
-    const [exercises] = useState<Exercise[]>(DummyData[0].exercises);
+    const { workout, setWorkout } = useContext<WorkoutContextProps>(
+        WorkoutContext
+    );
 
     return (
         <React.Fragment>
@@ -24,7 +27,7 @@ const CreateWorkout = ({ history }) => {
                     renderItem={({ item }) => <List.Item title={item.title} />}
                     keyExtractor={item => item.title}
                     ItemSeparatorComponent={Divider}
-                    data={exercises}
+                    data={workout.exercises}
                     ListFooterComponent={
                         <React.Fragment>
                             <Divider />
