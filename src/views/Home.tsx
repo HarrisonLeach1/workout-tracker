@@ -5,6 +5,7 @@ import { listWorkouts } from "../graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
 import { ListWorkoutsQuery, ListWorkoutsQueryVariables } from "../API";
 import gql from "graphql-tag";
+import { DummyData } from "../modules/DummyData";
 
 const Home = ({ history, theme }) => {
     const { colors } = theme;

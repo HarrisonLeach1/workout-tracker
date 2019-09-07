@@ -69,7 +69,7 @@ const App = () => {
 
 const WithProvider = () => (
     // TODO: Fix cast here by changing AWSAppSyncClient
-    <ApolloProvider client={client as any}>
+    <ApolloProvider client={client}>
         <App />
     </ApolloProvider>
 );
