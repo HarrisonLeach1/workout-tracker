@@ -10,13 +10,12 @@ import { WorkoutContext, WorkoutInputs } from "./src/modules/WorkoutContext";
 import { ApolloProvider } from "@apollo/react-hooks";
 import AWSAppSyncClient, { AUTH_TYPE } from "aws-appsync";
 import awsconfig from "./aws-exports";
+import ApolloClient from "apollo-boost";
 
-const client = new AWSAppSyncClient({
-    url: awsconfig.aws_appsync_graphqlEndpoint,
-    region: awsconfig.aws_appsync_region,
-    auth: {
-        type: AUTH_TYPE.API_KEY, // or type: awsconfig.aws_appsync_authenticationType,
-        apiKey: awsconfig.aws_appsync_apiKey
+const client = new ApolloClient({
+    uri: awsconfig.aws_appsync_graphqlEndpoint,
+    headers: {
+        "X-Api-Key": awsconfig.aws_appsync_apiKey
     }
 });
 
@@ -68,8 +67,8 @@ const App = () => {
 };
 
 const WithProvider = () => (
-    // TODO: Fix cast here by changing AWSAppSyncClient
-    <ApolloProvider client={client}>
+    // TODO: Fix cast here by adding properties to client
+    <ApolloProvider client={client as any}>
         <App />
     </ApolloProvider>
 );

@@ -13,6 +13,7 @@
         "@aws-amplify/api": "^1.0.42",
         "@aws-amplify/pubsub": "^1.1.0",
         "@react-native-community/netinfo": "~3.2.1",
+        "apollo-boost": "^0.4.4",
         "aws-appsync": "^2.0.0",
         "aws-appsync-react": "^2.0.0",
         "expo": "^34.0.1",
