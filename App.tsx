@@ -10,6 +10,7 @@ import { WorkoutContext } from "./src/modules/WorkoutContext";
 import { ApolloProvider } from "@apollo/react-hooks";
 import AWSAppSyncClient, { AUTH_TYPE } from "aws-appsync";
 import awsconfig from "./aws-exports";
+import { CreateWorkoutInput } from "./src/API";
 
 const client = new AWSAppSyncClient({
     url: awsconfig.aws_appsync_graphqlEndpoint,
@@ -20,10 +21,10 @@ const client = new AWSAppSyncClient({
     }
 });
 
-export default function App() {
-    const [workout, setWorkout] = useState<Workout>({
-        title: "",
-        exercises: DummyData[0].exercises
+const App = () => {
+    const [workout, setWorkout] = useState<CreateWorkoutInput>({
+        name: "",
+        exercises: []
     });
     const workoutValue = useMemo(() => ({ workout, setWorkout }), [
         workout,
@@ -33,34 +34,40 @@ export default function App() {
     return (
         <PaperProvider theme={theme}>
             <NativeRouter>
-                <ApolloProvider client={client}>
-                    <Switch>
-                        <Route exact path="/" component={Home} />
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route
+                        exact
+                        path="/Workout"
+                        render={props => (
+                            <Workout {...props} workout={DummyData[0]} />
+                        )}
+                    />
+                    <WorkoutContext.Provider value={workoutValue}>
                         <Route
                             exact
-                            path="/Workout"
-                            render={props => (
-                                <Workout {...props} workout={DummyData[0]} />
-                            )}
+                            path="/CreateWorkout"
+                            component={CreateWorkout}
                         />
-                        <WorkoutContext.Provider value={workoutValue}>
-                            <Route
-                                exact
-                                path="/CreateWorkout"
-                                component={CreateWorkout}
-                            />
-                            <Route
-                                exact
-                                path="/CreateExercise"
-                                component={CreateExercise}
-                            />
-                        </WorkoutContext.Provider>
-                    </Switch>
-                </ApolloProvider>
+                        <Route
+                            exact
+                            path="/CreateExercise"
+                            component={CreateExercise}
+                        />
+                    </WorkoutContext.Provider>
+                </Switch>
             </NativeRouter>
         </PaperProvider>
     );
-}
+};
+
+const WithProvider = () => (
+    <ApolloProvider client={client}>
+        <App />
+    </ApolloProvider>
+);
+
+export default WithProvider;
 
 const theme = {
     ...DefaultTheme,

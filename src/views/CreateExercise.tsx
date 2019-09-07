@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useContext } from "react";
 import {
     StyleSheet,
     KeyboardAvoidingView,
@@ -8,9 +8,10 @@ import {
 import { TextInput, Button } from "react-native-paper";
 import { Formik, FormikProps, FormikActions } from "formik";
 import { WorkoutContext, WorkoutContextProps } from "../modules/WorkoutContext";
+import { ExerciseInput } from "../API";
 
 interface ExerciseFormValues {
-    title: string;
+    name: string;
     sets: string;
     repetitions: string;
     weightInKg: string;
@@ -25,8 +26,8 @@ const CreateExercise = ({ history }) => {
         values: ExerciseFormValues,
         actions: FormikActions<ExerciseFormValues>
     ) => {
-        const exercise: Exercise = {
-            title: values.title,
+        const exercise: ExerciseInput = {
+            name: values.name,
             sets: +values.sets,
             repetitions: +values.repetitions,
             weightInKg: +values.weightInKg
@@ -53,7 +54,7 @@ const CreateExercise = ({ history }) => {
             >
                 <Formik
                     initialValues={{
-                        title: "",
+                        name: "",
                         sets: "3",
                         repetitions: "8",
                         weightInKg: "20"
@@ -66,9 +67,9 @@ const CreateExercise = ({ history }) => {
                                 style={styles.inputContainerStyle}
                                 label="Exercise Name"
                                 placeholder="Type something"
-                                onChangeText={props.handleChange("title")}
-                                onBlur={props.handleBlur("title")}
-                                value={props.values.title}
+                                onChangeText={props.handleChange("name")}
+                                onBlur={props.handleBlur("name")}
+                                value={props.values.name}
                             />
 
                             <TextInput

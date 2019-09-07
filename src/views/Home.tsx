@@ -10,8 +10,8 @@ const Home = ({ history }) => {
                 <Text>Graph</Text>
             </View>
             <FlatList
-                renderItem={({ item }) => <List.Item title={item.title} />}
-                keyExtractor={item => item.title}
+                renderItem={({ item }) => <List.Item title={item.name} />}
+                keyExtractor={item => item.name}
                 ItemSeparatorComponent={Divider}
                 data={DummyData}
             />

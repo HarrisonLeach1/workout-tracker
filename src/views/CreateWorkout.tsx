@@ -1,13 +1,31 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, KeyboardAvoidingView, FlatList } from "react-native";
-import { TextInput, List, Divider, Title } from "react-native-paper";
-import { DummyData } from "../modules/DummyData";
+import { TextInput, List, Divider, Title, Button } from "react-native-paper";
 import { WorkoutContext, WorkoutContextProps } from "../modules/WorkoutContext";
+import { useMutation } from "@apollo/react-hooks";
+import { createWorkout } from "../graphql/mutations";
+import { CreateWorkoutInput } from "../API";
+import gql from "graphql-tag";
 
 const CreateWorkout = ({ history }) => {
     const { workout, setWorkout } = useContext<WorkoutContextProps>(
         WorkoutContext
     );
+
+    const [addWorkout] = useMutation<any, CreateWorkoutInput>(
+        gql(createWorkout),
+        {
+            variables: {
+                name: workout.name,
+                exercises: workout.exercises
+            }
+        }
+    );
+
+    const handleCreate = () => {
+        addWorkout();
+        history.push("/");
+    };
 
     return (
         <React.Fragment>
@@ -20,12 +38,20 @@ const CreateWorkout = ({ history }) => {
                     style={styles.inputContainerStyle}
                     label="Workout Name"
                     placeholder="Type something"
+                    onChangeText={newText => {
+                        setWorkout(prev => {
+                            // could be error here because return prev prevents re-rendering
+                            prev.name = newText;
+                            return prev;
+                        });
+                    }}
+                    value={workout.name}
                 />
                 <Title style={styles.exerciseTitle}>Exercises</Title>
                 <Divider />
                 <FlatList
-                    renderItem={({ item }) => <List.Item title={item.title} />}
-                    keyExtractor={item => item.title}
+                    renderItem={({ item }) => <List.Item title={item.name} />}
+                    keyExtractor={item => item.name}
                     ItemSeparatorComponent={Divider}
                     data={workout.exercises}
                     ListFooterComponent={
@@ -42,6 +68,14 @@ const CreateWorkout = ({ history }) => {
                         </React.Fragment>
                     }
                 />
+                <Button
+                    mode="contained"
+                    /*TODO: Cast is needed here due to existing bug with Formik Types with React Native: 
+                                https://github.com/jaredpalmer/formik/issues/376 */
+                    onPress={handleCreate}
+                >
+                    Create Workout
+                </Button>
             </KeyboardAvoidingView>
         </React.Fragment>
     );

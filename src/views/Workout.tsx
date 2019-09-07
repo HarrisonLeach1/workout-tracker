@@ -4,11 +4,11 @@ import Timer from "../components/Timer";
 import { RouteComponentProps } from "react-router-native";
 
 interface IWorkoutProps extends RouteComponentProps {
-    workout: Workout;
+    workout: any;
 }
 
 const Workout = ({ history, workout }: IWorkoutProps) => {
-    const [currentExercise, setCurrentExercise] = useState<Exercise>(
+    const [currentExercise, setCurrentExercise] = useState<any>(
         workout.exercises[0]
     );
     const [currentSet, setCurrentSet] = useState(1);

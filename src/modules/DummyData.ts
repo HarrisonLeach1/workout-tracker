@@ -1,15 +1,17 @@
-export const DummyData: Workout[] = [
+import { CreateWorkoutInput } from "../API";
+
+export const DummyData: CreateWorkoutInput[] = [
     {
-        title: "Back",
+        name: "Back",
         exercises: [
             {
-                title: "Barbell Rows",
+                name: "Barbell Rows",
                 sets: 5,
                 repetitions: 6,
                 weightInKg: 60
             },
             {
-                title: "Deadlift",
+                name: "Deadlift",
                 sets: 5,
                 repetitions: 5,
                 weightInKg: 110
@@ -17,16 +19,16 @@ export const DummyData: Workout[] = [
         ]
     },
     {
-        title: "Chest",
+        name: "Chest",
         exercises: [
             {
-                title: "Barbell BenchPress",
+                name: "Barbell BenchPress",
                 sets: 5,
                 repetitions: 5,
                 weightInKg: 80
             },
             {
-                title: "Incline Dumbell Press",
+                name: "Incline Dumbell Press",
                 sets: 4,
                 repetitions: 6,
                 weightInKg: 24
@@ -34,16 +36,16 @@ export const DummyData: Workout[] = [
         ]
     },
     {
-        title: "Legs",
+        name: "Legs",
         exercises: [
             {
-                title: "Barbell Back Squats",
+                name: "Barbell Back Squats",
                 sets: 5,
                 repetitions: 5,
                 weightInKg: 90
             },
             {
-                title: "Leg Press",
+                name: "Leg Press",
                 sets: 4,
                 repetitions: 6,
                 weightInKg: 80
