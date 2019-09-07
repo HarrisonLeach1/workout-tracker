@@ -8,9 +8,9 @@ import {
     Theme,
     Divider
 } from "react-native-paper";
-import { ListWorkoutsQueryVariables, ListWorkoutsQuery } from "../API";
+import { ListWorkoutsQueryVariables, ListWorkoutsQuery } from "../../API";
 import gql from "graphql-tag";
-import { listWorkouts } from "../graphql/queries";
+import { listWorkouts } from "../../graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
 
 interface IWorkoutListProps extends RouteComponentProps {

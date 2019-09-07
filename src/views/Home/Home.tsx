@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Theme } from "react-native-paper";
-import WorkoutList from "../components/WorkoutList";
+import WorkoutList from "./WorkoutList";
 import { RouteComponentProps } from "react-router";
 
 interface IHomeProps extends RouteComponentProps {

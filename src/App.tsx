@@ -1,14 +1,15 @@
 import React, { useState, useMemo } from "react";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { NativeRouter, Route, Switch } from "react-router-native";
-import Workout from "./src/views/Workout";
-import Home from "./src/views/Home";
-import CreateWorkout from "./src/views/CreateWorkout";
-import CreateExercise from "./src/views/CreateExercise";
-import { WorkoutContext, WorkoutInputs } from "./src/modules/WorkoutContext";
+import Workout from "./views/Workout/Workout";
+import Home from "./views/Home/Home";
+import CreateWorkout from "./views/Create/CreateWorkout";
+import CreateExercise from "./views/Create/CreateExercise";
+import { WorkoutContext, WorkoutInputs } from "./modules/WorkoutContext";
 import { ApolloProvider } from "@apollo/react-hooks";
-import awsconfig from "./aws-exports";
+import awsconfig from "../aws-exports";
 import ApolloClient from "apollo-boost";
+import { registerRootComponent } from "expo";
 
 const client = new ApolloClient({
     uri: awsconfig.aws_appsync_graphqlEndpoint,
@@ -82,11 +83,11 @@ const WithProvider = () => (
     </ApolloProvider>
 );
 
-export default WithProvider;
-
 const theme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors
     }
 };
+
+export default registerRootComponent(WithProvider);

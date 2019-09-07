@@ -7,8 +7,11 @@ import {
 } from "react-native";
 import { TextInput, Button, Appbar } from "react-native-paper";
 import { Formik, FormikProps, FormikActions } from "formik";
-import { WorkoutContext, WorkoutContextProps } from "../modules/WorkoutContext";
-import { CreateExerciseInput } from "../API";
+import {
+    WorkoutContext,
+    WorkoutContextProps
+} from "../../modules/WorkoutContext";
+import { CreateExerciseInput } from "../../API";
 
 interface ExerciseFormValues {
     name: string;

@@ -8,15 +8,18 @@ import {
     Button,
     Appbar
 } from "react-native-paper";
-import { WorkoutContext, WorkoutContextProps } from "../modules/WorkoutContext";
+import {
+    WorkoutContext,
+    WorkoutContextProps
+} from "../../modules/WorkoutContext";
 import { useMutation } from "@apollo/react-hooks";
-import { createWorkout, createExercise } from "../graphql/mutations";
+import { createWorkout, createExercise } from "../../graphql/mutations";
 import {
     CreateWorkoutMutation,
     CreateWorkoutMutationVariables,
     CreateExerciseMutation,
     CreateExerciseMutationVariables
-} from "../API";
+} from "../../API";
 import gql from "graphql-tag";
 import { Formik, FormikProps } from "formik";
 import { ExecutionResult } from "apollo-link";
