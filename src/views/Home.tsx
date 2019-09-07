@@ -1,53 +1,21 @@
 import React from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
-import { List, Divider, FAB, ActivityIndicator } from "react-native-paper";
-import { listWorkouts } from "../graphql/queries";
-import { useQuery } from "@apollo/react-hooks";
-import { ListWorkoutsQuery, ListWorkoutsQueryVariables } from "../API";
-import gql from "graphql-tag";
+import { StyleSheet, Text, View } from "react-native";
+import { Theme } from "react-native-paper";
+import WorkoutList from "../components/WorkoutList";
+import { RouteComponentProps } from "react-router";
 
-const Home = ({ history, theme }) => {
-    const { colors } = theme;
+interface IHomeProps extends RouteComponentProps {
+    theme: Theme;
+    onWorkoutPress: (workoutId: string) => void;
+}
 
-    const { loading, error, data } = useQuery<
-        ListWorkoutsQuery,
-        ListWorkoutsQueryVariables
-    >(gql(listWorkouts), {
-        variables: { limit: 5 }
-    });
-
+const Home = (props: IHomeProps) => {
     return (
         <View style={styles.container}>
             <View style={styles.graph}>
                 <Text>Graph</Text>
             </View>
-            <View style={styles.container}>
-                {loading ? (
-                    <ActivityIndicator
-                        size={"large"}
-                        animating={true}
-                        color={colors.primary}
-                    />
-                ) : data ? (
-                    <React.Fragment>
-                        <FlatList
-                            renderItem={({ item }) => (
-                                <List.Item title={item.name} />
-                            )}
-                            keyExtractor={item => item.id}
-                            ItemSeparatorComponent={Divider}
-                            data={data.listWorkouts.items}
-                        />
-                        <FAB
-                            style={styles.fab}
-                            icon="add"
-                            onPress={() => history.push("/CreateWorkout")}
-                        />
-                    </React.Fragment>
-                ) : (
-                    <Text> Error Loading Workouts </Text>
-                )}
-            </View>
+            <WorkoutList {...props} />
         </View>
     );
 };
@@ -67,11 +35,5 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "center"
-    },
-    fab: {
-        position: "absolute",
-        margin: 24,
-        right: 0,
-        bottom: 0
     }
 });

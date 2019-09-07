@@ -3,12 +3,10 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { NativeRouter, Route, Switch } from "react-router-native";
 import Workout from "./src/views/Workout";
 import Home from "./src/views/Home";
-import { DummyData } from "./src/modules/DummyData";
 import CreateWorkout from "./src/views/CreateWorkout";
 import CreateExercise from "./src/views/CreateExercise";
 import { WorkoutContext, WorkoutInputs } from "./src/modules/WorkoutContext";
 import { ApolloProvider } from "@apollo/react-hooks";
-import AWSAppSyncClient, { AUTH_TYPE } from "aws-appsync";
 import awsconfig from "./aws-exports";
 import ApolloClient from "apollo-boost";
 
@@ -32,6 +30,11 @@ const App = () => {
         setWorkout
     ]);
 
+    const [selectedWorkout, setSelectedWorkoutId] = useState<string>("");
+    const handleWorkoutPress = (workoutId: string) => {
+        setSelectedWorkoutId(workoutId);
+    };
+
     return (
         <PaperProvider theme={theme}>
             <NativeRouter>
@@ -39,13 +42,19 @@ const App = () => {
                     <Route
                         exact
                         path="/"
-                        render={props => <Home {...props} theme={theme} />}
+                        render={props => (
+                            <Home
+                                {...props}
+                                theme={theme}
+                                onWorkoutPress={handleWorkoutPress}
+                            />
+                        )}
                     />
                     <Route
                         exact
                         path="/Workout"
                         render={props => (
-                            <Workout {...props} workout={DummyData[0]} />
+                            <Workout {...props} workoutId={selectedWorkout} />
                         )}
                     />
                     <WorkoutContext.Provider value={workoutValue}>

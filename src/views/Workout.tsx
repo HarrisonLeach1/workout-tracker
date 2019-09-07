@@ -4,27 +4,22 @@ import Timer from "../components/Timer";
 import { RouteComponentProps } from "react-router-native";
 
 interface IWorkoutProps extends RouteComponentProps {
-    workout: any;
+    workoutId: string;
 }
 
-const Workout = ({ history, workout }: IWorkoutProps) => {
-    const [currentExercise, setCurrentExercise] = useState<any>(
-        workout.exercises[0]
-    );
-    const [currentSet, setCurrentSet] = useState(1);
-
+const Workout = ({ history, workoutId }: IWorkoutProps) => {
     return (
         <React.Fragment>
             <View style={styles.timerContainer}>
                 <Timer initialTimeInSeconds={6} initialIsActive={true} />
             </View>
             <View style={styles.workoutInfoContainer}>
-                <Text>{currentExercise.title}</Text>
+                <Text>{"currentExercise.title"}</Text>
                 <Text>
-                    Set: {currentSet} / {currentExercise.sets}
+                    Set: {"currentSet"} / {"currentExercise.sets"}
                 </Text>
-                <Text>Weight: {currentExercise.weightInKg} Kg</Text>
-                <Text>Reps: {currentExercise.repetitions}</Text>
+                <Text>Weight: {"currentExercise.weightInKg"} Kg</Text>
+                <Text>Reps: {"currentExercise.repetitions"}</Text>
                 <Button onPress={() => history.push("/")} title="Go Back" />
             </View>
         </React.Fragment>
