@@ -5,7 +5,7 @@ import {
     ScrollView,
     View
 } from "react-native";
-import { TextInput, Button } from "react-native-paper";
+import { TextInput, Button, Appbar } from "react-native-paper";
 import { Formik, FormikProps, FormikActions } from "formik";
 import { WorkoutContext, WorkoutContextProps } from "../modules/WorkoutContext";
 import { CreateExerciseInput } from "../API";
@@ -41,76 +41,91 @@ const CreateExercise = ({ history }) => {
         history.push("/CreateWorkout");
     };
 
+    const goBack = () => {
+        history.goBack();
+    };
+
     return (
-        <KeyboardAvoidingView
-            style={styles.wrapper}
-            behavior="padding"
-            keyboardVerticalOffset={0}
-        >
-            <ScrollView
-                style={styles.container}
-                keyboardShouldPersistTaps={"always"}
-                removeClippedSubviews={false}
+        <React.Fragment>
+            <Appbar.Header>
+                <Appbar.BackAction onPress={goBack} />
+                <Appbar.Content title="Create Exercise" />
+            </Appbar.Header>
+
+            <KeyboardAvoidingView
+                style={styles.wrapper}
+                behavior="padding"
+                keyboardVerticalOffset={0}
             >
-                <Formik
-                    initialValues={{
-                        name: "",
-                        sets: "3",
-                        repetitions: "8",
-                        weightInKg: "20"
-                    }}
-                    onSubmit={handleSubmit}
+                <ScrollView
+                    style={styles.container}
+                    keyboardShouldPersistTaps={"always"}
+                    removeClippedSubviews={false}
                 >
-                    {(props: FormikProps<ExerciseFormValues>) => (
-                        <View>
-                            <TextInput
-                                style={styles.inputContainerStyle}
-                                label="Exercise Name"
-                                placeholder="Type something"
-                                onChangeText={props.handleChange("name")}
-                                onBlur={props.handleBlur("name")}
-                                value={props.values.name}
-                            />
+                    <Formik
+                        initialValues={{
+                            name: "",
+                            sets: "3",
+                            repetitions: "8",
+                            weightInKg: "20"
+                        }}
+                        onSubmit={handleSubmit}
+                    >
+                        {(props: FormikProps<ExerciseFormValues>) => (
+                            <View>
+                                <TextInput
+                                    style={styles.inputContainerStyle}
+                                    label="Exercise Name"
+                                    placeholder="Type something"
+                                    onChangeText={props.handleChange("name")}
+                                    onBlur={props.handleBlur("name")}
+                                    value={props.values.name}
+                                />
 
-                            <TextInput
-                                style={styles.inputContainerStyle}
-                                label="Number of Sets"
-                                placeholder="Type something"
-                                onChangeText={props.handleChange("sets")}
-                                onBlur={props.handleBlur("sets")}
-                                value={props.values.sets}
-                            />
+                                <TextInput
+                                    style={styles.inputContainerStyle}
+                                    label="Number of Sets"
+                                    placeholder="Type something"
+                                    onChangeText={props.handleChange("sets")}
+                                    onBlur={props.handleBlur("sets")}
+                                    value={props.values.sets}
+                                />
 
-                            <TextInput
-                                style={styles.inputContainerStyle}
-                                label="Goal Repetitions"
-                                placeholder="Type something"
-                                onChangeText={props.handleChange("repetitions")}
-                                onBlur={props.handleBlur("repetitions")}
-                                value={props.values.repetitions}
-                            />
+                                <TextInput
+                                    style={styles.inputContainerStyle}
+                                    label="Goal Repetitions"
+                                    placeholder="Type something"
+                                    onChangeText={props.handleChange(
+                                        "repetitions"
+                                    )}
+                                    onBlur={props.handleBlur("repetitions")}
+                                    value={props.values.repetitions}
+                                />
 
-                            <TextInput
-                                style={styles.inputContainerStyle}
-                                label="Goal Weight (Kg)"
-                                placeholder="Type something"
-                                onChangeText={props.handleChange("weightInKg")}
-                                onBlur={props.handleBlur("weightInKg")}
-                                value={props.values.weightInKg}
-                            />
-                            <Button
-                                mode="contained"
-                                /*TODO: Cast is needed here due to existing bug with Formik Types with React Native: 
+                                <TextInput
+                                    style={styles.inputContainerStyle}
+                                    label="Goal Weight (Kg)"
+                                    placeholder="Type something"
+                                    onChangeText={props.handleChange(
+                                        "weightInKg"
+                                    )}
+                                    onBlur={props.handleBlur("weightInKg")}
+                                    value={props.values.weightInKg}
+                                />
+                                <Button
+                                    mode="contained"
+                                    /*TODO: Cast is needed here due to existing bug with Formik Types with React Native: 
                                 https://github.com/jaredpalmer/formik/issues/376 */
-                                onPress={props.handleSubmit as any}
-                            >
-                                Submit
-                            </Button>
-                        </View>
-                    )}
-                </Formik>
-            </ScrollView>
-        </KeyboardAvoidingView>
+                                    onPress={props.handleSubmit as any}
+                                >
+                                    Submit
+                                </Button>
+                            </View>
+                        )}
+                    </Formik>
+                </ScrollView>
+            </KeyboardAvoidingView>
+        </React.Fragment>
     );
 };
 

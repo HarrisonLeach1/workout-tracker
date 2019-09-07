@@ -1,6 +1,13 @@
 import React, { useContext } from "react";
 import { StyleSheet, KeyboardAvoidingView, FlatList, View } from "react-native";
-import { TextInput, List, Divider, Title, Button } from "react-native-paper";
+import {
+    TextInput,
+    List,
+    Divider,
+    Title,
+    Button,
+    Appbar
+} from "react-native-paper";
 import { WorkoutContext, WorkoutContextProps } from "../modules/WorkoutContext";
 import { useMutation } from "@apollo/react-hooks";
 import { createWorkout, createExercise } from "../graphql/mutations";
@@ -72,8 +79,16 @@ const CreateWorkout = ({ history }) => {
         history.push("/");
     };
 
+    const goBack = () => {
+        history.push("/");
+    };
+
     return (
         <React.Fragment>
+            <Appbar.Header>
+                <Appbar.BackAction onPress={goBack} />
+                <Appbar.Content title="Create Workout" />
+            </Appbar.Header>
             <KeyboardAvoidingView
                 style={styles.wrapper}
                 behavior="padding"
