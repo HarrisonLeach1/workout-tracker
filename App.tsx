@@ -37,7 +37,11 @@ const App = () => {
         <PaperProvider theme={theme}>
             <NativeRouter>
                 <Switch>
-                    <Route exact path="/" component={Home} />
+                    <Route
+                        exact
+                        path="/"
+                        render={props => <Home {...props} theme={theme} />}
+                    />
                     <Route
                         exact
                         path="/Workout"
@@ -64,7 +68,8 @@ const App = () => {
 };
 
 const WithProvider = () => (
-    <ApolloProvider client={client}>
+    // TODO: Fix cast here by changing AWSAppSyncClient
+    <ApolloProvider client={client as any}>
         <App />
     </ApolloProvider>
 );

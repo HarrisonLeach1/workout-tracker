@@ -43,7 +43,7 @@ const CreateWorkout = ({ history }) => {
         newWorkoutMutation: ExecutionResult<CreateWorkoutMutation>
     ) => {
         const workoutId = newWorkoutMutation.data.createWorkout.id;
-
+        console.log("Adding exercises for workout: " + workoutId);
         workout.createExercisesInput.forEach(createExerciseInput => {
             addExercise({
                 variables: {
@@ -61,6 +61,9 @@ const CreateWorkout = ({ history }) => {
             prev.createWorkoutInput.name = values.name;
             return prev;
         });
+        console.log(
+            "Creating workout with name: " + workout.createWorkoutInput.name
+        );
 
         const newWorkoutMutation = await addWorkout();
 
