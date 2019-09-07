@@ -3,17 +3,18 @@
 type Workout @model {
     id: ID!
     name: String
-    exercises: [Exercise]
+    exercises: [Exercise] @connection(name: "WorkoutExercises")
 }
 
 # @connection annotations are used by AWS AppSync to create foreign keys between
 # objects
 
 # Many-to-Many connections are not yet supported by AWS AppSync
-type Exercise {
+type Exercise @model {
     id: ID!
     name: String
     sets: Int
     repetitions: Int
     weightInKg: Int
+    workout: Workout @connection(name: "WorkoutExercises")
 }

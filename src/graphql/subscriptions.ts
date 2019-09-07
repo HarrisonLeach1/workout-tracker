@@ -6,11 +6,14 @@ export const onCreateWorkout = `subscription OnCreateWorkout {
     id
     name
     exercises {
-      id
-      name
-      sets
-      repetitions
-      weightInKg
+      items {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
+      nextToken
     }
   }
 }
@@ -20,11 +23,14 @@ export const onUpdateWorkout = `subscription OnUpdateWorkout {
     id
     name
     exercises {
-      id
-      name
-      sets
-      repetitions
-      weightInKg
+      items {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
+      nextToken
     }
   }
 }
@@ -34,11 +40,65 @@ export const onDeleteWorkout = `subscription OnDeleteWorkout {
     id
     name
     exercises {
+      items {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onCreateExercise = `subscription OnCreateExercise {
+  onCreateExercise {
+    id
+    name
+    sets
+    repetitions
+    weightInKg
+    workout {
       id
       name
-      sets
-      repetitions
-      weightInKg
+      exercises {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onUpdateExercise = `subscription OnUpdateExercise {
+  onUpdateExercise {
+    id
+    name
+    sets
+    repetitions
+    weightInKg
+    workout {
+      id
+      name
+      exercises {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onDeleteExercise = `subscription OnDeleteExercise {
+  onDeleteExercise {
+    id
+    name
+    sets
+    repetitions
+    weightInKg
+    workout {
+      id
+      name
+      exercises {
+        nextToken
+      }
     }
   }
 }

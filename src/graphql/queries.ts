@@ -6,11 +6,14 @@ export const getWorkout = `query GetWorkout($id: ID!) {
     id
     name
     exercises {
-      id
-      name
-      sets
-      repetitions
-      weightInKg
+      items {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
+      nextToken
     }
   }
 }
@@ -25,11 +28,45 @@ export const listWorkouts = `query ListWorkouts(
       id
       name
       exercises {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getExercise = `query GetExercise($id: ID!) {
+  getExercise(id: $id) {
+    id
+    name
+    sets
+    repetitions
+    weightInKg
+    workout {
+      id
+      name
+      exercises {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const listExercises = `query ListExercises(
+  $filter: ModelExerciseFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listExercises(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      sets
+      repetitions
+      weightInKg
+      workout {
         id
         name
-        sets
-        repetitions
-        weightInKg
       }
     }
     nextToken

@@ -8,7 +8,7 @@ import {
 import { TextInput, Button } from "react-native-paper";
 import { Formik, FormikProps, FormikActions } from "formik";
 import { WorkoutContext, WorkoutContextProps } from "../modules/WorkoutContext";
-import { ExerciseInput } from "../API";
+import { CreateExerciseInput } from "../API";
 
 interface ExerciseFormValues {
     name: string;
@@ -26,7 +26,7 @@ const CreateExercise = ({ history }) => {
         values: ExerciseFormValues,
         actions: FormikActions<ExerciseFormValues>
     ) => {
-        const exercise: ExerciseInput = {
+        const exercise: CreateExerciseInput = {
             name: values.name,
             sets: +values.sets,
             repetitions: +values.repetitions,
@@ -34,7 +34,7 @@ const CreateExercise = ({ history }) => {
         };
 
         setWorkout(prev => {
-            prev.exercises.push(exercise);
+            prev.createExercisesInput.push(exercise);
             return prev;
         });
 

@@ -1,29 +1,71 @@
 import React, { useContext } from "react";
-import { StyleSheet, KeyboardAvoidingView, FlatList } from "react-native";
+import { StyleSheet, KeyboardAvoidingView, FlatList, View } from "react-native";
 import { TextInput, List, Divider, Title, Button } from "react-native-paper";
 import { WorkoutContext, WorkoutContextProps } from "../modules/WorkoutContext";
 import { useMutation } from "@apollo/react-hooks";
-import { createWorkout } from "../graphql/mutations";
-import { CreateWorkoutInput } from "../API";
+import { createWorkout, createExercise } from "../graphql/mutations";
+import {
+    CreateWorkoutMutation,
+    CreateWorkoutMutationVariables,
+    CreateExerciseMutation,
+    CreateExerciseMutationVariables
+} from "../API";
 import gql from "graphql-tag";
+import { Formik, FormikProps } from "formik";
+import { ExecutionResult } from "apollo-link";
+
+interface WorkoutFormValues {
+    name: string;
+}
 
 const CreateWorkout = ({ history }) => {
     const { workout, setWorkout } = useContext<WorkoutContextProps>(
         WorkoutContext
     );
 
-    const [addWorkout] = useMutation<any, CreateWorkoutInput>(
-        gql(createWorkout),
-        {
-            variables: {
-                name: workout.name,
-                exercises: workout.exercises
+    const [addWorkout, { error, data }] = useMutation<
+        CreateWorkoutMutation,
+        CreateWorkoutMutationVariables
+    >(gql(createWorkout), {
+        variables: {
+            input: {
+                name: workout.createWorkoutInput.name
             }
         }
-    );
+    });
 
-    const handleCreate = () => {
-        addWorkout();
+    const [addExercise] = useMutation<
+        CreateExerciseMutation,
+        CreateExerciseMutationVariables
+    >(gql(createExercise));
+
+    const addExercises = (
+        newWorkoutMutation: ExecutionResult<CreateWorkoutMutation>
+    ) => {
+        const workoutId = newWorkoutMutation.data.createWorkout.id;
+
+        workout.createExercisesInput.forEach(createExerciseInput => {
+            addExercise({
+                variables: {
+                    input: {
+                        ...createExerciseInput,
+                        exerciseWorkoutId: workoutId
+                    }
+                }
+            });
+        });
+    };
+
+    const handleCreate = async (values: WorkoutFormValues) => {
+        setWorkout(prev => {
+            prev.createWorkoutInput.name = values.name;
+            return prev;
+        });
+
+        const newWorkoutMutation = await addWorkout();
+
+        await addExercises(newWorkoutMutation);
+
         history.push("/");
     };
 
@@ -34,48 +76,63 @@ const CreateWorkout = ({ history }) => {
                 behavior="padding"
                 keyboardVerticalOffset={80}
             >
-                <TextInput
-                    style={styles.inputContainerStyle}
-                    label="Workout Name"
-                    placeholder="Type something"
-                    onChangeText={newText => {
-                        setWorkout(prev => {
-                            // could be error here because return prev prevents re-rendering
-                            prev.name = newText;
-                            return prev;
-                        });
+                <Formik
+                    initialValues={{
+                        name: ""
                     }}
-                    value={workout.name}
-                />
-                <Title style={styles.exerciseTitle}>Exercises</Title>
-                <Divider />
-                <FlatList
-                    renderItem={({ item }) => <List.Item title={item.name} />}
-                    keyExtractor={item => item.name}
-                    ItemSeparatorComponent={Divider}
-                    data={workout.exercises}
-                    ListFooterComponent={
-                        <React.Fragment>
-                            <Divider />
-                            <List.Item
-                                title="Add Exercise"
-                                left={props => (
-                                    <List.Icon {...props} icon="add" />
-                                )}
-                                onPress={() => history.push("/CreateExercise")}
-                            />
-                            <Divider />
-                        </React.Fragment>
-                    }
-                />
-                <Button
-                    mode="contained"
-                    /*TODO: Cast is needed here due to existing bug with Formik Types with React Native: 
-                                https://github.com/jaredpalmer/formik/issues/376 */
-                    onPress={handleCreate}
+                    onSubmit={values => handleCreate(values)}
                 >
-                    Create Workout
-                </Button>
+                    {(props: FormikProps<WorkoutFormValues>) => (
+                        <View>
+                            <TextInput
+                                style={styles.inputContainerStyle}
+                                label="Workout Name"
+                                placeholder="Type something"
+                                onChangeText={props.handleChange("name")}
+                                onBlur={props.handleBlur("name")}
+                                value={props.values.name}
+                            />
+                            <Title style={styles.exerciseTitle}>
+                                Exercises
+                            </Title>
+                            <Divider />
+                            <FlatList
+                                renderItem={({ item }) => (
+                                    <List.Item title={item.name} />
+                                )}
+                                keyExtractor={item => item.name}
+                                ItemSeparatorComponent={Divider}
+                                data={workout.createExercisesInput}
+                                ListFooterComponent={
+                                    <React.Fragment>
+                                        <Divider />
+                                        <List.Item
+                                            title="Add Exercise"
+                                            left={props => (
+                                                <List.Icon
+                                                    {...props}
+                                                    icon="add"
+                                                />
+                                            )}
+                                            onPress={() =>
+                                                history.push("/CreateExercise")
+                                            }
+                                        />
+                                        <Divider />
+                                    </React.Fragment>
+                                }
+                            />
+                            <Button
+                                mode="contained"
+                                /*TODO: Cast is needed here due to existing bug with Formik Types with React Native: 
+                                https://github.com/jaredpalmer/formik/issues/376 */
+                                onPress={props.handleSubmit as any}
+                            >
+                                Create Workout
+                            </Button>
+                        </View>
+                    )}
+                </Formik>
             </KeyboardAvoidingView>
         </React.Fragment>
     );

@@ -6,11 +6,10 @@ import Home from "./src/views/Home";
 import { DummyData } from "./src/modules/DummyData";
 import CreateWorkout from "./src/views/CreateWorkout";
 import CreateExercise from "./src/views/CreateExercise";
-import { WorkoutContext } from "./src/modules/WorkoutContext";
+import { WorkoutContext, WorkoutInputs } from "./src/modules/WorkoutContext";
 import { ApolloProvider } from "@apollo/react-hooks";
 import AWSAppSyncClient, { AUTH_TYPE } from "aws-appsync";
 import awsconfig from "./aws-exports";
-import { CreateWorkoutInput } from "./src/API";
 
 const client = new AWSAppSyncClient({
     url: awsconfig.aws_appsync_graphqlEndpoint,
@@ -22,10 +21,13 @@ const client = new AWSAppSyncClient({
 });
 
 const App = () => {
-    const [workout, setWorkout] = useState<CreateWorkoutInput>({
-        name: "",
-        exercises: []
+    const [workout, setWorkout] = useState<WorkoutInputs>({
+        createWorkoutInput: {
+            name: ""
+        },
+        createExercisesInput: []
     });
+
     const workoutValue = useMemo(() => ({ workout, setWorkout }), [
         workout,
         setWorkout

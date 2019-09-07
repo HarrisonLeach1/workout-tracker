@@ -6,11 +6,14 @@ export const createWorkout = `mutation CreateWorkout($input: CreateWorkoutInput!
     id
     name
     exercises {
-      id
-      name
-      sets
-      repetitions
-      weightInKg
+      items {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
+      nextToken
     }
   }
 }
@@ -20,11 +23,14 @@ export const updateWorkout = `mutation UpdateWorkout($input: UpdateWorkoutInput!
     id
     name
     exercises {
-      id
-      name
-      sets
-      repetitions
-      weightInKg
+      items {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
+      nextToken
     }
   }
 }
@@ -34,11 +40,65 @@ export const deleteWorkout = `mutation DeleteWorkout($input: DeleteWorkoutInput!
     id
     name
     exercises {
+      items {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const createExercise = `mutation CreateExercise($input: CreateExerciseInput!) {
+  createExercise(input: $input) {
+    id
+    name
+    sets
+    repetitions
+    weightInKg
+    workout {
       id
       name
-      sets
-      repetitions
-      weightInKg
+      exercises {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const updateExercise = `mutation UpdateExercise($input: UpdateExerciseInput!) {
+  updateExercise(input: $input) {
+    id
+    name
+    sets
+    repetitions
+    weightInKg
+    workout {
+      id
+      name
+      exercises {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const deleteExercise = `mutation DeleteExercise($input: DeleteExerciseInput!) {
+  deleteExercise(input: $input) {
+    id
+    name
+    sets
+    repetitions
+    weightInKg
+    workout {
+      id
+      name
+      exercises {
+        nextToken
+      }
     }
   }
 }

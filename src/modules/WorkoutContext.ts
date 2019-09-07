@@ -1,9 +1,14 @@
 import { createContext } from "react";
-import { CreateWorkoutInput } from "../API";
+import { CreateWorkoutInput, CreateExerciseInput } from "../API";
+
+export interface WorkoutInputs {
+    createWorkoutInput: CreateWorkoutInput;
+    createExercisesInput: CreateExerciseInput[];
+}
 
 export interface WorkoutContextProps {
-    workout: CreateWorkoutInput;
-    setWorkout: React.Dispatch<React.SetStateAction<CreateWorkoutInput>>;
+    workout: WorkoutInputs;
+    setWorkout: React.Dispatch<React.SetStateAction<WorkoutInputs>>;
 }
 
 export const WorkoutContext = createContext(null);
