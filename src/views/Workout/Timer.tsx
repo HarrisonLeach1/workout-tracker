@@ -1,25 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import React, { useEffect, useState } from "react";
+import { Text, View } from "react-native";
+import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 interface ITimerProps {
-    initialTimeInSeconds: number,
-    initialIsActive: boolean
+    initialTimeInSeconds: number;
+    isActive: boolean;
+    isDecrementing: boolean;
+    onZeroReached: () => void;
 }
 
-const Timer = ({ initialTimeInSeconds, initialIsActive }: ITimerProps) => {
-
+const Timer = ({
+    initialTimeInSeconds,
+    isActive,
+    isDecrementing,
+    onZeroReached
+}: ITimerProps) => {
     const [timeInSeconds, setTimeInSeconds] = useState(initialTimeInSeconds);
-    const [isActive, setIsActive] = useState(initialIsActive);
+
+    useEffect(() => {
+        setTimeInSeconds(initialTimeInSeconds);
+    }, [initialTimeInSeconds]);
 
     useEffect(() => {
         let interval = null;
-        if (isActive && timeInSeconds > 0) {
+        if (isActive && isDecrementing && timeInSeconds == 0) {
+            onZeroReached();
+        } else if (isActive) {
             interval = setInterval(() => {
-                setTimeInSeconds(timeInSeconds - 1);
+                const change: number = isDecrementing ? -1 : 1;
+                setTimeInSeconds(timeInSeconds + change);
             }, 1000);
         }
-
         // clean-up
         return () => clearInterval(interval);
     }, [isActive, timeInSeconds]);
@@ -29,19 +40,18 @@ const Timer = ({ initialTimeInSeconds, initialIsActive }: ITimerProps) => {
             <AnimatedCircularProgress
                 size={150}
                 width={3}
-                fill={(timeInSeconds / 6) * 100}
-                tintColor="#00e0ff"
-                backgroundColor="#3d5875">
-                {
-                    (fill) => (
-                        <Text>
-                            {timeInSeconds}
-                        </Text>
-                    )
+                fill={
+                    isDecrementing
+                        ? (timeInSeconds / initialTimeInSeconds) * 100
+                        : ((60 - timeInSeconds) / 60) * 100
                 }
+                tintColor="#00e0ff"
+                backgroundColor="#3d5875"
+            >
+                {() => <Text>{timeInSeconds}</Text>}
             </AnimatedCircularProgress>
-        </View >
+        </View>
     );
-}
+};
 
 export default Timer;
