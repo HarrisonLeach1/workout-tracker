@@ -7,6 +7,8 @@ import { getWorkout } from "../../graphql/queries";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import { Theme, ActivityIndicator, Button } from "react-native-paper";
+import { Exercise } from "../../modules/WorkoutTypes";
+import ExerciseInfo from "./ExerciseInfo";
 
 export enum ExerciseState {
     Waiting,
@@ -95,7 +97,10 @@ const Workout = ({ history, workoutId, theme }: IWorkoutProps) => {
     });
 
     const [state, dispatch] = useReducer(reducer, initialWorkoutState);
-    console.log(state);
+
+    const currentExercise: Exercise = data
+        ? data.getWorkout.exercises.items[state.exerciseIndex]
+        : null;
 
     return (
         <View style={styles.container}>
@@ -143,45 +148,15 @@ const Workout = ({ history, workoutId, theme }: IWorkoutProps) => {
                         <Text>Error</Text>
                     )}
                     <View style={styles.workoutInfoContainer}>
-                        {data.getWorkout.exercises.items[
-                            state.exerciseIndex
-                        ] ? (
-                            <React.Fragment>
-                                <Text>
-                                    {
-                                        data.getWorkout.exercises.items[
-                                            state.exerciseIndex
-                                        ].name
-                                    }
-                                </Text>
-                                <Text>
-                                    Set: {state.setNumber} /{" "}
-                                    {
-                                        data.getWorkout.exercises.items[
-                                            state.exerciseIndex
-                                        ].sets
-                                    }
-                                </Text>
-                                <Text>
-                                    Weight:{" "}
-                                    {
-                                        data.getWorkout.exercises.items[
-                                            state.exerciseIndex
-                                        ].weightInKg
-                                    }{" "}
-                                    Kg
-                                </Text>
-                                <Text>
-                                    Reps:{" "}
-                                    {
-                                        data.getWorkout.exercises.items[
-                                            state.exerciseIndex
-                                        ].repetitions
-                                    }
-                                </Text>
-                            </React.Fragment>
+                        {currentExercise ? (
+                            <ExerciseInfo
+                                exercise={currentExercise}
+                                setNumber={state.setNumber}
+                            />
+                        ) : state.workoutFinished ? (
+                            <Text>WorkoutFinished!</Text>
                         ) : (
-                            <Text>No Exercises in this Workout</Text>
+                            <Text>No Exercises found</Text>
                         )}
                         <Button onPress={() => history.push("/")}>
                             Go Back
