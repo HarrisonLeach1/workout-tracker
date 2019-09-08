@@ -55,7 +55,11 @@ const App = () => {
                         exact
                         path="/Workout"
                         render={props => (
-                            <Workout {...props} workoutId={selectedWorkout} />
+                            <Workout
+                                {...props}
+                                workoutId={selectedWorkout}
+                                theme={theme}
+                            />
                         )}
                     />
                     <WorkoutContext.Provider value={workoutValue}>
