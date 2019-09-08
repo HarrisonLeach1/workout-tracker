@@ -9,6 +9,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Theme, ActivityIndicator, Button } from "react-native-paper";
 import { Exercise } from "../../modules/WorkoutTypes";
 import ExerciseInfo from "./ExerciseInfo";
+import WorkoutButton from "./WorkoutButton";
 
 export enum ExerciseState {
     Waiting,
@@ -16,15 +17,15 @@ export enum ExerciseState {
     Break
 }
 
+export type Action =
+    | { type: "start set" }
+    | { type: "finish set" }
+    | { type: "end break" };
+
 interface IWorkoutProps extends RouteComponentProps {
     workoutId: string;
     theme: Theme;
 }
-
-type Action =
-    | { type: "start set" }
-    | { type: "finish set" }
-    | { type: "end break" };
 
 type WorkoutState = {
     exerciseIndex: number;
@@ -124,39 +125,18 @@ const Workout = ({ history, workoutId, theme }: IWorkoutProps) => {
                             }}
                         />
                     </View>
-                    {state.exerciseState === ExerciseState.Waiting ? (
-                        <Button
-                            onPress={() => {
-                                dispatch({ type: "start set" });
-                            }}
-                        >
-                            Start Set
-                        </Button>
-                    ) : state.exerciseState === ExerciseState.Exercising ? (
-                        <Button
-                            onPress={() => {
-                                dispatch({ type: "finish set" });
-                            }}
-                        >
-                            Finish Set
-                        </Button>
-                    ) : state.exerciseState === ExerciseState.Break ? (
-                        <Button disabled={true} onPress={() => {}}>
-                            Break
-                        </Button>
-                    ) : (
-                        <Text>Error</Text>
-                    )}
+                    <WorkoutButton
+                        exerciseState={state.exerciseState}
+                        dispatch={dispatch}
+                    />
                     <View style={styles.workoutInfoContainer}>
-                        {currentExercise ? (
+                        {state.workoutFinished ? (
+                            <Text>Workout Finished!</Text>
+                        ) : (
                             <ExerciseInfo
                                 exercise={currentExercise}
                                 setNumber={state.setNumber}
                             />
-                        ) : state.workoutFinished ? (
-                            <Text>WorkoutFinished!</Text>
-                        ) : (
-                            <Text>No Exercises found</Text>
                         )}
                         <Button onPress={() => history.push("/")}>
                             Go Back
