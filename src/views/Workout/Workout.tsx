@@ -10,6 +10,7 @@ import { Theme, ActivityIndicator, Button } from "react-native-paper";
 import { Exercise } from "../../modules/WorkoutTypes";
 import ExerciseInfo from "./ExerciseInfo";
 import WorkoutButton from "./WorkoutButton";
+import { useImmerReducer } from "use-immer";
 
 export enum ExerciseState {
     Waiting,
@@ -48,40 +49,27 @@ const initialWorkoutState = {
 function reducer(state: WorkoutState, action: Action): WorkoutState {
     switch (action.type) {
         case "start set":
-            return {
-                ...state,
-                timerIsActive: true,
-                timerIsDecrementing: false,
-                exerciseState: ExerciseState.Exercising
-            };
+            state.timerIsActive = true;
+            state.timerIsDecrementing = false;
+            state.exerciseState = ExerciseState.Exercising;
+            return;
         case "finish set":
-            let newSetNumber: number = state.setNumber + 1;
-            let newExerciseIndex: number = state.exerciseIndex;
-            let newWorkoutFinished: boolean = state.workoutFinished;
-
             if (state.setNumber >= 3) {
-                newSetNumber = 1;
-                newExerciseIndex++;
-                if (newExerciseIndex >= 4) {
-                    newWorkoutFinished = true;
+                state.setNumber = 1;
+                state.exerciseIndex++;
+                if (state.exerciseIndex >= 4) {
+                    state.workoutFinished = true;
                 }
+            } else {
+                state.setNumber++;
             }
-
-            return {
-                ...state,
-                timerIsDecrementing: true,
-                setNumber: newSetNumber,
-                exerciseIndex: newExerciseIndex,
-                workoutFinished: newWorkoutFinished,
-                exerciseState: ExerciseState.Break
-            };
-
+            state.timerIsDecrementing = true;
+            state.exerciseState = ExerciseState.Break;
+            return;
         case "end break":
-            return {
-                ...state,
-                timerIsActive: false,
-                exerciseState: ExerciseState.Waiting
-            };
+            state.timerIsActive = false;
+            state.exerciseState = ExerciseState.Waiting;
+            return;
         default:
             throw new Error();
     }
@@ -97,11 +85,13 @@ const Workout = ({ history, workoutId, theme }: IWorkoutProps) => {
         }
     });
 
-    const [state, dispatch] = useReducer(reducer, initialWorkoutState);
+    const [state, dispatch] = useImmerReducer(reducer, initialWorkoutState);
 
     const currentExercise: Exercise = data
         ? data.getWorkout.exercises.items[state.exerciseIndex]
         : null;
+
+    console.log(state);
 
     return (
         <View style={styles.container}>
