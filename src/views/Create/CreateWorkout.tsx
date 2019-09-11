@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
-import { StyleSheet, KeyboardAvoidingView, FlatList, View } from "react-native";
+import { StyleSheet, FlatList, View, ViewStyle, StyleProp } from "react-native";
 import {
     TextInput,
     List,
     Divider,
     Title,
-    Button,
-    Appbar
+    Appbar,
+    Surface,
+    Theme,
+    FAB
 } from "react-native-paper";
 import {
     WorkoutContext,
@@ -23,12 +25,17 @@ import {
 import gql from "graphql-tag";
 import { Formik, FormikProps } from "formik";
 import { ExecutionResult } from "apollo-link";
+import { RouteComponentProps } from "react-router";
+
+interface ICreateWorkoutProps extends RouteComponentProps {
+    theme: Theme;
+}
 
 interface WorkoutFormValues {
     name: string;
 }
 
-const CreateWorkout = ({ history }) => {
+const CreateWorkout = ({ history, theme }: ICreateWorkoutProps) => {
     const { workout, setWorkout } = useContext<WorkoutContextProps>(
         WorkoutContext
     );
@@ -87,79 +94,64 @@ const CreateWorkout = ({ history }) => {
     };
 
     return (
-        <React.Fragment>
-            <Appbar.Header>
-                <Appbar.BackAction onPress={goBack} />
-                <Appbar.Content title="Create Workout" />
-            </Appbar.Header>
-            <KeyboardAvoidingView
-                style={styles.wrapper}
-                behavior="padding"
-                keyboardVerticalOffset={80}
-            >
-                <Formik
-                    initialValues={{
-                        name: ""
-                    }}
-                    onSubmit={values => handleCreate(values)}
-                >
-                    {(props: FormikProps<WorkoutFormValues>) => (
-                        <View>
-                            <TextInput
-                                style={styles.inputContainerStyle}
-                                label="Workout Name"
-                                placeholder="Type something"
-                                onChangeText={props.handleChange("name")}
-                                onBlur={props.handleBlur("name")}
-                                value={props.values.name}
-                            />
-                            <Title style={styles.exerciseTitle}>
-                                Exercises
-                            </Title>
-                            <Divider />
-                            <FlatList
-                                renderItem={({ item }) => (
-                                    <List.Item title={item.name} />
-                                )}
-                                keyExtractor={item => item.name}
-                                ItemSeparatorComponent={Divider}
-                                data={workout.createExercisesInput}
-                                ListFooterComponent={
-                                    <React.Fragment>
-                                        <Divider />
-                                        <List.Item
-                                            title="Add Exercise"
-                                            left={props => (
-                                                <List.Icon
-                                                    {...props}
-                                                    icon="add"
-                                                />
-                                            )}
-                                            onPress={() =>
-                                                history.push("/CreateExercise")
-                                            }
-                                        />
-                                        <Divider />
-                                    </React.Fragment>
-                                }
-                            />
-                            <Button
-                                mode="contained"
-                                /*TODO: Cast is needed here due to existing bug with Formik Types with React Native: 
-                                https://github.com/jaredpalmer/formik/issues/376 */
-                                onPress={props.handleSubmit as any}
-                            >
-                                Create Workout
-                            </Button>
-                        </View>
-                    )}
-                </Formik>
-            </KeyboardAvoidingView>
-        </React.Fragment>
+        <Formik
+            initialValues={{
+                name: ""
+            }}
+            onSubmit={values => handleCreate(values)}
+        >
+            {(props: FormikProps<WorkoutFormValues>) => (
+                <React.Fragment>
+                    <Surface
+                        style={
+                            {
+                                ...styles.surface,
+                                backgroundColor: theme.colors.primary
+                            } as StyleProp<ViewStyle>
+                        }
+                    >
+                        <Appbar.Header style={{ elevation: 0 }}>
+                            <Appbar.BackAction onPress={goBack} />
+                            <Appbar.Content title="Create Workout" />
+                        </Appbar.Header>
+                        <Title
+                            style={{
+                                padding: 20,
+                                color: "#fff"
+                            }}
+                        >
+                            Exercises
+                        </Title>
+                        <FAB
+                            style={styles.fab}
+                            icon="add"
+                            onPress={() => {
+                                history.push("/CreateExercise");
+                            }}
+                        />
+                    </Surface>
+                    <View>
+                        <FlatList
+                            renderItem={({ item }) => (
+                                <List.Item title={item.name} />
+                            )}
+                            keyExtractor={item => item.name}
+                            ItemSeparatorComponent={Divider}
+                            data={workout.createExercisesInput}
+                        />
+                    </View>
+                </React.Fragment>
+            )}
+        </Formik>
     );
 };
 
 const styles = StyleSheet.create({
+    surface: {
+        alignItems: "stretch",
+        justifyContent: "flex-start",
+        elevation: 4
+    },
     container: {
         flex: 1,
         padding: 8,
@@ -172,7 +164,13 @@ const styles = StyleSheet.create({
     inputContainerStyle: {
         margin: 8
     },
-    exerciseTitle: { margin: 16 }
+    fab: {
+        position: "absolute",
+        margin: 24,
+        marginTop: 100,
+        right: 0,
+        bottom: -51
+    }
 });
 
 export default CreateWorkout;

@@ -66,7 +66,9 @@ const App = () => {
                         <Route
                             exact
                             path="/CreateWorkout"
-                            component={CreateWorkout}
+                            render={props => (
+                                <CreateWorkout {...props} theme={theme} />
+                            )}
                         />
                         <Route
                             exact
@@ -90,7 +92,9 @@ const WithProvider = () => (
 const theme = {
     ...DefaultTheme,
     colors: {
-        ...DefaultTheme.colors
+        ...DefaultTheme.colors,
+        primary: "#00838f",
+        accent: "#4fb3bf"
     }
 };
 
