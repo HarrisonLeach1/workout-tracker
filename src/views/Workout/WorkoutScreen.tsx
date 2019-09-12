@@ -23,7 +23,7 @@ export type Action =
     | { type: "finish set" }
     | { type: "end break" };
 
-interface IWorkoutProps extends RouteComponentProps {
+interface IWorkoutScreenProps extends RouteComponentProps {
     workoutId: string;
     theme: Theme;
 }
@@ -75,7 +75,7 @@ function reducer(state: WorkoutState, action: Action): WorkoutState {
     }
 }
 
-const Workout = ({ history, workoutId, theme }: IWorkoutProps) => {
+const WorkoutScreen = ({ history, workoutId, theme }: IWorkoutScreenProps) => {
     const { loading, error, data } = useQuery<
         GetWorkoutQuery,
         GetWorkoutQueryVariables
@@ -162,4 +162,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Workout;
+export default WorkoutScreen;

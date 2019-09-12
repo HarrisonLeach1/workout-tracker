@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from "react";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { NativeRouter, Route, Switch } from "react-router-native";
-import Workout from "./views/Workout/Workout";
-import Home from "./views/Home/Home";
-import CreateWorkout from "./views/Create/CreateWorkout";
-import CreateExercise from "./views/Create/CreateExercise";
+import WorkoutScreen from "./views/Workout/WorkoutScreen";
+import Home from "./views/Home/HomeScreen";
+import CreateWorkoutScreen from "./views/Create/CreateWorkoutScreen";
+import CreateExerciseScreen from "./views/Create/CreateExerciseScreen";
 import { WorkoutContext, WorkoutInputs } from "./modules/WorkoutContext";
 import { ApolloProvider } from "@apollo/react-hooks";
 import awsconfig from "../aws-exports";
@@ -55,7 +55,7 @@ const App = () => {
                         exact
                         path="/Workout"
                         render={props => (
-                            <Workout
+                            <WorkoutScreen
                                 {...props}
                                 workoutId={selectedWorkout}
                                 theme={theme}
@@ -67,13 +67,13 @@ const App = () => {
                             exact
                             path="/CreateWorkout"
                             render={props => (
-                                <CreateWorkout {...props} theme={theme} />
+                                <CreateWorkoutScreen {...props} theme={theme} />
                             )}
                         />
                         <Route
                             exact
                             path="/CreateExercise"
-                            component={CreateExercise}
+                            component={CreateExerciseScreen}
                         />
                     </WorkoutContext.Provider>
                 </Switch>

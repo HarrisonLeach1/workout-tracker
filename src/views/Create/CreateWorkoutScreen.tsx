@@ -27,7 +27,7 @@ import { Formik, FormikProps } from "formik";
 import { ExecutionResult } from "apollo-link";
 import { RouteComponentProps } from "react-router";
 
-interface ICreateWorkoutProps extends RouteComponentProps {
+interface ICreateWorkoutScreenProps extends RouteComponentProps {
     theme: Theme;
 }
 
@@ -35,7 +35,7 @@ interface WorkoutFormValues {
     name: string;
 }
 
-const CreateWorkout = ({ history, theme }: ICreateWorkoutProps) => {
+const CreateWorkoutScreen = ({ history, theme }: ICreateWorkoutScreenProps) => {
     const { workout, setWorkout } = useContext<WorkoutContextProps>(
         WorkoutContext
     );
@@ -173,4 +173,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CreateWorkout;
+export default CreateWorkoutScreen;

@@ -4,12 +4,12 @@ import { Theme } from "react-native-paper";
 import WorkoutList from "./WorkoutList";
 import { RouteComponentProps } from "react-router";
 
-interface IHomeProps extends RouteComponentProps {
+interface IHomeScreenProps extends RouteComponentProps {
     theme: Theme;
     onWorkoutPress: (workoutId: string) => void;
 }
 
-const Home = (props: IHomeProps) => {
+const Home = (props: IHomeScreenProps) => {
     return (
         <View style={styles.container}>
             <View style={styles.graph}>

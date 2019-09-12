@@ -20,7 +20,7 @@ interface ExerciseFormValues {
     weightInKg: string;
 }
 
-const CreateExercise = ({ history }) => {
+const CreateExerciseScreen = ({ history }) => {
     const { workout, setWorkout } = useContext<WorkoutContextProps>(
         WorkoutContext
     );
@@ -147,4 +147,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CreateExercise;
+export default CreateExerciseScreen;
