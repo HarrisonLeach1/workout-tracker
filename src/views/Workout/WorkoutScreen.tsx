@@ -11,32 +11,17 @@ import {
     Button,
     withTheme
 } from "react-native-paper";
-import { Exercise } from "../../modules/WorkoutTypes";
+import {
+    Exercise,
+    ExerciseState,
+    WorkoutState,
+    Action
+} from "../../modules/WorkoutTypes";
 import ExerciseInfo from "./ExerciseInfo";
 import WorkoutButton from "./WorkoutButton";
 import { useImmerReducer } from "use-immer";
-import { NavigationProps } from "../../modules/NavigationTypes";
-import { NavigationScreenComponent } from "react-navigation";
-
-export enum ExerciseState {
-    Waiting,
-    Exercising,
-    Break
-}
-
-export type Action =
-    | { type: "start set" }
-    | { type: "finish set" }
-    | { type: "end break" };
-
-type WorkoutState = {
-    exerciseIndex: number;
-    setNumber: number;
-    timerIsActive: boolean;
-    timerIsDecrementing: boolean;
-    workoutFinished: boolean;
-    exerciseState: ExerciseState;
-};
+import { useNavigation } from "../../modules/NavigationTypes";
+import { NavigationScreenProp, NavigationState } from "react-navigation";
 
 const initialWorkoutState = {
     exerciseIndex: 0,
@@ -75,17 +60,21 @@ function reducer(state: WorkoutState, action: Action): WorkoutState {
             throw new Error();
     }
 }
+interface NavigationParams {
+    workoutId: string;
+}
 
-const WorkoutScreen: NavigationScreenComponent<IWorkoutProps> = (
-    props: IWorkoutProps
-) => {
-    WorkoutScreen.navigationOptions = {};
+type Navigation = NavigationScreenProp<NavigationState, NavigationParams>;
+
+const WorkoutScreen = ({ theme }) => {
+    const navigation = useNavigation<NavigationParams>();
+
     const { loading, error, data } = useQuery<
         GetWorkoutQuery,
         GetWorkoutQueryVariables
     >(gql(getWorkout), {
         variables: {
-            id: props.screenProps.workoutId
+            id: navigation.state.params.workoutId
         }
     });
 

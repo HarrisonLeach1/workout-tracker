@@ -10,10 +10,6 @@ import {
     FAB,
     withTheme
 } from "react-native-paper";
-import {
-    WorkoutContext,
-    WorkoutContextProps
-} from "../../modules/WorkoutContext";
 import { useMutation } from "@apollo/react-hooks";
 import { createWorkout, createExercise } from "../../graphql/mutations";
 import {
@@ -25,20 +21,44 @@ import {
 import gql from "graphql-tag";
 import { Formik, FormikProps } from "formik";
 import { ExecutionResult } from "apollo-link";
-import { NavigationProps } from "../../modules/NavigationTypes";
-
-interface ICreateWorkoutProps extends NavigationProps {
-    theme: Theme;
-}
+import { WorkoutInputs } from "../../modules/WorkoutTypes";
+import { useNavigation } from "../../modules/NavigationTypes";
+import { NavigationScreenProp, NavigationState } from "react-navigation";
 
 interface WorkoutFormValues {
     name: string;
 }
 
-const CreateWorkoutScreen = ({ theme, navigation }: ICreateWorkoutProps) => {
-    const { workout, setWorkout } = useContext<WorkoutContextProps>(
-        WorkoutContext
-    );
+type Navigation = NavigationScreenProp<NavigationState, NavigationParams>;
+
+interface NavigationParams {
+    workout: WorkoutInputs;
+}
+
+interface NavStatelessComponent extends React.FC<{ theme: Theme }> {
+    navigationOptions?: Object;
+}
+
+const CreateWorkoutScreen: NavStatelessComponent = ({ theme }) => {
+    const navigation = useNavigation<NavigationParams>();
+    const workout: WorkoutInputs = navigation.getParam("workout", {
+        createWorkoutInput: {
+            name: ""
+        },
+        createExercisesInput: []
+    });
+
+    CreateWorkoutScreen.navigationOptions = ({
+        navigation
+    }: {
+        navigation: Navigation;
+    }) => ({
+        header: (
+            <Appbar.Header>
+                <Appbar.Content title="Create Workout" />
+            </Appbar.Header>
+        )
+    });
 
     const [addWorkout, { error, data }] = useMutation<
         CreateWorkoutMutation,
@@ -74,23 +94,11 @@ const CreateWorkoutScreen = ({ theme, navigation }: ICreateWorkoutProps) => {
     };
 
     const handleCreate = async (values: WorkoutFormValues) => {
-        setWorkout(prev => {
-            prev.createWorkoutInput.name = values.name;
-            return prev;
-        });
-        console.log(
-            "Creating workout with name: " + workout.createWorkoutInput.name
-        );
-
         const newWorkoutMutation = await addWorkout();
 
         await addExercises(newWorkoutMutation);
 
         navigation.navigate("Home");
-    };
-
-    const goBack = () => {
-        navigation.goBack();
     };
 
     return (
@@ -111,7 +119,9 @@ const CreateWorkoutScreen = ({ theme, navigation }: ICreateWorkoutProps) => {
                         }
                     >
                         <Appbar.Header style={{ elevation: 0 }}>
-                            <Appbar.BackAction onPress={goBack} />
+                            <Appbar.BackAction
+                                onPress={() => navigation.goBack()}
+                            />
                             <Appbar.Content title="Create Workout" />
                         </Appbar.Header>
                         <Title

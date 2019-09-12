@@ -1,13 +1,22 @@
+import { NavigationState, NavigationParams } from "react-navigation";
+import { Theme } from "react-native-paper";
+import { useContext } from "react";
 import {
     NavigationScreenProp,
-    NavigationState,
-    NavigationParams,
-    Theme
+    NavigationRoute,
+    NavigationContext
 } from "react-navigation";
 
-type Navigation = NavigationScreenProp<NavigationState, NavigationParams>;
+// Very helpful navigation hooks and types taken from:
+// https://dev.to/andreasbergqvist/react-navigation-with-typescript-29ka
+export type Navigation = NavigationScreenProp<
+    NavigationState,
+    NavigationParams
+>;
 
-export interface NavigationProps {
-    navigation: Navigation;
-    theme: Theme;
+export function useNavigation<Params>() {
+    return useContext(NavigationContext) as NavigationScreenProp<
+        NavigationRoute,
+        Params
+    >;
 }

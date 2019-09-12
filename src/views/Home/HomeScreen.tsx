@@ -2,17 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Theme, withTheme } from "react-native-paper";
 import WorkoutList from "./WorkoutList";
-import { NavigationProps } from "../../modules/NavigationTypes";
 
-interface IHomeScreenProps extends NavigationProps {
-    theme: Theme;
-}
-
-const HomeScreen = (props: IHomeScreenProps) => {
-    static navigationOptions = {
-        title: 'Home',
-      };
-      
+const HomeScreen = props => {
     return (
         <View style={styles.container}>
             <View style={styles.graph}>

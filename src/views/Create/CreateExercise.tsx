@@ -7,12 +7,9 @@ import {
 } from "react-native";
 import { TextInput, Button, Appbar, withTheme } from "react-native-paper";
 import { Formik, FormikProps, FormikActions } from "formik";
-import {
-    WorkoutContext,
-    WorkoutContextProps
-} from "../../modules/WorkoutContext";
 import { CreateExerciseInput } from "../../API";
-import { NavigationProps } from "../../modules/NavigationTypes";
+import { WorkoutInputs } from "../../modules/WorkoutTypes";
+import { useNavigation } from "../../modules/NavigationTypes";
 
 interface ExerciseFormValues {
     name: string;
@@ -21,15 +18,13 @@ interface ExerciseFormValues {
     weightInKg: string;
 }
 
-const CreateExerciseScreen = ({ navigation }: NavigationProps) => {
-    const { workout, setWorkout } = useContext<WorkoutContextProps>(
-        WorkoutContext
-    );
+interface NavigationParams {
+    workout: WorkoutInputs;
+}
 
-    const handleSubmit = (
-        values: ExerciseFormValues,
-        actions: FormikActions<ExerciseFormValues>
-    ) => {
+const CreateExerciseScreen = ({ theme }) => {
+    const navigation = useNavigation<NavigationParams>();
+    const handleSubmit = (values: ExerciseFormValues) => {
         const exercise: CreateExerciseInput = {
             name: values.name,
             sets: +values.sets,
@@ -37,22 +32,16 @@ const CreateExerciseScreen = ({ navigation }: NavigationProps) => {
             weightInKg: +values.weightInKg
         };
 
-        setWorkout(prev => {
-            prev.createExercisesInput.push(exercise);
-            return prev;
-        });
+        const workout: WorkoutInputs = navigation.state.params.workout;
+        workout.createExercisesInput.push(exercise);
 
-        navigation.navigate("CreateWorkout");
-    };
-
-    const goBack = () => {
         navigation.goBack();
     };
 
     return (
         <React.Fragment>
             <Appbar.Header>
-                <Appbar.BackAction onPress={goBack} />
+                <Appbar.BackAction onPress={() => navigation.goBack()} />
                 <Appbar.Content title="Create Exercise" />
             </Appbar.Header>
 

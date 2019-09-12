@@ -1,7 +1,7 @@
 import React from "react";
-import { ExerciseState, Action } from "./WorkoutScreen";
 import { Button } from "react-native-paper";
 import { Text } from "react-native";
+import { ExerciseState, Action } from "../../modules/WorkoutTypes";
 
 interface IWorkoutButtonProps {
     exerciseState: ExerciseState;

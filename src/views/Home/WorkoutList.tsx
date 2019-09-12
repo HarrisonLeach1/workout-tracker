@@ -1,11 +1,9 @@
 import React from "react";
-import { RouteComponentProps } from "react-router";
 import { View, FlatList, StyleSheet, Text } from "react-native";
 import {
     FAB,
     ActivityIndicator,
     List,
-    Theme,
     Divider,
     withTheme
 } from "react-native-paper";
@@ -13,13 +11,11 @@ import { ListWorkoutsQueryVariables, ListWorkoutsQuery } from "../../API";
 import gql from "graphql-tag";
 import { listWorkouts } from "../../graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
-import { NavigationProps } from "../../modules/NavigationTypes";
+import { useNavigation } from "../../modules/NavigationTypes";
 
-interface IWorkoutListProps extends NavigationProps {
-    theme: Theme;
-}
+const WorkoutList = ({ theme }) => {
+    const navigation = useNavigation();
 
-const WorkoutList: React.FC<IWorkoutListProps> = ({ theme, navigation }) => {
     const { loading, error, data } = useQuery<
         ListWorkoutsQuery,
         ListWorkoutsQueryVariables
@@ -41,7 +37,9 @@ const WorkoutList: React.FC<IWorkoutListProps> = ({ theme, navigation }) => {
                         renderItem={({ item }) => (
                             <List.Item
                                 onPress={() => {
-                                    navigation.navigate("Workout");
+                                    navigation.navigate("Workout", {
+                                        workoutId: item.id
+                                    });
                                 }}
                                 title={item.name}
                             />
