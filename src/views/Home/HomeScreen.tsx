@@ -1,26 +1,27 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Theme } from "react-native-paper";
+import { Theme, withTheme } from "react-native-paper";
 import WorkoutList from "./WorkoutList";
-import { RouteComponentProps } from "react-router";
+import { NavigationProps } from "../../modules/NavigationTypes";
 
-interface IHomeProps extends RouteComponentProps {
+interface IHomeScreenProps extends NavigationProps {
     theme: Theme;
-    onWorkoutPress: (workoutId: string) => void;
 }
 
-const Home = (props: IHomeProps) => {
+const HomeScreen = (props: IHomeScreenProps) => {
+    static navigationOptions = {
+        title: 'Home',
+      };
+      
     return (
         <View style={styles.container}>
             <View style={styles.graph}>
                 <Text>Graph</Text>
             </View>
-            <WorkoutList {...props} />
+            <WorkoutList {...props} theme={props.theme} />
         </View>
     );
 };
-
-export default Home;
 
 const styles = StyleSheet.create({
     container: {
@@ -37,3 +38,5 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     }
 });
+
+export default withTheme(HomeScreen);

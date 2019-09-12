@@ -6,23 +6,20 @@ import {
     ActivityIndicator,
     List,
     Theme,
-    Divider
+    Divider,
+    withTheme
 } from "react-native-paper";
 import { ListWorkoutsQueryVariables, ListWorkoutsQuery } from "../../API";
 import gql from "graphql-tag";
 import { listWorkouts } from "../../graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
+import { NavigationProps } from "../../modules/NavigationTypes";
 
-interface IWorkoutListProps extends RouteComponentProps {
-    onWorkoutPress: (workoutId: string) => void;
+interface IWorkoutListProps extends NavigationProps {
     theme: Theme;
 }
 
-const WorkoutList: React.FC<IWorkoutListProps> = ({
-    history,
-    theme,
-    onWorkoutPress
-}) => {
+const WorkoutList: React.FC<IWorkoutListProps> = ({ theme, navigation }) => {
     const { loading, error, data } = useQuery<
         ListWorkoutsQuery,
         ListWorkoutsQueryVariables
@@ -44,8 +41,7 @@ const WorkoutList: React.FC<IWorkoutListProps> = ({
                         renderItem={({ item }) => (
                             <List.Item
                                 onPress={() => {
-                                    onWorkoutPress(item.id);
-                                    history.push("/Workout");
+                                    navigation.navigate("Workout");
                                 }}
                                 title={item.name}
                             />
@@ -57,7 +53,7 @@ const WorkoutList: React.FC<IWorkoutListProps> = ({
                     <FAB
                         style={styles.fab}
                         icon="add"
-                        onPress={() => history.push("/CreateWorkout")}
+                        onPress={() => navigation.navigate("CreateWorkout")}
                     />
                 </React.Fragment>
             ) : (
@@ -89,4 +85,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default WorkoutList;
+export default withTheme(WorkoutList);

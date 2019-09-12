@@ -5,13 +5,14 @@ import {
     ScrollView,
     View
 } from "react-native";
-import { TextInput, Button, Appbar } from "react-native-paper";
+import { TextInput, Button, Appbar, withTheme } from "react-native-paper";
 import { Formik, FormikProps, FormikActions } from "formik";
 import {
     WorkoutContext,
     WorkoutContextProps
 } from "../../modules/WorkoutContext";
 import { CreateExerciseInput } from "../../API";
+import { NavigationProps } from "../../modules/NavigationTypes";
 
 interface ExerciseFormValues {
     name: string;
@@ -20,7 +21,7 @@ interface ExerciseFormValues {
     weightInKg: string;
 }
 
-const CreateExercise = ({ history }) => {
+const CreateExerciseScreen = ({ navigation }: NavigationProps) => {
     const { workout, setWorkout } = useContext<WorkoutContextProps>(
         WorkoutContext
     );
@@ -41,11 +42,11 @@ const CreateExercise = ({ history }) => {
             return prev;
         });
 
-        history.push("/CreateWorkout");
+        navigation.navigate("CreateWorkout");
     };
 
     const goBack = () => {
-        history.goBack();
+        navigation.goBack();
     };
 
     return (
@@ -147,4 +148,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CreateExercise;
+export default CreateExerciseScreen;

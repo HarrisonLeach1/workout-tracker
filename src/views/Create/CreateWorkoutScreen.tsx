@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { StyleSheet, FlatList, View, ViewStyle, StyleProp } from "react-native";
 import {
-    TextInput,
     List,
     Divider,
     Title,
     Appbar,
     Surface,
     Theme,
-    FAB
+    FAB,
+    withTheme
 } from "react-native-paper";
 import {
     WorkoutContext,
@@ -25,9 +25,9 @@ import {
 import gql from "graphql-tag";
 import { Formik, FormikProps } from "formik";
 import { ExecutionResult } from "apollo-link";
-import { RouteComponentProps } from "react-router";
+import { NavigationProps } from "../../modules/NavigationTypes";
 
-interface ICreateWorkoutProps extends RouteComponentProps {
+interface ICreateWorkoutProps extends NavigationProps {
     theme: Theme;
 }
 
@@ -35,7 +35,7 @@ interface WorkoutFormValues {
     name: string;
 }
 
-const CreateWorkout = ({ history, theme }: ICreateWorkoutProps) => {
+const CreateWorkoutScreen = ({ theme, navigation }: ICreateWorkoutProps) => {
     const { workout, setWorkout } = useContext<WorkoutContextProps>(
         WorkoutContext
     );
@@ -86,11 +86,11 @@ const CreateWorkout = ({ history, theme }: ICreateWorkoutProps) => {
 
         await addExercises(newWorkoutMutation);
 
-        history.push("/");
+        navigation.navigate("Home");
     };
 
     const goBack = () => {
-        history.push("/");
+        navigation.goBack();
     };
 
     return (
@@ -120,13 +120,21 @@ const CreateWorkout = ({ history, theme }: ICreateWorkoutProps) => {
                                 color: "#fff"
                             }}
                         >
+                            Workout Name
+                        </Title>
+                        <Title
+                            style={{
+                                padding: 20,
+                                color: "#fff"
+                            }}
+                        >
                             Exercises
                         </Title>
                         <FAB
                             style={styles.fab}
                             icon="add"
                             onPress={() => {
-                                history.push("/CreateExercise");
+                                navigation.push("CreateExercise");
                             }}
                         />
                     </Surface>
@@ -173,4 +181,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CreateWorkout;
+export default withTheme(CreateWorkoutScreen);

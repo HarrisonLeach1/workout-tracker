@@ -1,15 +1,19 @@
-import React, { useState, useMemo } from "react";
-import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import { NativeRouter, Route, Switch } from "react-router-native";
-import Workout from "./views/Workout/Workout";
-import Home from "./views/Home/Home";
-import CreateWorkout from "./views/Create/CreateWorkout";
-import CreateExercise from "./views/Create/CreateExercise";
-import { WorkoutContext, WorkoutInputs } from "./modules/WorkoutContext";
+import React from "react";
+import {
+    DefaultTheme,
+    Provider as PaperProvider,
+    Appbar
+} from "react-native-paper";
+import CreateWorkoutScreen from "./views/Create/CreateWorkoutScreen";
+import CreateExerciseScreen from "./views/Create/CreateExercise";
 import { ApolloProvider } from "@apollo/react-hooks";
 import awsconfig from "../aws-exports";
 import ApolloClient from "apollo-boost";
 import { registerRootComponent } from "expo";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import HomeScreen from "./views/Home/HomeScreen";
+import WorkoutScreen from "./views/Workout/WorkoutScreen";
 
 const client = new ApolloClient({
     uri: awsconfig.aws_appsync_graphqlEndpoint,
@@ -18,66 +22,24 @@ const client = new ApolloClient({
     }
 });
 
+const AppNavigator = createStackNavigator(
+    {
+        Home: HomeScreen,
+        CreateWorkout: CreateWorkoutScreen,
+        CreateExercise: CreateExerciseScreen,
+        Workout: WorkoutScreen
+    },
+    {
+        initialRouteName: "Home"
+    }
+);
+
+const AppContainer = createAppContainer(AppNavigator);
+
 const App = () => {
-    const [workout, setWorkout] = useState<WorkoutInputs>({
-        createWorkoutInput: {
-            name: ""
-        },
-        createExercisesInput: []
-    });
-
-    const workoutValue = useMemo(() => ({ workout, setWorkout }), [
-        workout,
-        setWorkout
-    ]);
-
-    const [selectedWorkout, setSelectedWorkoutId] = useState<string>("");
-    const handleWorkoutPress = (workoutId: string) => {
-        setSelectedWorkoutId(workoutId);
-    };
-
     return (
         <PaperProvider theme={theme}>
-            <NativeRouter>
-                <Switch>
-                    <Route
-                        exact
-                        path="/"
-                        render={props => (
-                            <Home
-                                {...props}
-                                theme={theme}
-                                onWorkoutPress={handleWorkoutPress}
-                            />
-                        )}
-                    />
-                    <Route
-                        exact
-                        path="/Workout"
-                        render={props => (
-                            <Workout
-                                {...props}
-                                workoutId={selectedWorkout}
-                                theme={theme}
-                            />
-                        )}
-                    />
-                    <WorkoutContext.Provider value={workoutValue}>
-                        <Route
-                            exact
-                            path="/CreateWorkout"
-                            render={props => (
-                                <CreateWorkout {...props} theme={theme} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/CreateExercise"
-                            component={CreateExercise}
-                        />
-                    </WorkoutContext.Provider>
-                </Switch>
-            </NativeRouter>
+            <AppContainer />
         </PaperProvider>
     );
 };

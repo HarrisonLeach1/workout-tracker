@@ -1,16 +1,22 @@
-import React, { useReducer } from "react";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Timer from "./Timer";
-import { RouteComponentProps } from "react-router-native";
 import { GetWorkoutQuery, GetWorkoutQueryVariables } from "../../API";
 import { getWorkout } from "../../graphql/queries";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import { Theme, ActivityIndicator, Button } from "react-native-paper";
+import {
+    Theme,
+    ActivityIndicator,
+    Button,
+    withTheme
+} from "react-native-paper";
 import { Exercise } from "../../modules/WorkoutTypes";
 import ExerciseInfo from "./ExerciseInfo";
 import WorkoutButton from "./WorkoutButton";
 import { useImmerReducer } from "use-immer";
+import { NavigationProps } from "../../modules/NavigationTypes";
+import { NavigationScreenComponent } from "react-navigation";
 
 export enum ExerciseState {
     Waiting,
@@ -22,11 +28,6 @@ export type Action =
     | { type: "start set" }
     | { type: "finish set" }
     | { type: "end break" };
-
-interface IWorkoutProps extends RouteComponentProps {
-    workoutId: string;
-    theme: Theme;
-}
 
 type WorkoutState = {
     exerciseIndex: number;
@@ -75,13 +76,16 @@ function reducer(state: WorkoutState, action: Action): WorkoutState {
     }
 }
 
-const Workout = ({ history, workoutId, theme }: IWorkoutProps) => {
+const WorkoutScreen: NavigationScreenComponent<IWorkoutProps> = (
+    props: IWorkoutProps
+) => {
+    WorkoutScreen.navigationOptions = {};
     const { loading, error, data } = useQuery<
         GetWorkoutQuery,
         GetWorkoutQueryVariables
     >(gql(getWorkout), {
         variables: {
-            id: workoutId
+            id: props.screenProps.workoutId
         }
     });
 
@@ -128,7 +132,7 @@ const Workout = ({ history, workoutId, theme }: IWorkoutProps) => {
                                 setNumber={state.setNumber}
                             />
                         )}
-                        <Button onPress={() => history.push("/")}>
+                        <Button onPress={() => navigation.navigate("Home")}>
                             Go Back
                         </Button>
                     </View>
@@ -162,4 +166,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Workout;
+export default withTheme(WorkoutScreen);

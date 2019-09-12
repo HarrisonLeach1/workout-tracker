@@ -1,5 +1,5 @@
 import React from "react";
-import { ExerciseState, Action } from "./Workout";
+import { ExerciseState, Action } from "./WorkoutScreen";
 import { Button } from "react-native-paper";
 import { Text } from "react-native";
 
