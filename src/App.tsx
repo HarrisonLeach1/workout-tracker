@@ -3,16 +3,16 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { NativeRouter, Route, Switch } from "react-router-native";
 import WorkoutScreen from "./views/Workout/WorkoutScreen";
 import HomeScreen from "./views/Home/HomeScreen";
-import CreateWorkoutScreen from "./views/Create/CreateWorkoutScreen";
+import CreateRoutineScreen from "./views/Create/CreateRoutineScreen";
 import CreateExerciseScreen from "./views/Create/CreateExerciseScreen";
-import { WorkoutContext, WorkoutInputs } from "./modules/WorkoutContext";
+import { CreateRoutineContext, RoutineInputs } from "./modules/RoutineContext";
 import { ApolloProvider } from "@apollo/react-hooks";
 import awsconfig from "../aws-exports";
 import ApolloClient from "apollo-boost";
 import { registerRootComponent } from "expo";
 import Stack from "react-router-native-stack";
 import { SelectedRoutineContext } from "./modules/SelectedRoutineContext";
-import CreateWorkoutHeader from "./views/Create/CreateWorkoutHeader";
+import CreateRoutineHeader from "./views/Create/CreateRoutineHeader";
 
 const client = new ApolloClient({
     uri: awsconfig.aws_appsync_graphqlEndpoint,
@@ -22,16 +22,16 @@ const client = new ApolloClient({
 });
 
 const App = () => {
-    const [workout, setWorkout] = useState<WorkoutInputs>({
-        createWorkoutInput: {
+    const [routine, setRoutine] = useState<RoutineInputs>({
+        createRoutineInput: {
             name: ""
         },
         createExercisesInput: []
     });
 
-    const workoutValue = useMemo(() => ({ workout, setWorkout }), [
-        workout,
-        setWorkout
+    const routineContextValue = useMemo(() => ({ routine, setRoutine }), [
+        routine,
+        setRoutine
     ]);
 
     const [routineID, setRoutineID] = useState<string>("");
@@ -44,7 +44,7 @@ const App = () => {
     return (
         <PaperProvider theme={theme}>
             <SelectedRoutineContext.Provider value={routineIDValue}>
-                <WorkoutContext.Provider value={workoutValue}>
+                <CreateRoutineContext.Provider value={routineContextValue}>
                     <NativeRouter>
                         <Stack style={{ alignItems: "flex-start" }}>
                             <Route exact path="/" component={HomeScreen} />
@@ -55,8 +55,8 @@ const App = () => {
                             />
                             <Route
                                 exact
-                                path="/CreateWorkout"
-                                component={CreateWorkoutScreen}
+                                path="/CreateRoutine"
+                                component={CreateRoutineScreen}
                             />
                             <Route
                                 exact
@@ -66,7 +66,7 @@ const App = () => {
                             />
                         </Stack>
                     </NativeRouter>
-                </WorkoutContext.Provider>
+                </CreateRoutineContext.Provider>
             </SelectedRoutineContext.Provider>
         </PaperProvider>
     );

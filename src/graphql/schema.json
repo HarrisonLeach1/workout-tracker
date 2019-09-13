@@ -15,7 +15,7 @@
         "name" : "Query",
         "description" : null,
         "fields" : [ {
-          "name" : "getWorkout",
+          "name" : "getRoutine",
           "description" : null,
           "args" : [ {
             "name" : "id",
@@ -33,20 +33,20 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Workout",
+            "name" : "Routine",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "listWorkouts",
+          "name" : "listRoutines",
           "description" : null,
           "args" : [ {
             "name" : "filter",
             "description" : null,
             "type" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelWorkoutFilterInput",
+              "name" : "ModelRoutineFilterInput",
               "ofType" : null
             },
             "defaultValue" : null
@@ -71,7 +71,7 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "ModelWorkoutConnection",
+            "name" : "ModelRoutineConnection",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -145,7 +145,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "OBJECT",
-        "name" : "Workout",
+        "name" : "Routine",
         "description" : null,
         "fields" : [ {
           "name" : "id",
@@ -342,12 +342,12 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "workout",
+          "name" : "routine",
           "description" : null,
           "args" : [ ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Workout",
+            "name" : "Routine",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -776,7 +776,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "OBJECT",
-        "name" : "ModelWorkoutConnection",
+        "name" : "ModelRoutineConnection",
         "description" : null,
         "fields" : [ {
           "name" : "items",
@@ -787,7 +787,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "OBJECT",
-              "name" : "Workout",
+              "name" : "Routine",
               "ofType" : null
             }
           },
@@ -811,7 +811,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "ModelWorkoutFilterInput",
+        "name" : "ModelRoutineFilterInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -840,7 +840,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelWorkoutFilterInput",
+              "name" : "ModelRoutineFilterInput",
               "ofType" : null
             }
           },
@@ -853,7 +853,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelWorkoutFilterInput",
+              "name" : "ModelRoutineFilterInput",
               "ofType" : null
             }
           },
@@ -863,7 +863,7 @@
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
-            "name" : "ModelWorkoutFilterInput",
+            "name" : "ModelRoutineFilterInput",
             "ofType" : null
           },
           "defaultValue" : null
@@ -876,7 +876,7 @@
         "name" : "Mutation",
         "description" : null,
         "fields" : [ {
-          "name" : "createWorkout",
+          "name" : "createRoutine",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -886,7 +886,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "CreateWorkoutInput",
+                "name" : "CreateRoutineInput",
                 "ofType" : null
               }
             },
@@ -894,13 +894,13 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Workout",
+            "name" : "Routine",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "updateWorkout",
+          "name" : "updateRoutine",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -910,7 +910,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "UpdateWorkoutInput",
+                "name" : "UpdateRoutineInput",
                 "ofType" : null
               }
             },
@@ -918,13 +918,13 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Workout",
+            "name" : "Routine",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "deleteWorkout",
+          "name" : "deleteRoutine",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -934,7 +934,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "DeleteWorkoutInput",
+                "name" : "DeleteRoutineInput",
                 "ofType" : null
               }
             },
@@ -942,7 +942,7 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Workout",
+            "name" : "Routine",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -1026,7 +1026,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "CreateWorkoutInput",
+        "name" : "CreateRoutineInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -1053,7 +1053,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "UpdateWorkoutInput",
+        "name" : "UpdateRoutineInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -1084,7 +1084,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "DeleteWorkoutInput",
+        "name" : "DeleteRoutineInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -1151,7 +1151,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "exerciseWorkoutId",
+          "name" : "exerciseRoutineId",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -1218,7 +1218,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "exerciseWorkoutId",
+          "name" : "exerciseRoutineId",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -1253,34 +1253,34 @@
         "name" : "Subscription",
         "description" : null,
         "fields" : [ {
-          "name" : "onCreateWorkout",
+          "name" : "onCreateRoutine",
           "description" : null,
           "args" : [ ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Workout",
+            "name" : "Routine",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "onUpdateWorkout",
+          "name" : "onUpdateRoutine",
           "description" : null,
           "args" : [ ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Workout",
+            "name" : "Routine",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "onDeleteWorkout",
+          "name" : "onDeleteRoutine",
           "description" : null,
           "args" : [ ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Workout",
+            "name" : "Routine",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -2254,23 +2254,6 @@
         "onFragment" : false,
         "onField" : false
       }, {
-        "name" : "deprecated",
-        "description" : null,
-        "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
-        "args" : [ {
-          "name" : "reason",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "String",
-            "ofType" : null
-          },
-          "defaultValue" : "\"No longer supported\""
-        } ],
-        "onOperation" : false,
-        "onFragment" : false,
-        "onField" : false
-      }, {
         "name" : "aws_oidc",
         "description" : "Tells the service this field/object has access authorized by an OIDC token.",
         "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
@@ -2337,6 +2320,23 @@
             }
           },
           "defaultValue" : null
+        } ],
+        "onOperation" : false,
+        "onFragment" : false,
+        "onField" : false
+      }, {
+        "name" : "deprecated",
+        "description" : null,
+        "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
+        "args" : [ {
+          "name" : "reason",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
+          },
+          "defaultValue" : "\"No longer supported\""
         } ],
         "onOperation" : false,
         "onFragment" : false,

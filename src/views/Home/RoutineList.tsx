@@ -9,24 +9,24 @@ import {
     Divider,
     withTheme
 } from "react-native-paper";
-import { ListWorkoutsQueryVariables, ListWorkoutsQuery } from "../../API";
+import { ListRoutinesQueryVariables, ListRoutinesQuery } from "../../API";
 import gql from "graphql-tag";
-import { listWorkouts } from "../../graphql/queries";
+import { listRoutines } from "../../graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
 import { SelectedRoutineContext } from "../../modules/SelectedRoutineContext";
 
-interface IWorkoutListProps extends RouteComponentProps {
+interface IRoutineListProps extends RouteComponentProps {
     theme: Theme;
 }
 
-const WorkoutList: React.FC<IWorkoutListProps> = ({
+const RoutineList: React.FC<IRoutineListProps> = ({
     history,
     theme
-}: IWorkoutListProps) => {
+}: IRoutineListProps) => {
     const { loading, error, data } = useQuery<
-        ListWorkoutsQuery,
-        ListWorkoutsQueryVariables
-    >(gql(listWorkouts), {
+        ListRoutinesQuery,
+        ListRoutinesQueryVariables
+    >(gql(listRoutines), {
         variables: { limit: 5 }
     });
 
@@ -54,16 +54,16 @@ const WorkoutList: React.FC<IWorkoutListProps> = ({
                         )}
                         keyExtractor={item => item.id}
                         ItemSeparatorComponent={Divider}
-                        data={data.listWorkouts.items}
+                        data={data.listRoutines.items}
                     />
                     <FAB
                         style={styles.fab}
                         icon="add"
-                        onPress={() => history.push("/CreateWorkout")}
+                        onPress={() => history.push("/CreateRoutine")}
                     />
                 </React.Fragment>
             ) : (
-                <Text> Error Loading Workouts </Text>
+                <Text> Error Loading Routines </Text>
             )}
         </View>
     );
@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default withTheme(WorkoutList);
+export default withTheme(RoutineList);

@@ -10,14 +10,14 @@ import {
 import { RouteComponentProps } from "react-router";
 import { StyleProp, ViewStyle, StyleSheet } from "react-native";
 
-interface ICreateWorkoutHeaderProps extends RouteComponentProps {
+interface ICreateRoutineHeaderProps extends RouteComponentProps {
     theme: Theme;
 }
 
-const CreateWorkoutHeader: React.FC<ICreateWorkoutHeaderProps> = ({
+const CreateRoutineHeader: React.FC<ICreateRoutineHeaderProps> = ({
     history,
     theme
-}: ICreateWorkoutHeaderProps) => {
+}: ICreateRoutineHeaderProps) => {
     return (
         <Surface
             style={
@@ -29,7 +29,7 @@ const CreateWorkoutHeader: React.FC<ICreateWorkoutHeaderProps> = ({
         >
             <Appbar.Header style={{ elevation: 0 }}>
                 <Appbar.BackAction onPress={() => history.goBack()} />
-                <Appbar.Content title="Create Workout" />
+                <Appbar.Content title="Create Workout Routine" />
             </Appbar.Header>
             <Title
                 style={{
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default withTheme(CreateWorkoutHeader);
+export default withTheme(CreateRoutineHeader);

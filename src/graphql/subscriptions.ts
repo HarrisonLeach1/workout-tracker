@@ -1,8 +1,8 @@
 // tslint:disable
 // this is an auto generated file. This will be overwritten
 
-export const onCreateWorkout = `subscription OnCreateWorkout {
-  onCreateWorkout {
+export const onCreateRoutine = `subscription OnCreateRoutine {
+  onCreateRoutine {
     id
     name
     exercises {
@@ -18,8 +18,8 @@ export const onCreateWorkout = `subscription OnCreateWorkout {
   }
 }
 `;
-export const onUpdateWorkout = `subscription OnUpdateWorkout {
-  onUpdateWorkout {
+export const onUpdateRoutine = `subscription OnUpdateRoutine {
+  onUpdateRoutine {
     id
     name
     exercises {
@@ -35,8 +35,8 @@ export const onUpdateWorkout = `subscription OnUpdateWorkout {
   }
 }
 `;
-export const onDeleteWorkout = `subscription OnDeleteWorkout {
-  onDeleteWorkout {
+export const onDeleteRoutine = `subscription OnDeleteRoutine {
+  onDeleteRoutine {
     id
     name
     exercises {
@@ -59,7 +59,7 @@ export const onCreateExercise = `subscription OnCreateExercise {
     sets
     repetitions
     weightInKg
-    workout {
+    routine {
       id
       name
       exercises {
@@ -76,7 +76,7 @@ export const onUpdateExercise = `subscription OnUpdateExercise {
     sets
     repetitions
     weightInKg
-    workout {
+    routine {
       id
       name
       exercises {
@@ -93,7 +93,7 @@ export const onDeleteExercise = `subscription OnDeleteExercise {
     sets
     repetitions
     weightInKg
-    workout {
+    routine {
       id
       name
       exercises {

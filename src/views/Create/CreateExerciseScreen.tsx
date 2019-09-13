@@ -14,9 +14,9 @@ import {
 } from "react-native-paper";
 import { Formik, FormikProps, FormikActions } from "formik";
 import {
-    WorkoutContext,
-    WorkoutContextProps
-} from "../../modules/WorkoutContext";
+    CreateRoutineContext,
+    CreateRoutineContextProps
+} from "../../modules/RoutineContext";
 import { CreateExerciseInput } from "../../API";
 import { RouteComponentProps } from "react-router";
 
@@ -35,8 +35,8 @@ const CreateExerciseScreen: React.FC<ICreateExerciseScreenProps> = ({
     history,
     theme
 }: ICreateExerciseScreenProps) => {
-    const { workout, setWorkout } = useContext<WorkoutContextProps>(
-        WorkoutContext
+    const { routine, setRoutine } = useContext<CreateRoutineContextProps>(
+        CreateRoutineContext
     );
 
     const handleSubmit = (
@@ -50,7 +50,7 @@ const CreateExerciseScreen: React.FC<ICreateExerciseScreenProps> = ({
             weightInKg: +values.weightInKg
         };
 
-        setWorkout(prev => {
+        setRoutine(prev => {
             prev.createExercisesInput.push(exercise);
             return prev;
         });

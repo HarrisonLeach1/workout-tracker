@@ -1,8 +1,8 @@
 // tslint:disable
 // this is an auto generated file. This will be overwritten
 
-export const getWorkout = `query GetWorkout($id: ID!) {
-  getWorkout(id: $id) {
+export const getRoutine = `query GetRoutine($id: ID!) {
+  getRoutine(id: $id) {
     id
     name
     exercises {
@@ -18,12 +18,12 @@ export const getWorkout = `query GetWorkout($id: ID!) {
   }
 }
 `;
-export const listWorkouts = `query ListWorkouts(
-  $filter: ModelWorkoutFilterInput
+export const listRoutines = `query ListRoutines(
+  $filter: ModelRoutineFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listWorkouts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listRoutines(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       name
@@ -42,7 +42,7 @@ export const getExercise = `query GetExercise($id: ID!) {
     sets
     repetitions
     weightInKg
-    workout {
+    routine {
       id
       name
       exercises {
@@ -64,7 +64,7 @@ export const listExercises = `query ListExercises(
       sets
       repetitions
       weightInKg
-      workout {
+      routine {
         id
         name
       }

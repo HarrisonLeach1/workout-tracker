@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Theme, withTheme } from "react-native-paper";
-import WorkoutList from "./WorkoutList";
+import RoutineList from "./RoutineList";
 import { RouteComponentProps } from "react-router";
 
 interface IHomeScreenProps extends RouteComponentProps {
@@ -14,7 +14,7 @@ const HomeScreen = (props: IHomeScreenProps) => {
             <View style={styles.graph}>
                 <Text>Graph</Text>
             </View>
-            <WorkoutList {...props} />
+            <RoutineList {...props} />
         </View>
     );
 };

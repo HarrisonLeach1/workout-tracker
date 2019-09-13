@@ -1,8 +1,8 @@
 // tslint:disable
 // this is an auto generated file. This will be overwritten
 
-export const createWorkout = `mutation CreateWorkout($input: CreateWorkoutInput!) {
-  createWorkout(input: $input) {
+export const createRoutine = `mutation CreateRoutine($input: CreateRoutineInput!) {
+  createRoutine(input: $input) {
     id
     name
     exercises {
@@ -18,8 +18,8 @@ export const createWorkout = `mutation CreateWorkout($input: CreateWorkoutInput!
   }
 }
 `;
-export const updateWorkout = `mutation UpdateWorkout($input: UpdateWorkoutInput!) {
-  updateWorkout(input: $input) {
+export const updateRoutine = `mutation UpdateRoutine($input: UpdateRoutineInput!) {
+  updateRoutine(input: $input) {
     id
     name
     exercises {
@@ -35,8 +35,8 @@ export const updateWorkout = `mutation UpdateWorkout($input: UpdateWorkoutInput!
   }
 }
 `;
-export const deleteWorkout = `mutation DeleteWorkout($input: DeleteWorkoutInput!) {
-  deleteWorkout(input: $input) {
+export const deleteRoutine = `mutation DeleteRoutine($input: DeleteRoutineInput!) {
+  deleteRoutine(input: $input) {
     id
     name
     exercises {
@@ -59,7 +59,7 @@ export const createExercise = `mutation CreateExercise($input: CreateExerciseInp
     sets
     repetitions
     weightInKg
-    workout {
+    routine {
       id
       name
       exercises {
@@ -76,7 +76,7 @@ export const updateExercise = `mutation UpdateExercise($input: UpdateExerciseInp
     sets
     repetitions
     weightInKg
-    workout {
+    routine {
       id
       name
       exercises {
@@ -93,7 +93,7 @@ export const deleteExercise = `mutation DeleteExercise($input: DeleteExerciseInp
     sets
     repetitions
     weightInKg
-    workout {
+    routine {
       id
       name
       exercises {

@@ -1,17 +1,17 @@
 /* tslint:disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateWorkoutInput = {
+export type CreateRoutineInput = {
   id?: string | null,
   name?: string | null,
 };
 
-export type UpdateWorkoutInput = {
+export type UpdateRoutineInput = {
   id: string,
   name?: string | null,
 };
 
-export type DeleteWorkoutInput = {
+export type DeleteRoutineInput = {
   id?: string | null,
 };
 
@@ -21,7 +21,7 @@ export type CreateExerciseInput = {
   sets?: number | null,
   repetitions?: number | null,
   weightInKg?: number | null,
-  exerciseWorkoutId?: string | null,
+  exerciseRoutineId?: string | null,
 };
 
 export type UpdateExerciseInput = {
@@ -30,19 +30,19 @@ export type UpdateExerciseInput = {
   sets?: number | null,
   repetitions?: number | null,
   weightInKg?: number | null,
-  exerciseWorkoutId?: string | null,
+  exerciseRoutineId?: string | null,
 };
 
 export type DeleteExerciseInput = {
   id?: string | null,
 };
 
-export type ModelWorkoutFilterInput = {
+export type ModelRoutineFilterInput = {
   id?: ModelIDFilterInput | null,
   name?: ModelStringFilterInput | null,
-  and?: Array< ModelWorkoutFilterInput | null > | null,
-  or?: Array< ModelWorkoutFilterInput | null > | null,
-  not?: ModelWorkoutFilterInput | null,
+  and?: Array< ModelRoutineFilterInput | null > | null,
+  or?: Array< ModelRoutineFilterInput | null > | null,
+  not?: ModelRoutineFilterInput | null,
 };
 
 export type ModelIDFilterInput = {
@@ -94,13 +94,13 @@ export type ModelIntFilterInput = {
   between?: Array< number | null > | null,
 };
 
-export type CreateWorkoutMutationVariables = {
-  input: CreateWorkoutInput,
+export type CreateRoutineMutationVariables = {
+  input: CreateRoutineInput,
 };
 
-export type CreateWorkoutMutation = {
-  createWorkout:  {
-    __typename: "Workout",
+export type CreateRoutineMutation = {
+  createRoutine:  {
+    __typename: "Routine",
     id: string,
     name: string | null,
     exercises:  {
@@ -118,13 +118,13 @@ export type CreateWorkoutMutation = {
   } | null,
 };
 
-export type UpdateWorkoutMutationVariables = {
-  input: UpdateWorkoutInput,
+export type UpdateRoutineMutationVariables = {
+  input: UpdateRoutineInput,
 };
 
-export type UpdateWorkoutMutation = {
-  updateWorkout:  {
-    __typename: "Workout",
+export type UpdateRoutineMutation = {
+  updateRoutine:  {
+    __typename: "Routine",
     id: string,
     name: string | null,
     exercises:  {
@@ -142,13 +142,13 @@ export type UpdateWorkoutMutation = {
   } | null,
 };
 
-export type DeleteWorkoutMutationVariables = {
-  input: DeleteWorkoutInput,
+export type DeleteRoutineMutationVariables = {
+  input: DeleteRoutineInput,
 };
 
-export type DeleteWorkoutMutation = {
-  deleteWorkout:  {
-    __typename: "Workout",
+export type DeleteRoutineMutation = {
+  deleteRoutine:  {
+    __typename: "Routine",
     id: string,
     name: string | null,
     exercises:  {
@@ -178,8 +178,8 @@ export type CreateExerciseMutation = {
     sets: number | null,
     repetitions: number | null,
     weightInKg: number | null,
-    workout:  {
-      __typename: "Workout",
+    routine:  {
+      __typename: "Routine",
       id: string,
       name: string | null,
       exercises:  {
@@ -202,8 +202,8 @@ export type UpdateExerciseMutation = {
     sets: number | null,
     repetitions: number | null,
     weightInKg: number | null,
-    workout:  {
-      __typename: "Workout",
+    routine:  {
+      __typename: "Routine",
       id: string,
       name: string | null,
       exercises:  {
@@ -226,8 +226,8 @@ export type DeleteExerciseMutation = {
     sets: number | null,
     repetitions: number | null,
     weightInKg: number | null,
-    workout:  {
-      __typename: "Workout",
+    routine:  {
+      __typename: "Routine",
       id: string,
       name: string | null,
       exercises:  {
@@ -238,13 +238,13 @@ export type DeleteExerciseMutation = {
   } | null,
 };
 
-export type GetWorkoutQueryVariables = {
+export type GetRoutineQueryVariables = {
   id: string,
 };
 
-export type GetWorkoutQuery = {
-  getWorkout:  {
-    __typename: "Workout",
+export type GetRoutineQuery = {
+  getRoutine:  {
+    __typename: "Routine",
     id: string,
     name: string | null,
     exercises:  {
@@ -262,17 +262,17 @@ export type GetWorkoutQuery = {
   } | null,
 };
 
-export type ListWorkoutsQueryVariables = {
-  filter?: ModelWorkoutFilterInput | null,
+export type ListRoutinesQueryVariables = {
+  filter?: ModelRoutineFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListWorkoutsQuery = {
-  listWorkouts:  {
-    __typename: "ModelWorkoutConnection",
+export type ListRoutinesQuery = {
+  listRoutines:  {
+    __typename: "ModelRoutineConnection",
     items:  Array< {
-      __typename: "Workout",
+      __typename: "Routine",
       id: string,
       name: string | null,
       exercises:  {
@@ -296,8 +296,8 @@ export type GetExerciseQuery = {
     sets: number | null,
     repetitions: number | null,
     weightInKg: number | null,
-    workout:  {
-      __typename: "Workout",
+    routine:  {
+      __typename: "Routine",
       id: string,
       name: string | null,
       exercises:  {
@@ -324,8 +324,8 @@ export type ListExercisesQuery = {
       sets: number | null,
       repetitions: number | null,
       weightInKg: number | null,
-      workout:  {
-        __typename: "Workout",
+      routine:  {
+        __typename: "Routine",
         id: string,
         name: string | null,
       } | null,
@@ -334,9 +334,9 @@ export type ListExercisesQuery = {
   } | null,
 };
 
-export type OnCreateWorkoutSubscription = {
-  onCreateWorkout:  {
-    __typename: "Workout",
+export type OnCreateRoutineSubscription = {
+  onCreateRoutine:  {
+    __typename: "Routine",
     id: string,
     name: string | null,
     exercises:  {
@@ -354,9 +354,9 @@ export type OnCreateWorkoutSubscription = {
   } | null,
 };
 
-export type OnUpdateWorkoutSubscription = {
-  onUpdateWorkout:  {
-    __typename: "Workout",
+export type OnUpdateRoutineSubscription = {
+  onUpdateRoutine:  {
+    __typename: "Routine",
     id: string,
     name: string | null,
     exercises:  {
@@ -374,9 +374,9 @@ export type OnUpdateWorkoutSubscription = {
   } | null,
 };
 
-export type OnDeleteWorkoutSubscription = {
-  onDeleteWorkout:  {
-    __typename: "Workout",
+export type OnDeleteRoutineSubscription = {
+  onDeleteRoutine:  {
+    __typename: "Routine",
     id: string,
     name: string | null,
     exercises:  {
@@ -402,8 +402,8 @@ export type OnCreateExerciseSubscription = {
     sets: number | null,
     repetitions: number | null,
     weightInKg: number | null,
-    workout:  {
-      __typename: "Workout",
+    routine:  {
+      __typename: "Routine",
       id: string,
       name: string | null,
       exercises:  {
@@ -422,8 +422,8 @@ export type OnUpdateExerciseSubscription = {
     sets: number | null,
     repetitions: number | null,
     weightInKg: number | null,
-    workout:  {
-      __typename: "Workout",
+    routine:  {
+      __typename: "Routine",
       id: string,
       name: string | null,
       exercises:  {
@@ -442,8 +442,8 @@ export type OnDeleteExerciseSubscription = {
     sets: number | null,
     repetitions: number | null,
     weightInKg: number | null,
-    workout:  {
-      __typename: "Workout",
+    routine:  {
+      __typename: "Routine",
       id: string,
       name: string | null,
       exercises:  {

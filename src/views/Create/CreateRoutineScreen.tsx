@@ -1,24 +1,15 @@
 import React, { useContext } from "react";
-import { StyleSheet, FlatList, View, ViewStyle, StyleProp } from "react-native";
+import { StyleSheet, FlatList, View } from "react-native";
+import { List, Divider, Theme, withTheme } from "react-native-paper";
 import {
-    List,
-    Divider,
-    Title,
-    Appbar,
-    Surface,
-    Theme,
-    FAB,
-    withTheme
-} from "react-native-paper";
-import {
-    WorkoutContext,
-    WorkoutContextProps
-} from "../../modules/WorkoutContext";
+    CreateRoutineContextProps,
+    CreateRoutineContext
+} from "../../modules/RoutineContext";
 import { useMutation } from "@apollo/react-hooks";
-import { createWorkout, createExercise } from "../../graphql/mutations";
+import { createRoutine, createExercise } from "../../graphql/mutations";
 import {
-    CreateWorkoutMutation,
-    CreateWorkoutMutationVariables,
+    CreateRoutineMutation,
+    CreateRoutineMutationVariables,
     CreateExerciseMutation,
     CreateExerciseMutationVariables
 } from "../../API";
@@ -26,30 +17,30 @@ import gql from "graphql-tag";
 import { Formik, FormikProps } from "formik";
 import { ExecutionResult } from "apollo-link";
 import { RouteComponentProps } from "react-router";
-import CreateWorkoutHeader from "./CreateWorkoutHeader";
+import CreateRoutineHeader from "./CreateRoutineHeader";
 
-interface ICreateWorkoutScreenProps extends RouteComponentProps {
+interface ICreateRoutineScreenProps extends RouteComponentProps {
     theme: Theme;
 }
 
-interface WorkoutFormValues {
+interface RoutineFormValues {
     name: string;
 }
 
-const CreateWorkoutScreen: React.FC<ICreateWorkoutScreenProps> = (
-    props: ICreateWorkoutScreenProps
+const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (
+    props: ICreateRoutineScreenProps
 ) => {
-    const { workout, setWorkout } = useContext<WorkoutContextProps>(
-        WorkoutContext
+    const { routine, setRoutine } = useContext<CreateRoutineContextProps>(
+        CreateRoutineContext
     );
 
-    const [addWorkout, { error, data }] = useMutation<
-        CreateWorkoutMutation,
-        CreateWorkoutMutationVariables
-    >(gql(createWorkout), {
+    const [addRoutine, { error, data }] = useMutation<
+        CreateRoutineMutation,
+        CreateRoutineMutationVariables
+    >(gql(createRoutine), {
         variables: {
             input: {
-                name: workout.createWorkoutInput.name
+                name: routine.createRoutineInput.name
             }
         }
     });
@@ -60,34 +51,31 @@ const CreateWorkoutScreen: React.FC<ICreateWorkoutScreenProps> = (
     >(gql(createExercise));
 
     const addExercises = (
-        newWorkoutMutation: ExecutionResult<CreateWorkoutMutation>
+        newRoutineMutation: ExecutionResult<CreateRoutineMutation>
     ) => {
-        const workoutId = newWorkoutMutation.data.createWorkout.id;
-        console.log("Adding exercises for workout: " + workoutId);
-        workout.createExercisesInput.forEach(createExerciseInput => {
+        const routineId = newRoutineMutation.data.createRoutine.id;
+        console.log("Adding exercises for routine: " + routineId);
+        routine.createExercisesInput.forEach(createExerciseInput => {
             addExercise({
                 variables: {
                     input: {
                         ...createExerciseInput,
-                        exerciseWorkoutId: workoutId
+                        exerciseRoutineId: routineId
                     }
                 }
             });
         });
     };
 
-    const handleCreate = async (values: WorkoutFormValues) => {
-        setWorkout(prev => {
-            prev.createWorkoutInput.name = values.name;
+    const handleCreate = async (values: RoutineFormValues) => {
+        setRoutine(prev => {
+            prev.createRoutineInput.name = values.name;
             return prev;
         });
-        console.log(
-            "Creating workout with name: " + workout.createWorkoutInput.name
-        );
 
-        const newWorkoutMutation = await addWorkout();
+        const newRoutineMutation = await addRoutine();
 
-        await addExercises(newWorkoutMutation);
+        await addExercises(newRoutineMutation);
 
         props.history.goBack();
     };
@@ -99,9 +87,9 @@ const CreateWorkoutScreen: React.FC<ICreateWorkoutScreenProps> = (
             }}
             onSubmit={values => handleCreate(values)}
         >
-            {(formikProps: FormikProps<WorkoutFormValues>) => (
+            {(formikProps: FormikProps<RoutineFormValues>) => (
                 <View style={styles.screen}>
-                    <CreateWorkoutHeader {...props} />
+                    <CreateRoutineHeader {...props} />
                     <View>
                         <FlatList
                             renderItem={({ item }) => (
@@ -109,7 +97,7 @@ const CreateWorkoutScreen: React.FC<ICreateWorkoutScreenProps> = (
                             )}
                             keyExtractor={item => item.name}
                             ItemSeparatorComponent={Divider}
-                            data={workout.createExercisesInput}
+                            data={routine.createExercisesInput}
                         />
                     </View>
                 </View>
@@ -137,4 +125,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default withTheme(CreateWorkoutScreen);
+export default withTheme(CreateRoutineScreen);
