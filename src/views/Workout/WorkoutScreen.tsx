@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Timer from "./Timer";
 import { RouteComponentProps } from "react-router-native";

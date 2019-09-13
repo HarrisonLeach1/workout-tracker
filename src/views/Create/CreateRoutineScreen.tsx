@@ -23,7 +23,7 @@ interface ICreateRoutineScreenProps extends RouteComponentProps {
     theme: Theme;
 }
 
-interface RoutineFormValues {
+export interface RoutineFormValues {
     name: string;
 }
 
@@ -83,13 +83,13 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (
     return (
         <Formik
             initialValues={{
-                name: ""
+                name: "Routine Name"
             }}
             onSubmit={values => handleCreate(values)}
         >
             {(formikProps: FormikProps<RoutineFormValues>) => (
                 <View style={styles.screen}>
-                    <CreateRoutineHeader {...props} />
+                    <CreateRoutineHeader {...props} formikProps={formikProps} />
                     <View>
                         <FlatList
                             renderItem={({ item }) => (

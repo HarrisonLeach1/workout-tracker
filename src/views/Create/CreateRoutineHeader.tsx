@@ -8,15 +8,25 @@ import {
     Theme
 } from "react-native-paper";
 import { RouteComponentProps } from "react-router";
-import { StyleProp, ViewStyle, StyleSheet } from "react-native";
+import {
+    StyleProp,
+    ViewStyle,
+    StyleSheet,
+    TextInput,
+    View
+} from "react-native";
+import { FormikProps } from "formik";
+import { RoutineFormValues } from "./CreateRoutineScreen";
 
 interface ICreateRoutineHeaderProps extends RouteComponentProps {
     theme: Theme;
+    formikProps: FormikProps<RoutineFormValues>;
 }
 
 const CreateRoutineHeader: React.FC<ICreateRoutineHeaderProps> = ({
     history,
-    theme
+    theme,
+    formikProps
 }: ICreateRoutineHeaderProps) => {
     return (
         <Surface
@@ -31,14 +41,32 @@ const CreateRoutineHeader: React.FC<ICreateRoutineHeaderProps> = ({
                 <Appbar.BackAction onPress={() => history.goBack()} />
                 <Appbar.Content title="Create Workout Routine" />
             </Appbar.Header>
-            <Title
-                style={{
-                    padding: 20,
-                    color: "#fff"
-                }}
-            >
-                Exercises
-            </Title>
+            <View style={styles.textContainer}>
+                <TextInput
+                    autoFocus={true}
+                    enablesReturnKeyAutomatically={true}
+                    placeholderTextColor="#AFAFAF"
+                    placeholder="Enter Routine Name"
+                    selectionColor="#fff"
+                    onChangeText={formikProps.handleChange("name")}
+                    onBlur={formikProps.handleBlur("name")}
+                    value={formikProps.values.name}
+                    style={{
+                        padding: 20,
+                        fontSize: 20,
+                        fontFamily: theme.fonts.light,
+                        color: "#fff"
+                    }}
+                />
+                <Title
+                    style={{
+                        padding: 20,
+                        color: "#fff"
+                    }}
+                >
+                    Exercises
+                </Title>
+            </View>
             <FAB
                 style={styles.fab}
                 icon="add"
@@ -55,6 +83,10 @@ const styles = StyleSheet.create({
         alignItems: "stretch",
         justifyContent: "flex-start",
         elevation: 4
+    },
+    textContainer: {
+        alignItems: "stretch",
+        justifyContent: "space-between"
     },
     fab: {
         position: "absolute",
