@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Timer from "./Timer";
 import { RouteComponentProps } from "react-router-native";
@@ -6,11 +6,17 @@ import { GetWorkoutQuery, GetWorkoutQueryVariables } from "../../API";
 import { getWorkout } from "../../graphql/queries";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import { Theme, ActivityIndicator, Button } from "react-native-paper";
+import {
+    Theme,
+    ActivityIndicator,
+    Button,
+    withTheme
+} from "react-native-paper";
 import { Exercise } from "../../modules/WorkoutTypes";
 import ExerciseInfo from "./ExerciseInfo";
 import WorkoutButton from "./WorkoutButton";
 import { useImmerReducer } from "use-immer";
+import { SelectedRoutineContext } from "../../modules/SelectedRoutineContext";
 
 export enum ExerciseState {
     Waiting,
@@ -24,7 +30,6 @@ export type Action =
     | { type: "end break" };
 
 interface IWorkoutScreenProps extends RouteComponentProps {
-    workoutId: string;
     theme: Theme;
 }
 
@@ -75,13 +80,15 @@ function reducer(state: WorkoutState, action: Action): WorkoutState {
     }
 }
 
-const WorkoutScreen = ({ history, workoutId, theme }: IWorkoutScreenProps) => {
+const WorkoutScreen = ({ history, theme }: IWorkoutScreenProps) => {
+    const { routineID, setRoutineID } = useContext(SelectedRoutineContext);
+
     const { loading, error, data } = useQuery<
         GetWorkoutQuery,
         GetWorkoutQueryVariables
     >(gql(getWorkout), {
         variables: {
-            id: workoutId
+            id: routineID
         }
     });
 
@@ -128,7 +135,7 @@ const WorkoutScreen = ({ history, workoutId, theme }: IWorkoutScreenProps) => {
                                 setNumber={state.setNumber}
                             />
                         )}
-                        <Button onPress={() => history.push("/")}>
+                        <Button onPress={() => history.goBack()}>
                             Go Back
                         </Button>
                     </View>
@@ -162,4 +169,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default WorkoutScreen;
+export default withTheme(WorkoutScreen);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { RouteComponentProps } from "react-router";
 import { View, FlatList, StyleSheet, Text } from "react-native";
 import {
@@ -6,29 +6,31 @@ import {
     ActivityIndicator,
     List,
     Theme,
-    Divider
+    Divider,
+    withTheme
 } from "react-native-paper";
 import { ListWorkoutsQueryVariables, ListWorkoutsQuery } from "../../API";
 import gql from "graphql-tag";
 import { listWorkouts } from "../../graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
+import { SelectedRoutineContext } from "../../modules/SelectedRoutineContext";
 
 interface IWorkoutListProps extends RouteComponentProps {
-    onWorkoutPress: (workoutId: string) => void;
     theme: Theme;
 }
 
 const WorkoutList: React.FC<IWorkoutListProps> = ({
     history,
-    theme,
-    onWorkoutPress
-}) => {
+    theme
+}: IWorkoutListProps) => {
     const { loading, error, data } = useQuery<
         ListWorkoutsQuery,
         ListWorkoutsQueryVariables
     >(gql(listWorkouts), {
         variables: { limit: 5 }
     });
+
+    const { routineID, setRoutineID } = useContext(SelectedRoutineContext);
 
     return (
         <View style={styles.container}>
@@ -44,7 +46,7 @@ const WorkoutList: React.FC<IWorkoutListProps> = ({
                         renderItem={({ item }) => (
                             <List.Item
                                 onPress={() => {
-                                    onWorkoutPress(item.id);
+                                    setRoutineID(item.id);
                                     history.push("/Workout");
                                 }}
                                 title={item.name}
@@ -89,4 +91,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default WorkoutList;
+export default withTheme(WorkoutList);

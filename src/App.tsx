@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { NativeRouter, Route, Switch } from "react-router-native";
 import WorkoutScreen from "./views/Workout/WorkoutScreen";
-import Home from "./views/Home/HomeScreen";
+import HomeScreen from "./views/Home/HomeScreen";
 import CreateWorkoutScreen from "./views/Create/CreateWorkoutScreen";
 import CreateExerciseScreen from "./views/Create/CreateExerciseScreen";
 import { WorkoutContext, WorkoutInputs } from "./modules/WorkoutContext";
@@ -10,6 +10,9 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import awsconfig from "../aws-exports";
 import ApolloClient from "apollo-boost";
 import { registerRootComponent } from "expo";
+import Stack from "react-router-native-stack";
+import { SelectedRoutineContext } from "./modules/SelectedRoutineContext";
+import CreateWorkoutHeader from "./views/Create/CreateWorkoutHeader";
 
 const client = new ApolloClient({
     uri: awsconfig.aws_appsync_graphqlEndpoint,
@@ -31,53 +34,40 @@ const App = () => {
         setWorkout
     ]);
 
-    const [selectedWorkout, setSelectedWorkoutId] = useState<string>("");
-    const handleWorkoutPress = (workoutId: string) => {
-        setSelectedWorkoutId(workoutId);
-    };
+    const [routineID, setRoutineID] = useState<string>("");
+
+    const routineIDValue = useMemo(() => ({ routineID, setRoutineID }), [
+        routineID,
+        setRoutineID
+    ]);
 
     return (
         <PaperProvider theme={theme}>
-            <NativeRouter>
-                <Switch>
-                    <Route
-                        exact
-                        path="/"
-                        render={props => (
-                            <Home
-                                {...props}
-                                theme={theme}
-                                onWorkoutPress={handleWorkoutPress}
+            <SelectedRoutineContext.Provider value={routineIDValue}>
+                <WorkoutContext.Provider value={workoutValue}>
+                    <NativeRouter>
+                        <Stack style={{ alignItems: "flex-start" }}>
+                            <Route exact path="/" component={HomeScreen} />
+                            <Route
+                                exact
+                                path="/Workout"
+                                component={WorkoutScreen}
                             />
-                        )}
-                    />
-                    <Route
-                        exact
-                        path="/Workout"
-                        render={props => (
-                            <WorkoutScreen
-                                {...props}
-                                workoutId={selectedWorkout}
-                                theme={theme}
+                            <Route
+                                exact
+                                path="/CreateWorkout"
+                                component={CreateWorkoutScreen}
                             />
-                        )}
-                    />
-                    <WorkoutContext.Provider value={workoutValue}>
-                        <Route
-                            exact
-                            path="/CreateWorkout"
-                            render={props => (
-                                <CreateWorkoutScreen {...props} theme={theme} />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/CreateExercise"
-                            component={CreateExerciseScreen}
-                        />
-                    </WorkoutContext.Provider>
-                </Switch>
-            </NativeRouter>
+                            <Route
+                                exact
+                                path="/CreateExercise"
+                                animationType="slide-vertical"
+                                component={CreateExerciseScreen}
+                            />
+                        </Stack>
+                    </NativeRouter>
+                </WorkoutContext.Provider>
+            </SelectedRoutineContext.Provider>
         </PaperProvider>
     );
 };

@@ -1,15 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Theme } from "react-native-paper";
+import { Theme, withTheme } from "react-native-paper";
 import WorkoutList from "./WorkoutList";
 import { RouteComponentProps } from "react-router";
 
 interface IHomeScreenProps extends RouteComponentProps {
     theme: Theme;
-    onWorkoutPress: (workoutId: string) => void;
 }
 
-const Home = (props: IHomeScreenProps) => {
+const HomeScreen = (props: IHomeScreenProps) => {
     return (
         <View style={styles.container}>
             <View style={styles.graph}>
@@ -19,8 +18,6 @@ const Home = (props: IHomeScreenProps) => {
         </View>
     );
 };
-
-export default Home;
 
 const styles = StyleSheet.create({
     container: {
@@ -37,3 +34,5 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     }
 });
+
+export default withTheme(HomeScreen);

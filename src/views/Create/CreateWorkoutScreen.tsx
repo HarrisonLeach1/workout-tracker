@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { StyleSheet, FlatList, View, ViewStyle, StyleProp } from "react-native";
 import {
-    TextInput,
     List,
     Divider,
     Title,
     Appbar,
     Surface,
     Theme,
-    FAB
+    FAB,
+    withTheme
 } from "react-native-paper";
 import {
     WorkoutContext,
@@ -26,6 +26,7 @@ import gql from "graphql-tag";
 import { Formik, FormikProps } from "formik";
 import { ExecutionResult } from "apollo-link";
 import { RouteComponentProps } from "react-router";
+import CreateWorkoutHeader from "./CreateWorkoutHeader";
 
 interface ICreateWorkoutScreenProps extends RouteComponentProps {
     theme: Theme;
@@ -35,7 +36,9 @@ interface WorkoutFormValues {
     name: string;
 }
 
-const CreateWorkoutScreen = ({ history, theme }: ICreateWorkoutScreenProps) => {
+const CreateWorkoutScreen: React.FC<ICreateWorkoutScreenProps> = (
+    props: ICreateWorkoutScreenProps
+) => {
     const { workout, setWorkout } = useContext<WorkoutContextProps>(
         WorkoutContext
     );
@@ -86,11 +89,7 @@ const CreateWorkoutScreen = ({ history, theme }: ICreateWorkoutScreenProps) => {
 
         await addExercises(newWorkoutMutation);
 
-        history.push("/");
-    };
-
-    const goBack = () => {
-        history.push("/");
+        props.history.goBack();
     };
 
     return (
@@ -100,36 +99,9 @@ const CreateWorkoutScreen = ({ history, theme }: ICreateWorkoutScreenProps) => {
             }}
             onSubmit={values => handleCreate(values)}
         >
-            {(props: FormikProps<WorkoutFormValues>) => (
-                <React.Fragment>
-                    <Surface
-                        style={
-                            {
-                                ...styles.surface,
-                                backgroundColor: theme.colors.primary
-                            } as StyleProp<ViewStyle>
-                        }
-                    >
-                        <Appbar.Header style={{ elevation: 0 }}>
-                            <Appbar.BackAction onPress={goBack} />
-                            <Appbar.Content title="Create Workout" />
-                        </Appbar.Header>
-                        <Title
-                            style={{
-                                padding: 20,
-                                color: "#fff"
-                            }}
-                        >
-                            Exercises
-                        </Title>
-                        <FAB
-                            style={styles.fab}
-                            icon="add"
-                            onPress={() => {
-                                history.push("/CreateExercise");
-                            }}
-                        />
-                    </Surface>
+            {(formikProps: FormikProps<WorkoutFormValues>) => (
+                <View style={styles.screen}>
+                    <CreateWorkoutHeader {...props} />
                     <View>
                         <FlatList
                             renderItem={({ item }) => (
@@ -140,29 +112,21 @@ const CreateWorkoutScreen = ({ history, theme }: ICreateWorkoutScreenProps) => {
                             data={workout.createExercisesInput}
                         />
                     </View>
-                </React.Fragment>
+                </View>
             )}
         </Formik>
     );
 };
-
 const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+        flexDirection: "column",
+        justifyContent: "flex-start"
+    },
     surface: {
         alignItems: "stretch",
         justifyContent: "flex-start",
         elevation: 4
-    },
-    container: {
-        flex: 1,
-        padding: 8,
-        backgroundColor: "#fff"
-    },
-    wrapper: {
-        flex: 1,
-        marginTop: 16
-    },
-    inputContainerStyle: {
-        margin: 8
     },
     fab: {
         position: "absolute",
@@ -173,4 +137,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CreateWorkoutScreen;
+export default withTheme(CreateWorkoutScreen);

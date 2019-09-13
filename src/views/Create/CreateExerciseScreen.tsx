@@ -5,13 +5,24 @@ import {
     ScrollView,
     View
 } from "react-native";
-import { TextInput, Button, Appbar } from "react-native-paper";
+import {
+    TextInput,
+    Button,
+    Appbar,
+    withTheme,
+    Theme
+} from "react-native-paper";
 import { Formik, FormikProps, FormikActions } from "formik";
 import {
     WorkoutContext,
     WorkoutContextProps
 } from "../../modules/WorkoutContext";
 import { CreateExerciseInput } from "../../API";
+import { RouteComponentProps } from "react-router";
+
+interface ICreateExerciseScreenProps extends RouteComponentProps {
+    theme: Theme;
+}
 
 interface ExerciseFormValues {
     name: string;
@@ -20,7 +31,10 @@ interface ExerciseFormValues {
     weightInKg: string;
 }
 
-const CreateExerciseScreen = ({ history }) => {
+const CreateExerciseScreen: React.FC<ICreateExerciseScreenProps> = ({
+    history,
+    theme
+}: ICreateExerciseScreenProps) => {
     const { workout, setWorkout } = useContext<WorkoutContextProps>(
         WorkoutContext
     );
@@ -41,17 +55,13 @@ const CreateExerciseScreen = ({ history }) => {
             return prev;
         });
 
-        history.push("/CreateWorkout");
-    };
-
-    const goBack = () => {
         history.goBack();
     };
 
     return (
-        <React.Fragment>
+        <View style={styles.screen}>
             <Appbar.Header>
-                <Appbar.BackAction onPress={goBack} />
+                <Appbar.Action icon="delete" onPress={() => history.goBack()} />
                 <Appbar.Content title="Create Exercise" />
             </Appbar.Header>
 
@@ -128,11 +138,16 @@ const CreateExerciseScreen = ({ history }) => {
                     </Formik>
                 </ScrollView>
             </KeyboardAvoidingView>
-        </React.Fragment>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+        flexDirection: "column",
+        justifyContent: "flex-start"
+    },
     container: {
         flex: 1,
         padding: 8,
@@ -147,4 +162,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CreateExerciseScreen;
+export default withTheme(CreateExerciseScreen);
