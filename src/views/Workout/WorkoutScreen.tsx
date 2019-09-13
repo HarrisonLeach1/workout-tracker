@@ -2,8 +2,8 @@ import React, { useReducer, useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Timer from "./Timer";
 import { RouteComponentProps } from "react-router-native";
-import { GetWorkoutQuery, GetWorkoutQueryVariables } from "../../API";
-import { getWorkout } from "../../graphql/queries";
+import { GetRoutineQuery, GetRoutineQueryVariables } from "../../API";
+import { getRoutine } from "../../graphql/queries";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import {
@@ -84,9 +84,9 @@ const WorkoutScreen = ({ history, theme }: IWorkoutScreenProps) => {
     const { routineID, setRoutineID } = useContext(SelectedRoutineContext);
 
     const { loading, error, data } = useQuery<
-        GetWorkoutQuery,
-        GetWorkoutQueryVariables
-    >(gql(getWorkout), {
+        GetRoutineQuery,
+        GetRoutineQueryVariables
+    >(gql(getRoutine), {
         variables: {
             id: routineID
         }
@@ -95,7 +95,7 @@ const WorkoutScreen = ({ history, theme }: IWorkoutScreenProps) => {
     const [state, dispatch] = useImmerReducer(reducer, initialWorkoutState);
 
     const currentExercise: Exercise = data
-        ? data.getWorkout.exercises.items[state.exerciseIndex]
+        ? data.getRoutine.exercises.items[state.exerciseIndex]
         : null;
 
     console.log(state);
