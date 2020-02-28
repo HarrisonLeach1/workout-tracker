@@ -40,6 +40,7 @@ const CreateRoutineHeader: React.FC<ICreateRoutineHeaderProps> = ({
             <Appbar.Header style={{ elevation: 0 }}>
                 <Appbar.BackAction onPress={() => history.goBack()} />
                 <Appbar.Content title="Create Workout Routine" />
+                <Appbar.Action icon="check" onPress={() => formikProps.submitForm()} />
             </Appbar.Header>
             <View style={styles.textContainer}>
                 <TextInput
