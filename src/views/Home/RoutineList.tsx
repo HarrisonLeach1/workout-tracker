@@ -27,10 +27,13 @@ const RoutineList: React.FC<IRoutineListProps> = ({
         ListRoutinesQuery,
         ListRoutinesQueryVariables
     >(gql(listRoutines), {
-        variables: { limit: 5 }
+        variables: { limit: 5 },
+        fetchPolicy: "cache-only"
     });
 
     const { routineID, setRoutineID } = useContext(SelectedRoutineContext);
+
+    console.log(data);
 
     return (
         <View style={styles.container}>

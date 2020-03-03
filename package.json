@@ -14,6 +14,7 @@
         "@aws-amplify/pubsub": "^1.1.0",
         "@react-native-community/netinfo": "~3.2.1",
         "apollo-boost": "^0.4.4",
+        "apollo-cache-persist": "^0.1.1",
         "aws-appsync": "^2.0.0",
         "aws-appsync-react": "^2.0.0",
         "expo": "^34.0.1",
@@ -31,6 +32,9 @@
         "react-router-native": "^5.0.1",
         "react-router-native-stack": "^0.0.16",
         "use-immer": "^0.3.3"
+    },
+    "resolutions": {
+        "apollo-client": "2.6.4"
     },
     "devDependencies": {
         "@types/react": "^16.8.23",

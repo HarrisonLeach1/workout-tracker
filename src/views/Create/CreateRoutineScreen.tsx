@@ -11,13 +11,19 @@ import {
     CreateRoutineMutation,
     CreateRoutineMutationVariables,
     CreateExerciseMutation,
-    CreateExerciseMutationVariables
+    CreateExerciseMutationVariables,
+    CreateExerciseInput
 } from "../../API";
 import gql from "graphql-tag";
 import { Formik, FormikProps } from "formik";
 import { ExecutionResult } from "apollo-link";
 import { RouteComponentProps } from "react-router";
 import CreateRoutineHeader from "./CreateRoutineHeader";
+import {
+    getOptmisticCreateExerciseResponse,
+    getOptmisticCreateRoutineResponse,
+    createRoutineUpdate
+} from "../../OfflineAPI";
 
 interface ICreateRoutineScreenProps extends RouteComponentProps {
     theme: Theme;
@@ -42,7 +48,11 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (
             input: {
                 name: routine.createRoutineInput.name
             }
-        }
+        },
+        optimisticResponse: getOptmisticCreateRoutineResponse(
+            routine.createRoutineInput.name
+        ),
+        update: createRoutineUpdate
     });
 
     const [addExercise] = useMutation<
@@ -50,20 +60,27 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (
         CreateExerciseMutationVariables
     >(gql(createExercise));
 
-    const addExercises = (
-        newRoutineMutation: ExecutionResult<CreateRoutineMutation>
-    ) => {
-        const routineId = newRoutineMutation.data.createRoutine.id;
-        console.log("Adding exercises for routine: " + routineId);
-        routine.createExercisesInput.forEach(createExerciseInput => {
-            addExercise({
+    const addExercises = (routineData: CreateRoutineMutation) => {
+        console.log(
+            "Adding exercises for routine: " + routineData.createRoutine.name
+        );
+        routine.createExercisesInput.forEach(async createExerciseInput => {
+            const input: CreateExerciseInput = {
+                ...createExerciseInput,
+                exerciseRoutineId: routineData.createRoutine.id
+            };
+
+            const newExercise = await addExercise({
                 variables: {
-                    input: {
-                        ...createExerciseInput,
-                        exerciseRoutineId: routineId
-                    }
-                }
+                    input: input
+                },
+                optimisticResponse: getOptmisticCreateExerciseResponse(
+                    input,
+                    routineData
+                )
             });
+
+            console.log("newExercise.data" + newExercise.data);
         });
     };
 
@@ -75,7 +92,11 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (
 
         const newRoutineMutation = await addRoutine();
 
-        await addExercises(newRoutineMutation);
+        const routineData: CreateRoutineMutation = newRoutineMutation.data;
+
+        console.log("newRoutineMutation.data" + newRoutineMutation.data);
+
+        await addExercises(routineData);
 
         props.history.goBack();
     };
