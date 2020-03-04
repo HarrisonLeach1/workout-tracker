@@ -1,13 +1,11 @@
-import React, { useState, useMemo } from "react";
+import React from "react";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import { NativeRouter, Route, Switch } from "react-router-native";
-import WorkoutScreen from "./views/Workout/WorkoutScreen";
+import { NativeRouter, Route } from "react-router-native";
 import HomeScreen from "./views/Home/HomeScreen";
 import CreateRoutineScreen from "./views/Create/CreateRoutineScreen";
 import CreateExerciseScreen from "./views/Create/CreateExerciseScreen";
 import {
     CreateRoutineContext,
-    RoutineInputs,
     useCreateRoutineContext
 } from "./modules/RoutineContext";
 import { ApolloProvider } from "@apollo/react-hooks";
@@ -19,6 +17,7 @@ import {
     SelectedRoutineContext,
     useSelectedRoutine
 } from "./modules/SelectedRoutineContext";
+import WorkoutTable from "./views/Workout/WorkoutTable";
 
 const client = new ApolloClient({
     uri: awsconfig.aws_appsync_graphqlEndpoint,
@@ -41,7 +40,7 @@ const App = () => {
                             <Route
                                 exact
                                 path="/Workout"
-                                component={WorkoutScreen}
+                                component={WorkoutTable}
                             />
                             <Route
                                 exact
