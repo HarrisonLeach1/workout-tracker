@@ -23,4 +23,4 @@ aws-exports.js
 awsconfiguration.json
 
 #vscode
-./vscode
+.vscode/

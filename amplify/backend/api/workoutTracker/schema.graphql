@@ -1,20 +1,45 @@
 # @model annotations are used by AWS AppSync to create DynamoDB tables
 
-type Routine @model {
-    id: ID!
-    name: String
-    exercises: [Exercise] @connection(name: "RoutineExercises")
+type Routine @model(subscriptions: null) {
+  id: ID!
+  name: String
+  exercises: [Exercise] @connection(name: "RoutineExercises")
+  workouts: [Workout] @connection(name: "RoutineWorkouts")
 }
 
 # @connection annotations are used by AWS AppSync to create foreign keys between
 # objects
 
 # Many-to-Many connections are not yet supported by AWS AppSync
-type Exercise @model {
-    id: ID!
-    name: String
-    sets: Int
-    repetitions: Int
-    weightInKg: Int
-    routine: Routine @connection(name: "RoutineExercises")
+type Exercise @model(subscriptions: null) {
+  id: ID!
+  name: String
+  sets: Int
+  repetitions: Int
+  weightInKg: Int
+  routine: Routine! @connection(name: "RoutineExercises")
+  instances: [ExerciseInstance] @connection(name: "ExerciseInstances")
+}
+
+type Workout @model(subscriptions: null) {
+  routine: Routine! @connection(name: "RoutineWorkouts")
+  id: ID!
+  startedAt: AWSDateTime!
+  completedAt: AWSDateTime
+  exerciseInstances: [ExerciseInstance] @connection(name: "WorkoutExerciseInstances")
+}
+
+type ExerciseInstance @model(subscriptions: null) {
+  workout: Workout! @connection(name: "WorkoutExerciseInstances")
+  id: ID!
+  exercise: Exercise! @connection(name: "ExerciseInstances")
+  sets: [Set] @connection(name: "ExerciseInstanceSets")
+}
+
+type Set @model(subscriptions: null) {
+  exerciseInstance: ExerciseInstance @connection(name: "ExerciseInstanceSets")
+  id: ID!
+  setNumber: Int
+  repetitions: Int
+  weightInKg: Int
 }

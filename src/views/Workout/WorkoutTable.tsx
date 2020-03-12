@@ -1,4 +1,4 @@
-import { Theme, Appbar, withTheme, ActivityIndicator } from "react-native-paper";
+import { Theme, Appbar, withTheme, ActivityIndicator, Divider } from "react-native-paper";
 import { RouteComponentProps } from "react-router";
 import { View, StyleSheet, Text, ScrollView, SectionList } from "react-native";
 import React, { useContext } from "react";
@@ -64,6 +64,8 @@ const WorkoutTable: React.FC<IWorkoutTableProps> = ({ history, theme }: IWorkout
           <SectionList
             sections={exerciseData}
             keyExtractor={(item, index) => index.toString()}
+            ItemSeparatorComponent={Divider}
+            SectionSeparatorComponent={Divider}
             renderItem={({ item }) => <SetListItem setNumber={item.setNumber} reps={item.reps} weight={item.weight} />}
             renderSectionHeader={({ section: { title } }) => {
               return (

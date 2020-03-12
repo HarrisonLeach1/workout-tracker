@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
 import { View, StyleSheet } from "react-native";
+import React from "react";
 
 interface IListItemRowProps {
-  children: ReactNode;
+  children: any;
 }
 
 const ListItemRow: React.FC<IListItemRowProps> = ({ children }) => {
