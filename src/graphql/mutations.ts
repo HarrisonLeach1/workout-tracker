@@ -6,9 +6,21 @@ export const createRoutine = `mutation CreateRoutine($input: CreateRoutineInput!
     id
     name
     exercises {
+      items {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
       nextToken
     }
     workouts {
+      items {
+        id
+        startedAt
+        completedAt
+      }
       nextToken
     }
   }
@@ -19,9 +31,21 @@ export const updateRoutine = `mutation UpdateRoutine($input: UpdateRoutineInput!
     id
     name
     exercises {
+      items {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
       nextToken
     }
     workouts {
+      items {
+        id
+        startedAt
+        completedAt
+      }
       nextToken
     }
   }
@@ -32,9 +56,21 @@ export const deleteRoutine = `mutation DeleteRoutine($input: DeleteRoutineInput!
     id
     name
     exercises {
+      items {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
       nextToken
     }
     workouts {
+      items {
+        id
+        startedAt
+        completedAt
+      }
       nextToken
     }
   }
@@ -50,8 +86,17 @@ export const createExercise = `mutation CreateExercise($input: CreateExerciseInp
     routine {
       id
       name
+      exercises {
+        nextToken
+      }
+      workouts {
+        nextToken
+      }
     }
-    instances {
+    results {
+      items {
+        id
+      }
       nextToken
     }
   }
@@ -67,8 +112,17 @@ export const updateExercise = `mutation UpdateExercise($input: UpdateExerciseInp
     routine {
       id
       name
+      exercises {
+        nextToken
+      }
+      workouts {
+        nextToken
+      }
     }
-    instances {
+    results {
+      items {
+        id
+      }
       nextToken
     }
   }
@@ -84,8 +138,17 @@ export const deleteExercise = `mutation DeleteExercise($input: DeleteExerciseInp
     routine {
       id
       name
+      exercises {
+        nextToken
+      }
+      workouts {
+        nextToken
+      }
     }
-    instances {
+    results {
+      items {
+        id
+      }
       nextToken
     }
   }
@@ -93,14 +156,23 @@ export const deleteExercise = `mutation DeleteExercise($input: DeleteExerciseInp
 `;
 export const createWorkout = `mutation CreateWorkout($input: CreateWorkoutInput!) {
   createWorkout(input: $input) {
+    id
     routine {
       id
       name
+      exercises {
+        nextToken
+      }
+      workouts {
+        nextToken
+      }
     }
-    id
     startedAt
     completedAt
-    exerciseInstances {
+    exerciseResults {
+      items {
+        id
+      }
       nextToken
     }
   }
@@ -108,14 +180,23 @@ export const createWorkout = `mutation CreateWorkout($input: CreateWorkoutInput!
 `;
 export const updateWorkout = `mutation UpdateWorkout($input: UpdateWorkoutInput!) {
   updateWorkout(input: $input) {
+    id
     routine {
       id
       name
+      exercises {
+        nextToken
+      }
+      workouts {
+        nextToken
+      }
     }
-    id
     startedAt
     completedAt
-    exerciseInstances {
+    exerciseResults {
+      items {
+        id
+      }
       nextToken
     }
   }
@@ -123,77 +204,143 @@ export const updateWorkout = `mutation UpdateWorkout($input: UpdateWorkoutInput!
 `;
 export const deleteWorkout = `mutation DeleteWorkout($input: DeleteWorkoutInput!) {
   deleteWorkout(input: $input) {
+    id
     routine {
       id
       name
+      exercises {
+        nextToken
+      }
+      workouts {
+        nextToken
+      }
     }
-    id
     startedAt
     completedAt
-    exerciseInstances {
+    exerciseResults {
+      items {
+        id
+      }
       nextToken
     }
   }
 }
 `;
-export const createExerciseInstance = `mutation CreateExerciseInstance($input: CreateExerciseInstanceInput!) {
-  createExerciseInstance(input: $input) {
+export const createExerciseResult = `mutation CreateExerciseResult($input: CreateExerciseResultInput!) {
+  createExerciseResult(input: $input) {
+    id
     workout {
       id
+      routine {
+        id
+        name
+      }
       startedAt
       completedAt
+      exerciseResults {
+        nextToken
+      }
     }
-    id
     exercise {
       id
       name
       sets
       repetitions
       weightInKg
+      routine {
+        id
+        name
+      }
+      results {
+        nextToken
+      }
     }
     sets {
+      items {
+        setNumber
+        repetitions
+        weightInKg
+      }
       nextToken
     }
   }
 }
 `;
-export const updateExerciseInstance = `mutation UpdateExerciseInstance($input: UpdateExerciseInstanceInput!) {
-  updateExerciseInstance(input: $input) {
+export const updateExerciseResult = `mutation UpdateExerciseResult($input: UpdateExerciseResultInput!) {
+  updateExerciseResult(input: $input) {
+    id
     workout {
       id
+      routine {
+        id
+        name
+      }
       startedAt
       completedAt
+      exerciseResults {
+        nextToken
+      }
     }
-    id
     exercise {
       id
       name
       sets
       repetitions
       weightInKg
+      routine {
+        id
+        name
+      }
+      results {
+        nextToken
+      }
     }
     sets {
+      items {
+        setNumber
+        repetitions
+        weightInKg
+      }
       nextToken
     }
   }
 }
 `;
-export const deleteExerciseInstance = `mutation DeleteExerciseInstance($input: DeleteExerciseInstanceInput!) {
-  deleteExerciseInstance(input: $input) {
+export const deleteExerciseResult = `mutation DeleteExerciseResult($input: DeleteExerciseResultInput!) {
+  deleteExerciseResult(input: $input) {
+    id
     workout {
       id
+      routine {
+        id
+        name
+      }
       startedAt
       completedAt
+      exerciseResults {
+        nextToken
+      }
     }
-    id
     exercise {
       id
       name
       sets
       repetitions
       weightInKg
+      routine {
+        id
+        name
+      }
+      results {
+        nextToken
+      }
     }
     sets {
+      items {
+        setNumber
+        repetitions
+        weightInKg
+      }
       nextToken
     }
   }
@@ -201,10 +348,24 @@ export const deleteExerciseInstance = `mutation DeleteExerciseInstance($input: D
 `;
 export const createSet = `mutation CreateSet($input: CreateSetInput!) {
   createSet(input: $input) {
-    exerciseInstance {
+    exerciseResult {
       id
+      workout {
+        id
+        startedAt
+        completedAt
+      }
+      exercise {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
+      sets {
+        nextToken
+      }
     }
-    id
     setNumber
     repetitions
     weightInKg
@@ -213,10 +374,24 @@ export const createSet = `mutation CreateSet($input: CreateSetInput!) {
 `;
 export const updateSet = `mutation UpdateSet($input: UpdateSetInput!) {
   updateSet(input: $input) {
-    exerciseInstance {
+    exerciseResult {
       id
+      workout {
+        id
+        startedAt
+        completedAt
+      }
+      exercise {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
+      sets {
+        nextToken
+      }
     }
-    id
     setNumber
     repetitions
     weightInKg
@@ -225,10 +400,24 @@ export const updateSet = `mutation UpdateSet($input: UpdateSetInput!) {
 `;
 export const deleteSet = `mutation DeleteSet($input: DeleteSetInput!) {
   deleteSet(input: $input) {
-    exerciseInstance {
+    exerciseResult {
       id
+      workout {
+        id
+        startedAt
+        completedAt
+      }
+      exercise {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
+      sets {
+        nextToken
+      }
     }
-    id
     setNumber
     repetitions
     weightInKg

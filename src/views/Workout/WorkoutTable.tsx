@@ -1,133 +1,120 @@
-import { Theme, Appbar, withTheme, ActivityIndicator, Divider } from "react-native-paper";
-import { RouteComponentProps } from "react-router";
-import { View, StyleSheet, Text, ScrollView, SectionList } from "react-native";
-import React, { useContext } from "react";
-import { GetRoutineQuery, GetRoutineQueryVariables } from "../../API";
-import { getRoutine } from "../../graphql/queries";
-import gql from "graphql-tag";
-import { SelectedRoutineContext } from "../../modules/SelectedRoutineContext";
-import { useQuery } from "@apollo/react-hooks";
-import { Exercise } from "../../modules/WorkoutTypes";
-import SimpleCheckbox from "../../reusableComponents/SimpleCheckbox";
-import ListItemRow from "../../reusableComponents/ListItemRow";
+import { SectionList, TextInput, Text, StyleSheet } from "react-native";
 
-interface IWorkoutTableProps extends RouteComponentProps {
-  theme: Theme;
+import { Divider, Button } from "react-native-paper";
+
+import React from "react";
+
+import ListItemRow from "../../reusableComponents/ListItemRow";
+import { Formik, FormikProps } from "formik";
+import { WorkoutInputs } from "../../contexts/InProgressWorkoutContext";
+import SimpleCheckbox from "../../reusableComponents/SimpleCheckbox";
+import { useCreateWorkout } from "../../customGraphql/HandleCreateWorkout";
+import { GetRoutineQuery, CreateSetInput } from "../../API";
+import { mapRoutinetoWorkoutInputs } from "../../mapping/MapRoutineToWorkoutInputs";
+import { Exercise } from "../../types/WorkoutTypes";
+
+export interface IWorkoutTableProps {
+  routineData: GetRoutineQuery;
 }
 
-const WorkoutTable: React.FC<IWorkoutTableProps> = ({ history, theme }: IWorkoutTableProps) => {
-  const { routineID } = useContext(SelectedRoutineContext);
+const WorkoutTable: React.FC<IWorkoutTableProps> = ({ routineData }: IWorkoutTableProps) => {
+  const initialValues: WorkoutInputs = mapRoutinetoWorkoutInputs(routineData);
 
-  const { loading, data } = useQuery<GetRoutineQuery, GetRoutineQueryVariables>(gql(getRoutine), {
-    variables: {
-      id: routineID
-    }
-  });
+  const [handleCreateWorkout, { loading: loadingCreateWorkout, errors }] = useCreateWorkout();
 
   interface ExerciseSection {
     title: string;
+    exerciseNumber: number;
     data: ISetListItemProps[];
   }
 
-  const getSetListItems = (item: Exercise): ISetListItemProps[] => {
-    const sets: ISetListItemProps[] = [];
-    for (let i = 1; i <= item.sets; i++) {
-      sets.push({
-        setNumber: i,
-        weight: item.weightInKg,
-        reps: item.repetitions
-      });
-    }
+  initialValues.exerciseResultInputs;
 
-    return sets;
-  };
-
-  const exerciseData: ExerciseSection[] = !data
-    ? []
-    : data.getRoutine.exercises.items.map<ExerciseSection>((item: Exercise) => ({
-        title: item.name,
-        data: getSetListItems(item)
-      }));
-
-  console.log(exerciseData);
+  // This is needed to map the routine data to the format required by a SectionList component
+  const exerciseData: ExerciseSection[] = routineData.getRoutine.exercises.items.map<ExerciseSection>((item: Exercise, index) => ({
+    title: item.name,
+    exerciseNumber: index,
+    data: initialValues.exerciseResultInputs[index].createSetInputs,
+  }));
 
   return (
-    <View style={styles.screen}>
-      <Appbar.Header>
-        <Appbar.BackAction onPress={() => history.goBack()} />
-        <Appbar.Content title="Workout" />
-      </Appbar.Header>
-      <ScrollView style={styles.container} keyboardShouldPersistTaps={"always"} removeClippedSubviews={false}>
-        {loading ? (
-          <ActivityIndicator size={"large"} animating={true} color={theme.colors.primary} />
-        ) : data ? (
-          <SectionList
-            sections={exerciseData}
-            keyExtractor={(item, index) => index.toString()}
-            ItemSeparatorComponent={Divider}
-            SectionSeparatorComponent={Divider}
-            renderItem={({ item }) => <SetListItem setNumber={item.setNumber} reps={item.reps} weight={item.weight} />}
-            renderSectionHeader={({ section: { title } }) => {
-              return (
-                <React.Fragment>
-                  <ListItemRow>
-                    <Text>{title}</Text>
-                  </ListItemRow>
-                  <ListItemRow>
-                    <Text>Set</Text>
-                    <Text>Reps</Text>
-                    <Text>Weight</Text>
-                    <Text>Completed</Text>
-                  </ListItemRow>
-                </React.Fragment>
-              );
-            }}
-          />
-        ) : (
-          <Text> Error Loading Workout </Text>
-        )}
-      </ScrollView>
-    </View>
+    <Formik initialValues={initialValues} onSubmit={values => handleCreateWorkout(values, routineData.getRoutine.exercises.items)}>
+      {(formikProps: FormikProps<WorkoutInputs>) => (
+          <React.Fragment>
+        <SectionList
+          sections={exerciseData}
+          keyExtractor={(item, index) => item + index.toString()}
+          ItemSeparatorComponent={Divider}
+          SectionSeparatorComponent={Divider}
+          renderItem={({ item, section }) => <SetListItem exerciseNumber={section.exerciseNumber} setNumber={item.setNumber} formikProps={formikProps} />}
+          renderSectionHeader={({ section: { title } }) => {
+            return (
+              <React.Fragment>
+                <ListItemRow>
+                  <Text>{title}</Text>
+                </ListItemRow>
+                <ListItemRow>
+                  <Text>Set</Text>
+                  <Text>Reps</Text>
+                  <Text>Weight</Text>
+                  <Text>Completed</Text>
+                </ListItemRow>
+              </React.Fragment>
+            );
+          }}
+        />
+        <Button mode="contained" onPress={formikProps.handleSubmit as any}>Submit</Button>
+        </React.Fragment>
+      )}
+    </Formik>
   );
 };
 
-export interface ISetListItemProps {
-  setNumber: number;
-  reps: number;
-  weight: number;
+export interface ISetListItemProps extends CreateSetInput {
+  exerciseNumber?: number;
+  formikProps?: FormikProps<WorkoutInputs>;
 }
 
 const SetListItem: React.FC<ISetListItemProps> = props => {
-  const { setNumber, reps, weight } = props;
+  const { setNumber, exerciseNumber, formikProps } = props;
+  const createSetInput = formikProps.values.exerciseResultInputs[exerciseNumber].createSetInputs[setNumber - 1];
+  const setStringIdentifier = `exerciseResultInputs[${exerciseNumber}].createSetInputs[${setNumber - 1}]`;
 
   return (
     <ListItemRow>
       <Text>{setNumber}</Text>
-      <Text>{reps}</Text>
-      <Text>{weight}</Text>
+      <TextInput
+        maxLength={4}
+        placeholder="0"
+        style={styles.TextInputStyle}
+        keyboardType={"numeric"}
+        onChangeText={formikProps.handleChange(`${setStringIdentifier}.repetitions`)}
+        onBlur={formikProps.handleBlur(`${setStringIdentifier}.repetitions`)}
+        value={createSetInput.repetitions.toString()}
+      />
+      <TextInput
+        maxLength={4}
+        placeholder="0"
+        style={styles.TextInputStyle}
+        keyboardType={"numeric"}
+        onChangeText={formikProps.handleChange(`${setStringIdentifier}.weightInKg`)}
+        onBlur={formikProps.handleBlur(`${setStringIdentifier}.weightInKg`)}
+        value={createSetInput.weightInKg.toString()}
+      />
       <SimpleCheckbox />
     </ListItemRow>
   );
 };
 
-export default withTheme(WorkoutTable);
-
 const styles = StyleSheet.create({
-  item: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16
-  },
-  screen: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "flex-start"
-  },
-  container: {
-    flex: 1,
-    padding: 8,
-    backgroundColor: "#fff"
-  }
-});
+    TextInputStyle: {
+      textAlign: "center",
+      height: 40,
+      borderRadius: 10,
+      borderWidth: 2,
+      borderColor: "#009688",
+      width: 100
+    }
+  });
+
+export default WorkoutTable;

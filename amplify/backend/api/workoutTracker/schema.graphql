@@ -18,27 +18,26 @@ type Exercise @model(subscriptions: null) {
   repetitions: Int
   weightInKg: Int
   routine: Routine! @connection(name: "RoutineExercises")
-  instances: [ExerciseInstance] @connection(name: "ExerciseInstances")
+  results: [ExerciseResult] @connection(name: "ExerciseResults")
 }
 
 type Workout @model(subscriptions: null) {
-  routine: Routine! @connection(name: "RoutineWorkouts")
   id: ID!
+  routine: Routine! @connection(name: "RoutineWorkouts")
   startedAt: AWSDateTime!
   completedAt: AWSDateTime
-  exerciseInstances: [ExerciseInstance] @connection(name: "WorkoutExerciseInstances")
+  exerciseResults: [ExerciseResult] @connection(name: "WorkoutExerciseResults")
 }
 
-type ExerciseInstance @model(subscriptions: null) {
-  workout: Workout! @connection(name: "WorkoutExerciseInstances")
+type ExerciseResult @model(subscriptions: null) {
   id: ID!
-  exercise: Exercise! @connection(name: "ExerciseInstances")
-  sets: [Set] @connection(name: "ExerciseInstanceSets")
+  workout: Workout! @connection(name: "WorkoutExerciseResults")
+  exercise: Exercise! @connection(name: "ExerciseResults")
+  sets: [Set] @connection(name: "ExerciseResultSets")
 }
 
 type Set @model(subscriptions: null) {
-  exerciseInstance: ExerciseInstance @connection(name: "ExerciseInstanceSets")
-  id: ID!
+  exerciseResult: ExerciseResult @connection(name: "ExerciseResultSets")
   setNumber: Int
   repetitions: Int
   weightInKg: Int

@@ -1,5 +1,5 @@
 import React from "react";
-import { Exercise } from "../../modules/WorkoutTypes";
+import { Exercise } from "../../types/WorkoutTypes";
 import { Text } from "react-native";
 
 interface IExerciseInfoProps {

@@ -16,7 +16,7 @@ import { Formik, FormikProps, FormikActions } from "formik";
 import {
     CreateRoutineContext,
     CreateRoutineContextProps
-} from "../../modules/RoutineContext";
+} from "../../contexts/RoutineContext";
 import { CreateExerciseInput } from "../../API";
 import { RouteComponentProps } from "react-router";
 
@@ -47,7 +47,8 @@ const CreateExerciseScreen: React.FC<ICreateExerciseScreenProps> = ({
             name: values.name,
             sets: +values.sets,
             repetitions: +values.repetitions,
-            weightInKg: +values.weightInKg
+            weightInKg: +values.weightInKg,
+            exerciseRoutineId: null
         };
 
         setRoutine(prev => {

@@ -7,7 +7,7 @@ import CreateExerciseScreen from "./views/Create/CreateExerciseScreen";
 import {
     CreateRoutineContext,
     useCreateRoutineContext
-} from "./modules/RoutineContext";
+} from "./contexts/RoutineContext";
 import { ApolloProvider } from "@apollo/react-hooks";
 import awsconfig from "../aws-exports";
 import ApolloClient from "apollo-boost";
@@ -16,8 +16,8 @@ import Stack from "react-router-native-stack";
 import {
     SelectedRoutineContext,
     useSelectedRoutine
-} from "./modules/SelectedRoutineContext";
-import WorkoutTable from "./views/Workout/WorkoutTable";
+} from "./contexts/InProgressWorkoutContext";
+import WorkoutScreen from "./views/Workout/WorkoutScreen";
 
 const client = new ApolloClient({
     uri: awsconfig.aws_appsync_graphqlEndpoint,
@@ -40,7 +40,7 @@ const App = () => {
                             <Route
                                 exact
                                 path="/Workout"
-                                component={WorkoutTable}
+                                component={WorkoutScreen}
                             />
                             <Route
                                 exact

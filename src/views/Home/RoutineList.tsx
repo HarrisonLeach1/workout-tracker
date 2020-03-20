@@ -13,7 +13,7 @@ import { ListRoutinesQueryVariables, ListRoutinesQuery } from "../../API";
 import gql from "graphql-tag";
 import { listRoutines } from "../../graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
-import { SelectedRoutineContext } from "../../modules/SelectedRoutineContext";
+import { SelectedRoutineContext } from "../../contexts/InProgressWorkoutContext";
 
 interface IRoutineListProps extends RouteComponentProps {
     theme: Theme;

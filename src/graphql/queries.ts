@@ -6,9 +6,21 @@ export const getRoutine = `query GetRoutine($id: ID!) {
     id
     name
     exercises {
+      items {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
       nextToken
     }
     workouts {
+      items {
+        id
+        startedAt
+        completedAt
+      }
       nextToken
     }
   }
@@ -23,6 +35,12 @@ export const listRoutines = `query ListRoutines(
     items {
       id
       name
+      exercises {
+        nextToken
+      }
+      workouts {
+        nextToken
+      }
     }
     nextToken
   }
@@ -38,8 +56,17 @@ export const getExercise = `query GetExercise($id: ID!) {
     routine {
       id
       name
+      exercises {
+        nextToken
+      }
+      workouts {
+        nextToken
+      }
     }
-    instances {
+    results {
+      items {
+        id
+      }
       nextToken
     }
   }
@@ -57,6 +84,13 @@ export const listExercises = `query ListExercises(
       sets
       repetitions
       weightInKg
+      routine {
+        id
+        name
+      }
+      results {
+        nextToken
+      }
     }
     nextToken
   }
@@ -64,14 +98,23 @@ export const listExercises = `query ListExercises(
 `;
 export const getWorkout = `query GetWorkout($id: ID!) {
   getWorkout(id: $id) {
+    id
     routine {
       id
       name
+      exercises {
+        nextToken
+      }
+      workouts {
+        nextToken
+      }
     }
-    id
     startedAt
     completedAt
-    exerciseInstances {
+    exerciseResults {
+      items {
+        id
+      }
       nextToken
     }
   }
@@ -85,42 +128,83 @@ export const listWorkouts = `query ListWorkouts(
   listWorkouts(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      routine {
+        id
+        name
+      }
       startedAt
       completedAt
+      exerciseResults {
+        nextToken
+      }
     }
     nextToken
   }
 }
 `;
-export const getExerciseInstance = `query GetExerciseInstance($id: ID!) {
-  getExerciseInstance(id: $id) {
+export const getExerciseResult = `query GetExerciseResult($id: ID!) {
+  getExerciseResult(id: $id) {
+    id
     workout {
       id
+      routine {
+        id
+        name
+      }
       startedAt
       completedAt
+      exerciseResults {
+        nextToken
+      }
     }
-    id
     exercise {
       id
       name
       sets
       repetitions
       weightInKg
+      routine {
+        id
+        name
+      }
+      results {
+        nextToken
+      }
     }
     sets {
+      items {
+        setNumber
+        repetitions
+        weightInKg
+      }
       nextToken
     }
   }
 }
 `;
-export const listExerciseInstances = `query ListExerciseInstances(
-  $filter: ModelExerciseInstanceFilterInput
+export const listExerciseResults = `query ListExerciseResults(
+  $filter: ModelExerciseResultFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listExerciseInstances(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listExerciseResults(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      workout {
+        id
+        startedAt
+        completedAt
+      }
+      exercise {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
+      sets {
+        nextToken
+      }
     }
     nextToken
   }
@@ -128,10 +212,24 @@ export const listExerciseInstances = `query ListExerciseInstances(
 `;
 export const getSet = `query GetSet($id: ID!) {
   getSet(id: $id) {
-    exerciseInstance {
+    exerciseResult {
       id
+      workout {
+        id
+        startedAt
+        completedAt
+      }
+      exercise {
+        id
+        name
+        sets
+        repetitions
+        weightInKg
+      }
+      sets {
+        nextToken
+      }
     }
-    id
     setNumber
     repetitions
     weightInKg
@@ -141,7 +239,9 @@ export const getSet = `query GetSet($id: ID!) {
 export const listSets = `query ListSets($filter: ModelSetFilterInput, $limit: Int, $nextToken: String) {
   listSets(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      id
+      exerciseResult {
+        id
+      }
       setNumber
       repetitions
       weightInKg

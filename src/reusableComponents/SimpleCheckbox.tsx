@@ -5,7 +5,7 @@ const SimpleCheckbox: React.FC<{}> = () => {
   const [checked, setChecked] = useState<boolean>(false);
 
   return (
-    <Checkbox
+    <Checkbox.Android
       status={checked ? "checked" : "unchecked"}
       onPress={() => {
         setChecked(!checked);
