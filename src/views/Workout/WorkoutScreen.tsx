@@ -22,6 +22,8 @@ const WorkoutScreen: React.FC<IWorkoutTableProps> = ({ history, theme }: IWorkou
     }
   });
 
+  console.log("routine data: " + JSON.stringify(data));
+
   return (
     <View style={styles.screen}>
       <Appbar.Header>

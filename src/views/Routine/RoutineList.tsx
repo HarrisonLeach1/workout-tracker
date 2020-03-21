@@ -58,7 +58,7 @@ const RoutineList: React.FC<IRoutineListProps> = ({
                     />
                     <FAB
                         style={styles.fab}
-                        icon="add"
+                        icon="plus"
                         onPress={() => history.push("/CreateRoutine")}
                     />
                 </React.Fragment>

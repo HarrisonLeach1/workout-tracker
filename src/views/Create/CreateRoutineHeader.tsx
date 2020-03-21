@@ -70,7 +70,7 @@ const CreateRoutineHeader: React.FC<ICreateRoutineHeaderProps> = ({
             </View>
             <FAB
                 style={styles.fab}
-                icon="add"
+                icon="plus"
                 onPress={() => {
                     history.push("/CreateExercise");
                 }}
