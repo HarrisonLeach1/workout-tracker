@@ -11,9 +11,6 @@ interface IHomeScreenProps extends RouteComponentProps {
 const RoutineScreen = (props: IHomeScreenProps) => {
   return (
     <View style={styles.container}>
-      <View style={styles.graph}>
-        <Text>Graph</Text>
-      </View>
       <RoutineList {...props} />
     </View>
   );
@@ -25,12 +22,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     backgroundColor: "#fff",
     alignItems: "stretch",
-    justifyContent: "center"
-  },
-  graph: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
     justifyContent: "center"
   }
 });
