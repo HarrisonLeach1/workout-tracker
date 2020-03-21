@@ -12,14 +12,28 @@ export const createRoutine = `mutation CreateRoutine($input: CreateRoutineInput!
         sets
         repetitions
         weightInKg
+        routine {
+          id
+          name
+        }
+        results {
+          nextToken
+        }
       }
       nextToken
     }
     workouts {
       items {
         id
+        routine {
+          id
+          name
+        }
         startedAt
         completedAt
+        exerciseResults {
+          nextToken
+        }
       }
       nextToken
     }
@@ -37,14 +51,28 @@ export const updateRoutine = `mutation UpdateRoutine($input: UpdateRoutineInput!
         sets
         repetitions
         weightInKg
+        routine {
+          id
+          name
+        }
+        results {
+          nextToken
+        }
       }
       nextToken
     }
     workouts {
       items {
         id
+        routine {
+          id
+          name
+        }
         startedAt
         completedAt
+        exerciseResults {
+          nextToken
+        }
       }
       nextToken
     }
@@ -62,14 +90,28 @@ export const deleteRoutine = `mutation DeleteRoutine($input: DeleteRoutineInput!
         sets
         repetitions
         weightInKg
+        routine {
+          id
+          name
+        }
+        results {
+          nextToken
+        }
       }
       nextToken
     }
     workouts {
       items {
         id
+        routine {
+          id
+          name
+        }
         startedAt
         completedAt
+        exerciseResults {
+          nextToken
+        }
       }
       nextToken
     }
@@ -87,15 +129,42 @@ export const createExercise = `mutation CreateExercise($input: CreateExerciseInp
       id
       name
       exercises {
+        items {
+          id
+          name
+          sets
+          repetitions
+          weightInKg
+        }
         nextToken
       }
       workouts {
+        items {
+          id
+          startedAt
+          completedAt
+        }
         nextToken
       }
     }
     results {
       items {
         id
+        workout {
+          id
+          startedAt
+          completedAt
+        }
+        exercise {
+          id
+          name
+          sets
+          repetitions
+          weightInKg
+        }
+        sets {
+          nextToken
+        }
       }
       nextToken
     }
@@ -113,15 +182,42 @@ export const updateExercise = `mutation UpdateExercise($input: UpdateExerciseInp
       id
       name
       exercises {
+        items {
+          id
+          name
+          sets
+          repetitions
+          weightInKg
+        }
         nextToken
       }
       workouts {
+        items {
+          id
+          startedAt
+          completedAt
+        }
         nextToken
       }
     }
     results {
       items {
         id
+        workout {
+          id
+          startedAt
+          completedAt
+        }
+        exercise {
+          id
+          name
+          sets
+          repetitions
+          weightInKg
+        }
+        sets {
+          nextToken
+        }
       }
       nextToken
     }
@@ -139,15 +235,42 @@ export const deleteExercise = `mutation DeleteExercise($input: DeleteExerciseInp
       id
       name
       exercises {
+        items {
+          id
+          name
+          sets
+          repetitions
+          weightInKg
+        }
         nextToken
       }
       workouts {
+        items {
+          id
+          startedAt
+          completedAt
+        }
         nextToken
       }
     }
     results {
       items {
         id
+        workout {
+          id
+          startedAt
+          completedAt
+        }
+        exercise {
+          id
+          name
+          sets
+          repetitions
+          weightInKg
+        }
+        sets {
+          nextToken
+        }
       }
       nextToken
     }
@@ -161,9 +284,21 @@ export const createWorkout = `mutation CreateWorkout($input: CreateWorkoutInput!
       id
       name
       exercises {
+        items {
+          id
+          name
+          sets
+          repetitions
+          weightInKg
+        }
         nextToken
       }
       workouts {
+        items {
+          id
+          startedAt
+          completedAt
+        }
         nextToken
       }
     }
@@ -172,6 +307,21 @@ export const createWorkout = `mutation CreateWorkout($input: CreateWorkoutInput!
     exerciseResults {
       items {
         id
+        workout {
+          id
+          startedAt
+          completedAt
+        }
+        exercise {
+          id
+          name
+          sets
+          repetitions
+          weightInKg
+        }
+        sets {
+          nextToken
+        }
       }
       nextToken
     }
@@ -185,9 +335,21 @@ export const updateWorkout = `mutation UpdateWorkout($input: UpdateWorkoutInput!
       id
       name
       exercises {
+        items {
+          id
+          name
+          sets
+          repetitions
+          weightInKg
+        }
         nextToken
       }
       workouts {
+        items {
+          id
+          startedAt
+          completedAt
+        }
         nextToken
       }
     }
@@ -196,6 +358,21 @@ export const updateWorkout = `mutation UpdateWorkout($input: UpdateWorkoutInput!
     exerciseResults {
       items {
         id
+        workout {
+          id
+          startedAt
+          completedAt
+        }
+        exercise {
+          id
+          name
+          sets
+          repetitions
+          weightInKg
+        }
+        sets {
+          nextToken
+        }
       }
       nextToken
     }
@@ -209,9 +386,21 @@ export const deleteWorkout = `mutation DeleteWorkout($input: DeleteWorkoutInput!
       id
       name
       exercises {
+        items {
+          id
+          name
+          sets
+          repetitions
+          weightInKg
+        }
         nextToken
       }
       workouts {
+        items {
+          id
+          startedAt
+          completedAt
+        }
         nextToken
       }
     }
@@ -220,6 +409,21 @@ export const deleteWorkout = `mutation DeleteWorkout($input: DeleteWorkoutInput!
     exerciseResults {
       items {
         id
+        workout {
+          id
+          startedAt
+          completedAt
+        }
+        exercise {
+          id
+          name
+          sets
+          repetitions
+          weightInKg
+        }
+        sets {
+          nextToken
+        }
       }
       nextToken
     }
@@ -234,10 +438,19 @@ export const createExerciseResult = `mutation CreateExerciseResult($input: Creat
       routine {
         id
         name
+        exercises {
+          nextToken
+        }
+        workouts {
+          nextToken
+        }
       }
       startedAt
       completedAt
       exerciseResults {
+        items {
+          id
+        }
         nextToken
       }
     }
@@ -250,13 +463,25 @@ export const createExerciseResult = `mutation CreateExerciseResult($input: Creat
       routine {
         id
         name
+        exercises {
+          nextToken
+        }
+        workouts {
+          nextToken
+        }
       }
       results {
+        items {
+          id
+        }
         nextToken
       }
     }
     sets {
       items {
+        exerciseResult {
+          id
+        }
         setNumber
         repetitions
         weightInKg
@@ -274,10 +499,19 @@ export const updateExerciseResult = `mutation UpdateExerciseResult($input: Updat
       routine {
         id
         name
+        exercises {
+          nextToken
+        }
+        workouts {
+          nextToken
+        }
       }
       startedAt
       completedAt
       exerciseResults {
+        items {
+          id
+        }
         nextToken
       }
     }
@@ -290,13 +524,25 @@ export const updateExerciseResult = `mutation UpdateExerciseResult($input: Updat
       routine {
         id
         name
+        exercises {
+          nextToken
+        }
+        workouts {
+          nextToken
+        }
       }
       results {
+        items {
+          id
+        }
         nextToken
       }
     }
     sets {
       items {
+        exerciseResult {
+          id
+        }
         setNumber
         repetitions
         weightInKg
@@ -314,10 +560,19 @@ export const deleteExerciseResult = `mutation DeleteExerciseResult($input: Delet
       routine {
         id
         name
+        exercises {
+          nextToken
+        }
+        workouts {
+          nextToken
+        }
       }
       startedAt
       completedAt
       exerciseResults {
+        items {
+          id
+        }
         nextToken
       }
     }
@@ -330,13 +585,25 @@ export const deleteExerciseResult = `mutation DeleteExerciseResult($input: Delet
       routine {
         id
         name
+        exercises {
+          nextToken
+        }
+        workouts {
+          nextToken
+        }
       }
       results {
+        items {
+          id
+        }
         nextToken
       }
     }
     sets {
       items {
+        exerciseResult {
+          id
+        }
         setNumber
         repetitions
         weightInKg
@@ -352,8 +619,15 @@ export const createSet = `mutation CreateSet($input: CreateSetInput!) {
       id
       workout {
         id
+        routine {
+          id
+          name
+        }
         startedAt
         completedAt
+        exerciseResults {
+          nextToken
+        }
       }
       exercise {
         id
@@ -361,8 +635,20 @@ export const createSet = `mutation CreateSet($input: CreateSetInput!) {
         sets
         repetitions
         weightInKg
+        routine {
+          id
+          name
+        }
+        results {
+          nextToken
+        }
       }
       sets {
+        items {
+          setNumber
+          repetitions
+          weightInKg
+        }
         nextToken
       }
     }
@@ -378,8 +664,15 @@ export const updateSet = `mutation UpdateSet($input: UpdateSetInput!) {
       id
       workout {
         id
+        routine {
+          id
+          name
+        }
         startedAt
         completedAt
+        exerciseResults {
+          nextToken
+        }
       }
       exercise {
         id
@@ -387,8 +680,20 @@ export const updateSet = `mutation UpdateSet($input: UpdateSetInput!) {
         sets
         repetitions
         weightInKg
+        routine {
+          id
+          name
+        }
+        results {
+          nextToken
+        }
       }
       sets {
+        items {
+          setNumber
+          repetitions
+          weightInKg
+        }
         nextToken
       }
     }
@@ -404,8 +709,15 @@ export const deleteSet = `mutation DeleteSet($input: DeleteSetInput!) {
       id
       workout {
         id
+        routine {
+          id
+          name
+        }
         startedAt
         completedAt
+        exerciseResults {
+          nextToken
+        }
       }
       exercise {
         id
@@ -413,8 +725,20 @@ export const deleteSet = `mutation DeleteSet($input: DeleteSetInput!) {
         sets
         repetitions
         weightInKg
+        routine {
+          id
+          name
+        }
+        results {
+          nextToken
+        }
       }
       sets {
+        items {
+          setNumber
+          repetitions
+          weightInKg
+        }
         nextToken
       }
     }

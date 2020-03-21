@@ -189,6 +189,15 @@ export type CreateRoutineMutation = {
         sets: number | null,
         repetitions: number | null,
         weightInKg: number | null,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
+        results:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -197,8 +206,17 @@ export type CreateRoutineMutation = {
       items:  Array< {
         __typename: "Workout",
         id: string,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
         startedAt: string,
         completedAt: string | null,
+        exerciseResults:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -223,6 +241,15 @@ export type UpdateRoutineMutation = {
         sets: number | null,
         repetitions: number | null,
         weightInKg: number | null,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
+        results:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -231,8 +258,17 @@ export type UpdateRoutineMutation = {
       items:  Array< {
         __typename: "Workout",
         id: string,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
         startedAt: string,
         completedAt: string | null,
+        exerciseResults:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -257,6 +293,15 @@ export type DeleteRoutineMutation = {
         sets: number | null,
         repetitions: number | null,
         weightInKg: number | null,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
+        results:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -265,8 +310,17 @@ export type DeleteRoutineMutation = {
       items:  Array< {
         __typename: "Workout",
         id: string,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
         startedAt: string,
         completedAt: string | null,
+        exerciseResults:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -291,10 +345,24 @@ export type CreateExerciseMutation = {
       name: string | null,
       exercises:  {
         __typename: "ModelExerciseConnection",
+        items:  Array< {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
       workouts:  {
         __typename: "ModelWorkoutConnection",
+        items:  Array< {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -303,6 +371,24 @@ export type CreateExerciseMutation = {
       items:  Array< {
         __typename: "ExerciseResult",
         id: string,
+        workout:  {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        },
+        exercise:  {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        },
+        sets:  {
+          __typename: "ModelSetConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -327,10 +413,24 @@ export type UpdateExerciseMutation = {
       name: string | null,
       exercises:  {
         __typename: "ModelExerciseConnection",
+        items:  Array< {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
       workouts:  {
         __typename: "ModelWorkoutConnection",
+        items:  Array< {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -339,6 +439,24 @@ export type UpdateExerciseMutation = {
       items:  Array< {
         __typename: "ExerciseResult",
         id: string,
+        workout:  {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        },
+        exercise:  {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        },
+        sets:  {
+          __typename: "ModelSetConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -363,10 +481,24 @@ export type DeleteExerciseMutation = {
       name: string | null,
       exercises:  {
         __typename: "ModelExerciseConnection",
+        items:  Array< {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
       workouts:  {
         __typename: "ModelWorkoutConnection",
+        items:  Array< {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -375,6 +507,24 @@ export type DeleteExerciseMutation = {
       items:  Array< {
         __typename: "ExerciseResult",
         id: string,
+        workout:  {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        },
+        exercise:  {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        },
+        sets:  {
+          __typename: "ModelSetConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -395,10 +545,24 @@ export type CreateWorkoutMutation = {
       name: string | null,
       exercises:  {
         __typename: "ModelExerciseConnection",
+        items:  Array< {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
       workouts:  {
         __typename: "ModelWorkoutConnection",
+        items:  Array< {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -409,6 +573,24 @@ export type CreateWorkoutMutation = {
       items:  Array< {
         __typename: "ExerciseResult",
         id: string,
+        workout:  {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        },
+        exercise:  {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        },
+        sets:  {
+          __typename: "ModelSetConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -429,10 +611,24 @@ export type UpdateWorkoutMutation = {
       name: string | null,
       exercises:  {
         __typename: "ModelExerciseConnection",
+        items:  Array< {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
       workouts:  {
         __typename: "ModelWorkoutConnection",
+        items:  Array< {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -443,6 +639,24 @@ export type UpdateWorkoutMutation = {
       items:  Array< {
         __typename: "ExerciseResult",
         id: string,
+        workout:  {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        },
+        exercise:  {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        },
+        sets:  {
+          __typename: "ModelSetConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -463,10 +677,24 @@ export type DeleteWorkoutMutation = {
       name: string | null,
       exercises:  {
         __typename: "ModelExerciseConnection",
+        items:  Array< {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
       workouts:  {
         __typename: "ModelWorkoutConnection",
+        items:  Array< {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -477,6 +705,24 @@ export type DeleteWorkoutMutation = {
       items:  Array< {
         __typename: "ExerciseResult",
         id: string,
+        workout:  {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        },
+        exercise:  {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        },
+        sets:  {
+          __typename: "ModelSetConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -498,11 +744,23 @@ export type CreateExerciseResultMutation = {
         __typename: "Routine",
         id: string,
         name: string | null,
+        exercises:  {
+          __typename: "ModelExerciseConnection",
+          nextToken: string | null,
+        } | null,
+        workouts:  {
+          __typename: "ModelWorkoutConnection",
+          nextToken: string | null,
+        } | null,
       },
       startedAt: string,
       completedAt: string | null,
       exerciseResults:  {
         __typename: "ModelExerciseResultConnection",
+        items:  Array< {
+          __typename: "ExerciseResult",
+          id: string,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -517,9 +775,21 @@ export type CreateExerciseResultMutation = {
         __typename: "Routine",
         id: string,
         name: string | null,
+        exercises:  {
+          __typename: "ModelExerciseConnection",
+          nextToken: string | null,
+        } | null,
+        workouts:  {
+          __typename: "ModelWorkoutConnection",
+          nextToken: string | null,
+        } | null,
       },
       results:  {
         __typename: "ModelExerciseResultConnection",
+        items:  Array< {
+          __typename: "ExerciseResult",
+          id: string,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -527,6 +797,10 @@ export type CreateExerciseResultMutation = {
       __typename: "ModelSetConnection",
       items:  Array< {
         __typename: "Set",
+        exerciseResult:  {
+          __typename: "ExerciseResult",
+          id: string,
+        } | null,
         setNumber: number | null,
         repetitions: number | null,
         weightInKg: number | null,
@@ -551,11 +825,23 @@ export type UpdateExerciseResultMutation = {
         __typename: "Routine",
         id: string,
         name: string | null,
+        exercises:  {
+          __typename: "ModelExerciseConnection",
+          nextToken: string | null,
+        } | null,
+        workouts:  {
+          __typename: "ModelWorkoutConnection",
+          nextToken: string | null,
+        } | null,
       },
       startedAt: string,
       completedAt: string | null,
       exerciseResults:  {
         __typename: "ModelExerciseResultConnection",
+        items:  Array< {
+          __typename: "ExerciseResult",
+          id: string,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -570,9 +856,21 @@ export type UpdateExerciseResultMutation = {
         __typename: "Routine",
         id: string,
         name: string | null,
+        exercises:  {
+          __typename: "ModelExerciseConnection",
+          nextToken: string | null,
+        } | null,
+        workouts:  {
+          __typename: "ModelWorkoutConnection",
+          nextToken: string | null,
+        } | null,
       },
       results:  {
         __typename: "ModelExerciseResultConnection",
+        items:  Array< {
+          __typename: "ExerciseResult",
+          id: string,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -580,6 +878,10 @@ export type UpdateExerciseResultMutation = {
       __typename: "ModelSetConnection",
       items:  Array< {
         __typename: "Set",
+        exerciseResult:  {
+          __typename: "ExerciseResult",
+          id: string,
+        } | null,
         setNumber: number | null,
         repetitions: number | null,
         weightInKg: number | null,
@@ -604,11 +906,23 @@ export type DeleteExerciseResultMutation = {
         __typename: "Routine",
         id: string,
         name: string | null,
+        exercises:  {
+          __typename: "ModelExerciseConnection",
+          nextToken: string | null,
+        } | null,
+        workouts:  {
+          __typename: "ModelWorkoutConnection",
+          nextToken: string | null,
+        } | null,
       },
       startedAt: string,
       completedAt: string | null,
       exerciseResults:  {
         __typename: "ModelExerciseResultConnection",
+        items:  Array< {
+          __typename: "ExerciseResult",
+          id: string,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -623,9 +937,21 @@ export type DeleteExerciseResultMutation = {
         __typename: "Routine",
         id: string,
         name: string | null,
+        exercises:  {
+          __typename: "ModelExerciseConnection",
+          nextToken: string | null,
+        } | null,
+        workouts:  {
+          __typename: "ModelWorkoutConnection",
+          nextToken: string | null,
+        } | null,
       },
       results:  {
         __typename: "ModelExerciseResultConnection",
+        items:  Array< {
+          __typename: "ExerciseResult",
+          id: string,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -633,6 +959,10 @@ export type DeleteExerciseResultMutation = {
       __typename: "ModelSetConnection",
       items:  Array< {
         __typename: "Set",
+        exerciseResult:  {
+          __typename: "ExerciseResult",
+          id: string,
+        } | null,
         setNumber: number | null,
         repetitions: number | null,
         weightInKg: number | null,
@@ -655,8 +985,17 @@ export type CreateSetMutation = {
       workout:  {
         __typename: "Workout",
         id: string,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
         startedAt: string,
         completedAt: string | null,
+        exerciseResults:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       },
       exercise:  {
         __typename: "Exercise",
@@ -665,9 +1004,24 @@ export type CreateSetMutation = {
         sets: number | null,
         repetitions: number | null,
         weightInKg: number | null,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
+        results:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       },
       sets:  {
         __typename: "ModelSetConnection",
+        items:  Array< {
+          __typename: "Set",
+          setNumber: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     } | null,
@@ -690,8 +1044,17 @@ export type UpdateSetMutation = {
       workout:  {
         __typename: "Workout",
         id: string,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
         startedAt: string,
         completedAt: string | null,
+        exerciseResults:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       },
       exercise:  {
         __typename: "Exercise",
@@ -700,9 +1063,24 @@ export type UpdateSetMutation = {
         sets: number | null,
         repetitions: number | null,
         weightInKg: number | null,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
+        results:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       },
       sets:  {
         __typename: "ModelSetConnection",
+        items:  Array< {
+          __typename: "Set",
+          setNumber: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     } | null,
@@ -725,8 +1103,17 @@ export type DeleteSetMutation = {
       workout:  {
         __typename: "Workout",
         id: string,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
         startedAt: string,
         completedAt: string | null,
+        exerciseResults:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       },
       exercise:  {
         __typename: "Exercise",
@@ -735,9 +1122,24 @@ export type DeleteSetMutation = {
         sets: number | null,
         repetitions: number | null,
         weightInKg: number | null,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
+        results:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       },
       sets:  {
         __typename: "ModelSetConnection",
+        items:  Array< {
+          __typename: "Set",
+          setNumber: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     } | null,
@@ -765,6 +1167,15 @@ export type GetRoutineQuery = {
         sets: number | null,
         repetitions: number | null,
         weightInKg: number | null,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
+        results:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -773,8 +1184,17 @@ export type GetRoutineQuery = {
       items:  Array< {
         __typename: "Workout",
         id: string,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
         startedAt: string,
         completedAt: string | null,
+        exerciseResults:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -796,10 +1216,24 @@ export type ListRoutinesQuery = {
       name: string | null,
       exercises:  {
         __typename: "ModelExerciseConnection",
+        items:  Array< {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
       workouts:  {
         __typename: "ModelWorkoutConnection",
+        items:  Array< {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     } | null > | null,
@@ -825,10 +1259,24 @@ export type GetExerciseQuery = {
       name: string | null,
       exercises:  {
         __typename: "ModelExerciseConnection",
+        items:  Array< {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
       workouts:  {
         __typename: "ModelWorkoutConnection",
+        items:  Array< {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -837,6 +1285,24 @@ export type GetExerciseQuery = {
       items:  Array< {
         __typename: "ExerciseResult",
         id: string,
+        workout:  {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        },
+        exercise:  {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        },
+        sets:  {
+          __typename: "ModelSetConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -863,9 +1329,21 @@ export type ListExercisesQuery = {
         __typename: "Routine",
         id: string,
         name: string | null,
+        exercises:  {
+          __typename: "ModelExerciseConnection",
+          nextToken: string | null,
+        } | null,
+        workouts:  {
+          __typename: "ModelWorkoutConnection",
+          nextToken: string | null,
+        } | null,
       },
       results:  {
         __typename: "ModelExerciseResultConnection",
+        items:  Array< {
+          __typename: "ExerciseResult",
+          id: string,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     } | null > | null,
@@ -887,10 +1365,24 @@ export type GetWorkoutQuery = {
       name: string | null,
       exercises:  {
         __typename: "ModelExerciseConnection",
+        items:  Array< {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
       workouts:  {
         __typename: "ModelWorkoutConnection",
+        items:  Array< {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -901,6 +1393,24 @@ export type GetWorkoutQuery = {
       items:  Array< {
         __typename: "ExerciseResult",
         id: string,
+        workout:  {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        },
+        exercise:  {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        },
+        sets:  {
+          __typename: "ModelSetConnection",
+          nextToken: string | null,
+        } | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -923,11 +1433,23 @@ export type ListWorkoutsQuery = {
         __typename: "Routine",
         id: string,
         name: string | null,
+        exercises:  {
+          __typename: "ModelExerciseConnection",
+          nextToken: string | null,
+        } | null,
+        workouts:  {
+          __typename: "ModelWorkoutConnection",
+          nextToken: string | null,
+        } | null,
       },
       startedAt: string,
       completedAt: string | null,
       exerciseResults:  {
         __typename: "ModelExerciseResultConnection",
+        items:  Array< {
+          __typename: "ExerciseResult",
+          id: string,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     } | null > | null,
@@ -950,11 +1472,23 @@ export type GetExerciseResultQuery = {
         __typename: "Routine",
         id: string,
         name: string | null,
+        exercises:  {
+          __typename: "ModelExerciseConnection",
+          nextToken: string | null,
+        } | null,
+        workouts:  {
+          __typename: "ModelWorkoutConnection",
+          nextToken: string | null,
+        } | null,
       },
       startedAt: string,
       completedAt: string | null,
       exerciseResults:  {
         __typename: "ModelExerciseResultConnection",
+        items:  Array< {
+          __typename: "ExerciseResult",
+          id: string,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -969,9 +1503,21 @@ export type GetExerciseResultQuery = {
         __typename: "Routine",
         id: string,
         name: string | null,
+        exercises:  {
+          __typename: "ModelExerciseConnection",
+          nextToken: string | null,
+        } | null,
+        workouts:  {
+          __typename: "ModelWorkoutConnection",
+          nextToken: string | null,
+        } | null,
       },
       results:  {
         __typename: "ModelExerciseResultConnection",
+        items:  Array< {
+          __typename: "ExerciseResult",
+          id: string,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     },
@@ -979,6 +1525,10 @@ export type GetExerciseResultQuery = {
       __typename: "ModelSetConnection",
       items:  Array< {
         __typename: "Set",
+        exerciseResult:  {
+          __typename: "ExerciseResult",
+          id: string,
+        } | null,
         setNumber: number | null,
         repetitions: number | null,
         weightInKg: number | null,
@@ -1003,8 +1553,17 @@ export type ListExerciseResultsQuery = {
       workout:  {
         __typename: "Workout",
         id: string,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
         startedAt: string,
         completedAt: string | null,
+        exerciseResults:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       },
       exercise:  {
         __typename: "Exercise",
@@ -1013,9 +1572,24 @@ export type ListExerciseResultsQuery = {
         sets: number | null,
         repetitions: number | null,
         weightInKg: number | null,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
+        results:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       },
       sets:  {
         __typename: "ModelSetConnection",
+        items:  Array< {
+          __typename: "Set",
+          setNumber: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     } | null > | null,
@@ -1036,8 +1610,17 @@ export type GetSetQuery = {
       workout:  {
         __typename: "Workout",
         id: string,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
         startedAt: string,
         completedAt: string | null,
+        exerciseResults:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       },
       exercise:  {
         __typename: "Exercise",
@@ -1046,9 +1629,24 @@ export type GetSetQuery = {
         sets: number | null,
         repetitions: number | null,
         weightInKg: number | null,
+        routine:  {
+          __typename: "Routine",
+          id: string,
+          name: string | null,
+        },
+        results:  {
+          __typename: "ModelExerciseResultConnection",
+          nextToken: string | null,
+        } | null,
       },
       sets:  {
         __typename: "ModelSetConnection",
+        items:  Array< {
+          __typename: "Set",
+          setNumber: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        } | null > | null,
         nextToken: string | null,
       } | null,
     } | null,
@@ -1072,6 +1670,24 @@ export type ListSetsQuery = {
       exerciseResult:  {
         __typename: "ExerciseResult",
         id: string,
+        workout:  {
+          __typename: "Workout",
+          id: string,
+          startedAt: string,
+          completedAt: string | null,
+        },
+        exercise:  {
+          __typename: "Exercise",
+          id: string,
+          name: string | null,
+          sets: number | null,
+          repetitions: number | null,
+          weightInKg: number | null,
+        },
+        sets:  {
+          __typename: "ModelSetConnection",
+          nextToken: string | null,
+        } | null,
       } | null,
       setNumber: number | null,
       repetitions: number | null,
