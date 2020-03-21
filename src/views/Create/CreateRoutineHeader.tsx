@@ -12,7 +12,7 @@ interface ICreateRoutineHeaderProps extends RouteComponentProps {
 
 const CreateRoutineHeader: React.FC<ICreateRoutineHeaderProps> = ({ history, theme, formikProps }: ICreateRoutineHeaderProps) => {
   return (
-    <Appbar.Header style={{ elevation: 0 }}>
+    <Appbar.Header>
       <Appbar.BackAction onPress={() => history.goBack()} />
       <Appbar.Content title="Create Workout Routine" />
       <Appbar.Action icon="check" onPress={() => formikProps.submitForm()} />
