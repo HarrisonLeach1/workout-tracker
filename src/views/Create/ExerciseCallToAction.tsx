@@ -14,7 +14,7 @@ const ExerciseCallToAction: React.FC<{}> = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 120,
+    marginTop: 90,
     marginBottom: 120,
     alignItems:"center"
   },

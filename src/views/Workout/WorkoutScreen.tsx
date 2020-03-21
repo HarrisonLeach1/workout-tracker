@@ -32,7 +32,7 @@ const WorkoutScreen: React.FC<IWorkoutTableProps> = ({ history, theme }: IWorkou
       </Appbar.Header>
       <ScrollView style={styles.container} keyboardShouldPersistTaps={"always"} removeClippedSubviews={false}>
         {loading ? (
-          <ActivityIndicator size={"large"} animating={true} color={theme.colors.primary} />
+          <ActivityIndicator size={"large"} animating={true} color={theme.colors.primary} style={{marginTop: 48}} />
         ) : data ? (
           <WorkoutTable routineData={data} />
         ) : (

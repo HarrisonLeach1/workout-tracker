@@ -2,6 +2,7 @@ import { RouteComponentProps } from "react-router";
 import { Theme, BottomNavigation, withTheme } from "react-native-paper";
 import RoutineScreen from "./Routine/RoutineScreen";
 import React, { useState } from "react";
+import ExerciseScreen from "./Exercise/ExerciseScreen";
 
 export interface IHomeScreenProps extends RouteComponentProps {
   theme: Theme;
@@ -10,7 +11,7 @@ export interface IHomeScreenProps extends RouteComponentProps {
 const HomeScreen: React.FC<IHomeScreenProps> = props => {
   const RoutineRoute = () => <RoutineScreen {...props} />;
 
-  const ExerciseRoute = () => <RoutineScreen {...props} />;
+  const ExerciseRoute = () => <ExerciseScreen {...props} />;
 
   const HistoryRoute = () => <RoutineScreen {...props} />;
 

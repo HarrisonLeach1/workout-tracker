@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     backgroundColor: "#fff",
     alignItems: "stretch",
-    justifyContent: "center"
+    justifyContent: "flex-start"
   }
 });
 

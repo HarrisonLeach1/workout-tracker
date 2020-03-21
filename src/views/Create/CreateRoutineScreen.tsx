@@ -75,7 +75,6 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (props: ICreate
         <View style={styles.screen}>
           <CreateRoutineHeader {...props} formikProps={formikProps} />
           <TextInput
-            autoFocus={true}
             enablesReturnKeyAutomatically={true}
             placeholder="Enter Routine Name"
             onChangeText={formikProps.handleChange("name")}
@@ -84,7 +83,7 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (props: ICreate
             style={styles.textInput}
           />
           <Title style={{ margin: 24 }}>Exercises</Title>
-          <Divider />
+          <Divider style={{ marginTop: 12}}/>
           <View>
             <FlatList
               renderItem={({ item }) => <List.Item title={item.name} />}
