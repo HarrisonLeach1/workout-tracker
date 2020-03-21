@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { StyleSheet, FlatList, View } from "react-native";
-import { List, Divider, Theme, withTheme } from "react-native-paper";
+import { List, Divider, Theme, withTheme, FAB, TextInput, Title, Caption } from "react-native-paper";
 import { useMutation } from "@apollo/react-hooks";
 import { createRoutine, createExercise } from "../../graphql/mutations";
 import { CreateRoutineMutation, CreateRoutineMutationVariables, CreateExerciseMutation, CreateExerciseMutationVariables } from "../../API";
@@ -10,6 +10,7 @@ import { ExecutionResult } from "apollo-link";
 import { RouteComponentProps } from "react-router";
 import CreateRoutineHeader from "./CreateRoutineHeader";
 import { CreateRoutineContextProps, CreateRoutineContext } from "../../contexts/RoutineContext";
+import ExerciseCallToAction from "./ExerciseCallToAction";
 
 interface ICreateRoutineScreenProps extends RouteComponentProps {
   theme: Theme;
@@ -34,7 +35,7 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (props: ICreate
 
   // TODO: Refactor creating routines to be in custom hook
   // There is currently a limitation in amplify that arrays cannot be added as mutation inputs
-  // thus each exercise must be added one by one. 
+  // thus each exercise must be added one by one.
   const addExercises = (newRoutineMutation: ExecutionResult<CreateRoutineMutation>) => {
     const routineId = newRoutineMutation.data.createRoutine.id;
     console.log("Adding exercises for routine: " + routineId);
@@ -66,21 +67,41 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (props: ICreate
   return (
     <Formik
       initialValues={{
-        name: "Routine Name"
+        name: ""
       }}
       onSubmit={values => handleCreate(values)}
     >
       {(formikProps: FormikProps<RoutineFormValues>) => (
         <View style={styles.screen}>
           <CreateRoutineHeader {...props} formikProps={formikProps} />
+          <TextInput
+            autoFocus={true}
+            enablesReturnKeyAutomatically={true}
+            placeholder="Enter Routine Name"
+            onChangeText={formikProps.handleChange("name")}
+            onBlur={formikProps.handleBlur("name")}
+            value={formikProps.values.name}
+            style={styles.textInput}
+          />
+          <Title style={{ margin: 24 }}>Exercises</Title>
+          <Divider />
           <View>
             <FlatList
               renderItem={({ item }) => <List.Item title={item.name} />}
               keyExtractor={item => item.name}
               ItemSeparatorComponent={Divider}
               data={routine.createExercisesInput}
+              ListEmptyComponent={<ExerciseCallToAction/>}
             />
           </View>
+
+          <FAB
+            style={styles.fab}
+            icon="plus"
+            onPress={() => {
+              props.history.push("/CreateExercise");
+            }}
+          />
         </View>
       )}
     </Formik>
@@ -88,21 +109,16 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (props: ICreate
 };
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "flex-start"
-  },
-  surface: {
-    alignItems: "stretch",
-    justifyContent: "flex-start",
-    elevation: 4
+    flex: 1
   },
   fab: {
     position: "absolute",
     margin: 24,
-    marginTop: 100,
     right: 0,
-    bottom: -51
+    bottom: 0
+  },
+  textInput: {
+    margin: 24
   }
 });
 
