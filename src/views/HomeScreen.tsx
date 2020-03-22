@@ -3,6 +3,7 @@ import { Theme, BottomNavigation, withTheme } from "react-native-paper";
 import RoutineScreen from "./Routine/RoutineScreen";
 import React, { useState } from "react";
 import ExerciseScreen from "./Exercise/ExerciseScreen";
+import HistoryScreen from "./History/HistoryScreen";
 
 export interface IHomeScreenProps extends RouteComponentProps {
   theme: Theme;
@@ -13,10 +14,9 @@ const HomeScreen: React.FC<IHomeScreenProps> = props => {
 
   const ExerciseRoute = () => <ExerciseScreen {...props} />;
 
-  const HistoryRoute = () => <RoutineScreen {...props} />;
+  const HistoryRoute = () => <HistoryScreen {...props} />;
 
   const ProfileRoute = () => <RoutineScreen {...props} />;
-
 
   const initialRouteState = {
     index: 0,

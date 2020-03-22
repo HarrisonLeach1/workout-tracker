@@ -14,3 +14,24 @@ export const getRoutineAndExercises = `query GetRoutine($id: ID!) {
     }
   }
   `;
+
+  export const getWorkoutSets = `query GetWorkout($id: ID!) {
+    getWorkout(id: $id) {
+      exerciseResults {
+        items {
+          id
+          exercise {
+            name
+          }
+          sets {
+            items {
+              setNumber
+              repetitions
+              weightInKg
+            }
+          }
+        }
+      }
+    }
+  }
+  `

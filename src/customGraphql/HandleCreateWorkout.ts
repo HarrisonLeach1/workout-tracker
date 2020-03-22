@@ -29,12 +29,9 @@ export const useCreateWorkout = (): [(values: WorkoutInputs, exercises: Exercise
   const [addSet, { loading: addSetLoading, error: addSetError }] = useMutation<CreateSetMutation, CreateSetMutationVariables>(gql(createSet));
 
   const handleCreateWorkout = async (values: WorkoutInputs, exercises: Exercise[]): Promise<void> => {
-
     values.createWorkoutInput.completedAt = new Date().toISOString();
 
     console.log("sent values: " + JSON.stringify(values));
-
-    return;
 
     const createdWorkout = await addWorkout({
       variables: {
