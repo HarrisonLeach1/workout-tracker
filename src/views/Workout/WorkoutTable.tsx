@@ -1,9 +1,8 @@
-import { SectionList, TextInput, Text, StyleSheet, View } from "react-native";
-import { Divider, Button, Title, Subheading, Caption, Theme } from "react-native-paper";
-import React from "react";
+import { SectionList, TextInput, Text, StyleSheet, View, ViewStyle, StyleProp, TextStyle } from "react-native";
+import { Divider, Button, Title, Subheading, Caption, Theme, Checkbox } from "react-native-paper";
+import React, { useState } from "react";
 import { Formik, FormikProps } from "formik";
 import { WorkoutInputs } from "../../contexts/InProgressWorkoutContext";
-import SimpleCheckbox from "../../reusableComponents/SimpleCheckbox";
 import { useCreateWorkout } from "../../customGraphql/HandleCreateWorkout";
 import { GetRoutineQuery, CreateSetInput } from "../../API";
 import { mapRoutinetoWorkoutInputs } from "../../mapping/MapRoutineToWorkoutInputs";
@@ -69,6 +68,7 @@ const WorkoutTable: React.FC<IWorkoutTableProps> = ({ routineData }: IWorkoutTab
   );
 };
 
+// TODO: move SetListItem into separate file
 export interface ISetListItemProps extends CreateSetInput {
   exerciseNumber?: number;
   formikProps?: FormikProps<WorkoutInputs>;
@@ -79,8 +79,11 @@ const SetListItem: React.FC<ISetListItemProps> = props => {
   const createSetInput = formikProps.values.exerciseResultInputs[exerciseNumber].createSetInputs[setNumber - 1];
   const setStringIdentifier = `exerciseResultInputs[${exerciseNumber}].createSetInputs[${setNumber - 1}]`;
 
+  const [completed, setCompleted] = useState<boolean>(false);
+  const backgroundColorStyle: StyleProp<ViewStyle> = completed ? { backgroundColor: "#d7f5df" } : {};
+
   return (
-    <View style={styles.rowStyle}>
+    <View style={{ ...styles.rowStyle, ...backgroundColorStyle }}>
       <Text>{setNumber}</Text>
       <TextInput
         maxLength={6}
@@ -101,7 +104,15 @@ const SetListItem: React.FC<ISetListItemProps> = props => {
         value={createSetInput.weightInKg ? createSetInput.weightInKg.toString() : ""}
       />
       <View style={{ position: "absolute", right: "10%" }}>
-        <SimpleCheckbox />
+        <Checkbox.Android
+          status={completed ? "checked" : "unchecked"}
+          onPress={() => {
+            // set weight and reps to target values if they have not been input
+            createSetInput.weightInKg = createSetInput.weightInKg || createSetInput.targetWeightInKg;
+            createSetInput.repetitions = createSetInput.repetitions || createSetInput.targetRepetitions;
+            setCompleted(!completed);
+          }}
+        />
       </View>
     </View>
   );
@@ -114,12 +125,12 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     borderWidth: 2,
     backgroundColor: "lightgrey",
-    borderColor: "white",
+    borderColor: "lightgrey",
     width: 70
   },
   rowStyle: {
-    marginHorizontal: 16,
-    marginVertical: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
     flexDirection: "row",
     alignItems: "center"
   },
