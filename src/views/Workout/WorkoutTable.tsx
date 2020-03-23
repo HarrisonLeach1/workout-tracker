@@ -59,8 +59,8 @@ const WorkoutTable: React.FC<IWorkoutTableProps> = ({ routineData }: IWorkoutTab
               );
             }}
           />
-          <Button mode="contained" onPress={formikProps.handleSubmit as any}>
-            Submit
+          <Button mode="contained" onPress={formikProps.handleSubmit as any} style={{ marginHorizontal: 25, marginTop: 20, marginBottom: 30 }}>
+            Finish Workout
           </Button>
         </React.Fragment>
       )}

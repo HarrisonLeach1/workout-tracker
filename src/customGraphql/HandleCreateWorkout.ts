@@ -64,7 +64,10 @@ export const useCreateWorkout = (): [(values: WorkoutInputs, exercises: Exercise
       await addSet({
         variables: {
           input: {
-            ...createSetInput,
+            setNumber: createSetInput.setNumber,
+            // TODO: Add form validation, should not be able to create workout without completing sets
+            weightInKg: createSetInput.weightInKg || 0,
+            repetitions: createSetInput.repetitions || 0,
             setExerciseResultId: createdExerciseResultId
           }
         }
