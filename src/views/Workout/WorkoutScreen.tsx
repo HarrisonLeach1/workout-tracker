@@ -13,7 +13,7 @@ interface IWorkoutTableProps extends RouteComponentProps {
   theme: Theme;
 }
 
-const WorkoutScreen: React.FC<IWorkoutTableProps> = ({ history, theme }: IWorkoutTableProps) => {
+const WorkoutScreen: React.FC<IWorkoutTableProps> = (props: IWorkoutTableProps) => {
   const { routineID } = useContext(SelectedRoutineContext);
 
   const { loading, data } = useQuery<GetRoutineQuery, GetRoutineQueryVariables>(gql(getRoutineAndExercises), {
@@ -22,19 +22,17 @@ const WorkoutScreen: React.FC<IWorkoutTableProps> = ({ history, theme }: IWorkou
     }
   });
 
-  console.log("routine data: " + JSON.stringify(data));
-
   return (
     <View style={styles.screen}>
       <Appbar.Header>
-        <Appbar.BackAction onPress={() => history.goBack()} />
+        <Appbar.BackAction onPress={() => props.history.goBack()} />
         <Appbar.Content title="Workout" />
       </Appbar.Header>
       <ScrollView style={styles.container} keyboardShouldPersistTaps={"always"} removeClippedSubviews={false}>
         {loading ? (
-          <ActivityIndicator size={"large"} animating={true} color={theme.colors.primary} style={{marginTop: 48}} />
+          <ActivityIndicator size={"large"} animating={true} color={props.theme.colors.primary} style={{marginTop: 48}} />
         ) : data ? (
-          <WorkoutTable routineData={data} />
+          <WorkoutTable routineData={data} {...props} />
         ) : (
           <Text> Error Loading Workout </Text>
         )}

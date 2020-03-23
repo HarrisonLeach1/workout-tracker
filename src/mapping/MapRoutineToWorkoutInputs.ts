@@ -1,5 +1,5 @@
 import { GetRoutineQuery, CreateSetInput } from "../API";
-import { WorkoutInputs as WorkoutFormInputs, ExerciseResultInput } from "../contexts/InProgressWorkoutContext";
+import { WorkoutInputs as WorkoutFormInputs, ExerciseResultInput, CreateSetFormInput } from "../contexts/InProgressWorkoutContext";
 import { Exercise } from "../types/WorkoutTypes";
 
 export const mapRoutinetoWorkoutInputs = (routineData: GetRoutineQuery): WorkoutFormInputs => {
@@ -26,13 +26,15 @@ const getExerciseResultInputs = (exercises: Exercise[]): ExerciseResultInput[] =
   }));
 };
 
-const getCreateSetInputs = (exercise: Exercise): CreateSetInput[] => {
-  const sets: CreateSetInput[] = [];
+const getCreateSetInputs = (exercise: Exercise): CreateSetFormInput[] => {
+  const sets: CreateSetFormInput[] = [];
   for (let i = 1; i <= exercise.sets; i++) {
     sets.push({
       setNumber: i,
-      weightInKg: exercise.weightInKg,
-      repetitions: exercise.repetitions
+      // TODO: Make target weight and sets equal to previous exercise result OR previous
+      // exercise result + prediction
+      targetWeightInKg: exercise.weightInKg,
+      targetRepetitions: exercise.repetitions
     });
   }
   return sets;
