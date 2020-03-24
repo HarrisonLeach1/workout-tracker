@@ -2,19 +2,19 @@
   "expo": {
     "name": "Workout Tracker",
     "slug": "workout-tracker",
-    "privacy": "public",
+    "privacy": "unlisted",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
     "entryPoint": "./src/App.tsx",
-    "version": "1.0.0",
+    "version": "0.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
