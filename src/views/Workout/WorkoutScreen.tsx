@@ -1,13 +1,14 @@
-import { Theme, Appbar, withTheme, ActivityIndicator } from "react-native-paper";
+import { Theme, Appbar, withTheme, ActivityIndicator, Portal, Dialog, Paragraph, Button } from "react-native-paper";
 import { RouteComponentProps } from "react-router";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { GetRoutineQuery, GetRoutineQueryVariables } from "../../API";
 import gql from "graphql-tag";
 import { SelectedRoutineContext } from "../../contexts/InProgressWorkoutContext";
 import { useQuery } from "@apollo/react-hooks";
 import { getRoutineAndExercises } from "../../customGraphql/customQueries";
 import WorkoutTable from "./WorkoutTable";
+import QuitWorkoutDialog from "./QuitWorkoutDialog";
 
 interface IWorkoutTableProps extends RouteComponentProps {
   theme: Theme;
@@ -22,11 +23,19 @@ const WorkoutScreen: React.FC<IWorkoutTableProps> = (props: IWorkoutTableProps) 
     }
   });
 
+  const [quitDialogVisible, setQuitDialogVisible] = useState<boolean>(false);
+  const handleQuitWorkout = () => {
+    setQuitDialogVisible(false);
+    props.history.goBack();
+  };
+  const handleCancelQuitWorkout = () => setQuitDialogVisible(false);
+
   return (
     <View style={styles.screen}>
+      <QuitWorkoutDialog theme={props.theme} visible={quitDialogVisible} onQuitWorkout={handleQuitWorkout} onCancelQuitWorkout={handleCancelQuitWorkout} />
       <Appbar.Header>
-        <Appbar.BackAction onPress={() => props.history.goBack()} />
-        <Appbar.Content title="Workout" />
+        <Appbar.Action icon="close" size={28} onPress={() => setQuitDialogVisible(true)} />
+        <Appbar.Content title="Workout" subtitle={data ? data.getRoutine.name : ""} />
       </Appbar.Header>
       <ScrollView style={styles.container} keyboardShouldPersistTaps={"always"} removeClippedSubviews={false}>
         {loading ? (
