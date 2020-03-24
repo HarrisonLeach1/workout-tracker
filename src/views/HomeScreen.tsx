@@ -4,6 +4,7 @@ import RoutineScreen from "./Routine/RoutineScreen";
 import React, { useState } from "react";
 import ExerciseScreen from "./Exercise/ExerciseScreen";
 import HistoryScreen from "./History/HistoryScreen";
+import ProfileScreen from "./Profile/ProfileScreen";
 
 export interface IHomeScreenProps extends RouteComponentProps {
   theme: Theme;
@@ -16,7 +17,7 @@ const HomeScreen: React.FC<IHomeScreenProps> = props => {
 
   const HistoryRoute = () => <HistoryScreen {...props} />;
 
-  const ProfileRoute = () => <RoutineScreen {...props} />;
+  const ProfileRoute = () => <ProfileScreen {...props} />;
 
   const initialRouteState = {
     index: 0,
