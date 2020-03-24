@@ -8,7 +8,7 @@ import { SelectedRoutineContext } from "../../contexts/InProgressWorkoutContext"
 import { useQuery } from "@apollo/react-hooks";
 import { getRoutineAndExercises } from "../../customGraphql/customQueries";
 import WorkoutTable from "./WorkoutTable";
-import QuitWorkoutDialog from "./QuitWorkoutDialog";
+import ConfirmQuitDialog from "../dialogs/ConfirmQuitDialog";
 
 interface IWorkoutTableProps extends RouteComponentProps {
   theme: Theme;
@@ -32,7 +32,14 @@ const WorkoutScreen: React.FC<IWorkoutTableProps> = (props: IWorkoutTableProps) 
 
   return (
     <View style={styles.screen}>
-      <QuitWorkoutDialog theme={props.theme} visible={quitDialogVisible} onQuitWorkout={handleQuitWorkout} onCancelQuitWorkout={handleCancelQuitWorkout} />
+      <ConfirmQuitDialog
+        theme={props.theme}
+        visible={quitDialogVisible}
+        onConfirmQuit={handleQuitWorkout}
+        onCancelQuit={handleCancelQuitWorkout}
+        title="Quit Workout"
+        description={"Are you sure you want to quit the current workout? \nYour progress will not be saved."}
+      />
       <Appbar.Header>
         <Appbar.Action icon="close" size={28} onPress={() => setQuitDialogVisible(true)} />
         <Appbar.Content title="Workout" subtitle={data ? data.getRoutine.name : ""} />
