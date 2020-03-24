@@ -29,12 +29,14 @@
         "react-native-svg": "9.9.5",
         "react-native-web": "^0.11.7",
         "react-router-native": "^5.0.1",
-        "react-router-native-stack": "^0.0.16"
+        "react-router-native-stack": "^0.0.16",
+        "yup": "^0.28.3"
     },
     "devDependencies": {
         "@types/react": "^16.9.25",
         "@types/react-native": "^0.61.23",
         "@types/react-router-native": "^4.2.4",
+        "@types/yup": "^0.26.33",
         "babel-preset-expo": "^7.0.0",
         "typescript": "^3.8.3"
     },
