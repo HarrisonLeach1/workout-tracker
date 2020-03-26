@@ -4,7 +4,7 @@ import { View, StyleSheet, Text, ScrollView } from "react-native";
 import React, { useContext, useState } from "react";
 import { GetRoutineQuery, GetRoutineQueryVariables } from "../../API";
 import gql from "graphql-tag";
-import { SelectedRoutineContext } from "../../contexts/InProgressWorkoutContext";
+import { SelectedRoutineContext } from "../../contexts/SelectedRoutineContext";
 import { useQuery } from "@apollo/react-hooks";
 import { getRoutineAndExercises } from "../../customGraphql/customQueries";
 import WorkoutTable from "./WorkoutTable";

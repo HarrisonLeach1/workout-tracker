@@ -6,7 +6,7 @@ import { ListRoutinesQueryVariables, ListRoutinesQuery } from "../../API";
 import gql from "graphql-tag";
 import { listRoutines } from "../../graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
-import { SelectedRoutineContext } from "../../contexts/InProgressWorkoutContext";
+import { SelectedRoutineContext } from "../../contexts/SelectedRoutineContext";
 import RoutinePreviewCard from "./RoutinePreviewCard";
 
 interface IRoutineListProps extends RouteComponentProps {
@@ -14,11 +14,12 @@ interface IRoutineListProps extends RouteComponentProps {
 }
 
 const RoutineList: React.FC<IRoutineListProps> = ({ history, theme }: IRoutineListProps) => {
-  const { loading, data } = useQuery<ListRoutinesQuery, ListRoutinesQueryVariables>(gql(listRoutines), {
+  const { loading, data, error } = useQuery<ListRoutinesQuery, ListRoutinesQueryVariables>(gql(listRoutines), {
     variables: { limit: 5 }
   });
 
   const { setRoutineID } = useContext(SelectedRoutineContext);
+  console.log("error: " + JSON.stringify(error));
 
   return (
     <View style={styles.container}>

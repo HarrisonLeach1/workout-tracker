@@ -14,9 +14,9 @@ import gql from "graphql-tag";
 
 import { createWorkout, createExerciseResult, createSet } from "../graphql/mutations";
 
-import { WorkoutInputs, ExerciseResultInput } from "../contexts/InProgressWorkoutContext";
 import { Exercise } from "../types/WorkoutTypes";
 import { ApolloError } from "apollo-boost";
+import { WorkoutInputs, ExerciseResultInput } from "../types/FormInputTypes";
 
 export const useCreateWorkout = (): [(values: WorkoutInputs, exercises: Exercise[]) => Promise<void>, { loading: boolean; errors: ApolloError[] }] => {
   const [addWorkout, { loading: addWorkoutLoading, error: addWorkoutError }] = useMutation<CreateWorkoutMutation, CreateWorkoutMutationVariables>(

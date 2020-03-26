@@ -1,11 +1,11 @@
-import { GetRoutineQuery, CreateSetInput } from "../API";
-import { WorkoutInputs as WorkoutFormInputs, ExerciseResultInput, CreateSetFormInput } from "../contexts/InProgressWorkoutContext";
+import { GetRoutineQuery } from "../API";
 import { Exercise } from "../types/WorkoutTypes";
+import { ExerciseResultInput, CreateSetFormInput, WorkoutInputs } from "../types/FormInputTypes";
 
-export const mapRoutinetoWorkoutInputs = (routineData: GetRoutineQuery): WorkoutFormInputs => {
+export const mapRoutinetoWorkoutInputs = (routineData: GetRoutineQuery): WorkoutInputs => {
   const routine = routineData.getRoutine;
 
-  const workoutInputs: WorkoutFormInputs = {
+  const workoutInputs: WorkoutInputs = {
     createWorkoutInput: {
       startedAt: new Date().toISOString(),
       workoutRoutineId: routine.id

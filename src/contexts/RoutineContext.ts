@@ -1,10 +1,5 @@
 import { createContext, useState } from "react";
-import { CreateRoutineInput, CreateExerciseInput } from "../API";
-
-export interface RoutineInputs {
-    createRoutineInput: CreateRoutineInput;
-    createExercisesInput: CreateExerciseInput[];
-}
+import { RoutineInputs } from "../types/FormInputTypes";
 
 export interface CreateRoutineContextProps {
     routine: RoutineInputs;

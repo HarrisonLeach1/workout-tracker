@@ -1,5 +1,4 @@
-import { createContext, useState } from "react";
-import { CreateWorkoutInput, CreateExerciseResultInput, CreateSetInput } from "../API";
+import { CreateExerciseResultInput, CreateWorkoutInput, CreateSetInput, CreateRoutineInput, CreateExerciseInput } from "../API";
 
 export interface WorkoutInputs {
   createWorkoutInput: CreateWorkoutInput;
@@ -16,9 +15,7 @@ export interface CreateSetFormInput extends CreateSetInput {
   targetRepetitions?: number;
 }
 
-export function useSelectedRoutine() {
-  const [routineID, setRoutineID] = useState<string>("");
-  return { routineID, setRoutineID };
+export interface RoutineInputs {
+  createRoutineInput: CreateRoutineInput;
+  createExercisesInput: CreateExerciseInput[];
 }
-
-export const SelectedRoutineContext = createContext(null);

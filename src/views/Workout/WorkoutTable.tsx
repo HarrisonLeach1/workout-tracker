@@ -2,12 +2,12 @@ import { SectionList, TextInput, Text, StyleSheet, View, ViewStyle, StyleProp, T
 import { Divider, Button, Title, Subheading, Caption, Theme, Checkbox } from "react-native-paper";
 import React, { useState } from "react";
 import { Formik, FormikProps } from "formik";
-import { WorkoutInputs } from "../../contexts/InProgressWorkoutContext";
 import { useCreateWorkout } from "../../customGraphql/HandleCreateWorkout";
 import { GetRoutineQuery, CreateSetInput } from "../../API";
 import { mapRoutinetoWorkoutInputs } from "../../mapping/MapRoutineToWorkoutInputs";
 import { Exercise } from "../../types/WorkoutTypes";
 import { RouteComponentProps } from "react-router-native";
+import { WorkoutInputs } from "../../types/FormInputTypes";
 
 export interface IWorkoutTableProps extends RouteComponentProps {
   theme: Theme;
