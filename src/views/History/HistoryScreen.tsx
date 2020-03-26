@@ -1,8 +1,8 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Theme, withTheme, Appbar } from "react-native-paper";
-import { RouteComponentProps } from "react-router";
-import HistoryList from "./HistoryList";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Theme, withTheme, Appbar } from 'react-native-paper';
+import { RouteComponentProps } from 'react-router';
+import HistoryList from './HistoryList';
 
 interface IHistoryScreenProps extends RouteComponentProps {
   theme: Theme;
@@ -24,9 +24,9 @@ export default withTheme(HistoryScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
-    backgroundColor: "#fff",
-    alignItems: "stretch",
-    justifyContent: "flex-start"
-  }
+    flexDirection: 'column',
+    backgroundColor: '#fff',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
+  },
 });

@@ -1,17 +1,15 @@
 {
-    "projectName": "workout-tracker",
-    "version": "3.0",
-    "frontend": "javascript",
-    "javascript": {
-        "framework": "react-native",
-        "config": {
-            "SourceDir": "/",
-            "DistributionDir": "/",
-            "BuildCommand": "npm run-script build",
-            "StartCommand": "npm run-script start"
-        }
-    },
-    "providers": [
-        "awscloudformation"
-    ]
+  "projectName": "workout-tracker",
+  "version": "3.0",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "react-native",
+    "config": {
+      "SourceDir": "/",
+      "DistributionDir": "/",
+      "BuildCommand": "npm run-script build",
+      "StartCommand": "npm run-script start"
+    }
+  },
+  "providers": ["awscloudformation"]
 }

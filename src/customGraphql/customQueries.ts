@@ -15,7 +15,7 @@ export const getRoutineAndExercises = `query GetRoutine($id: ID!) {
   }
   `;
 
-  export const getWorkoutSets = `query GetWorkout($id: ID!) {
+export const getWorkoutSets = `query GetWorkout($id: ID!) {
     getWorkout(id: $id) {
       exerciseResults {
         items {
@@ -34,4 +34,4 @@ export const getRoutineAndExercises = `query GetRoutine($id: ID!) {
       }
     }
   }
-  `
+  `;

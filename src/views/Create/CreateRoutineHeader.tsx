@@ -1,16 +1,20 @@
-import React, { useState } from "react";
-import { Appbar, withTheme, Theme } from "react-native-paper";
-import { RouteComponentProps } from "react-router";
-import { FormikProps } from "formik";
-import { RoutineFormValues } from "./CreateRoutineScreen";
-import ConfirmQuitDialog from "../dialogs/ConfirmQuitDialog";
+import React, { useState } from 'react';
+import { Appbar, withTheme, Theme } from 'react-native-paper';
+import { RouteComponentProps } from 'react-router';
+import { FormikProps } from 'formik';
+import { RoutineFormValues } from './CreateRoutineScreen';
+import ConfirmQuitDialog from '../dialogs/ConfirmQuitDialog';
 
 interface ICreateRoutineHeaderProps extends RouteComponentProps {
   theme: Theme;
   formikProps: FormikProps<RoutineFormValues>;
 }
 
-const CreateRoutineHeader: React.FC<ICreateRoutineHeaderProps> = ({ theme, history, formikProps }: ICreateRoutineHeaderProps) => {
+const CreateRoutineHeader: React.FC<ICreateRoutineHeaderProps> = ({
+  theme,
+  history,
+  formikProps,
+}: ICreateRoutineHeaderProps) => {
   const [quitDialogVisible, setQuitDialogVisible] = useState<boolean>(false);
   const handleConfirmQuit = () => {
     setQuitDialogVisible(false);
@@ -31,7 +35,7 @@ const CreateRoutineHeader: React.FC<ICreateRoutineHeaderProps> = ({ theme, histo
         onConfirmQuit={handleConfirmQuit}
         onCancelQuit={handleCancelQuit}
         title="Quit Routine Creation"
-        description={"Are you sure you want to quit routine creation? \nYour progress will not be saved."}
+        description={'Are you sure you want to quit routine creation? \nYour progress will not be saved.'}
       />
     </>
   );

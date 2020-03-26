@@ -3,1705 +3,1705 @@
 //  This file was automatically generated and should not be edited.
 
 export type CreateRoutineInput = {
-  id?: string | null,
-  name?: string | null,
+  id?: string | null;
+  name?: string | null;
 };
 
 export type UpdateRoutineInput = {
-  id: string,
-  name?: string | null,
+  id: string;
+  name?: string | null;
 };
 
 export type DeleteRoutineInput = {
-  id?: string | null,
+  id?: string | null;
 };
 
 export type CreateExerciseInput = {
-  id?: string | null,
-  name?: string | null,
-  sets?: number | null,
-  repetitions?: number | null,
-  weightInKg?: number | null,
-  exerciseRoutineId: string,
+  id?: string | null;
+  name?: string | null;
+  sets?: number | null;
+  repetitions?: number | null;
+  weightInKg?: number | null;
+  exerciseRoutineId: string;
 };
 
 export type UpdateExerciseInput = {
-  id: string,
-  name?: string | null,
-  sets?: number | null,
-  repetitions?: number | null,
-  weightInKg?: number | null,
-  exerciseRoutineId?: string | null,
+  id: string;
+  name?: string | null;
+  sets?: number | null;
+  repetitions?: number | null;
+  weightInKg?: number | null;
+  exerciseRoutineId?: string | null;
 };
 
 export type DeleteExerciseInput = {
-  id?: string | null,
+  id?: string | null;
 };
 
 export type CreateWorkoutInput = {
-  id?: string | null,
-  startedAt: string,
-  completedAt?: string | null,
-  workoutRoutineId: string,
+  id?: string | null;
+  startedAt: string;
+  completedAt?: string | null;
+  workoutRoutineId: string;
 };
 
 export type UpdateWorkoutInput = {
-  id: string,
-  startedAt?: string | null,
-  completedAt?: string | null,
-  workoutRoutineId?: string | null,
+  id: string;
+  startedAt?: string | null;
+  completedAt?: string | null;
+  workoutRoutineId?: string | null;
 };
 
 export type DeleteWorkoutInput = {
-  id?: string | null,
+  id?: string | null;
 };
 
 export type CreateExerciseResultInput = {
-  id?: string | null,
-  exerciseResultWorkoutId: string,
-  exerciseResultExerciseId: string,
+  id?: string | null;
+  exerciseResultWorkoutId: string;
+  exerciseResultExerciseId: string;
 };
 
 export type UpdateExerciseResultInput = {
-  id: string,
-  exerciseResultWorkoutId?: string | null,
-  exerciseResultExerciseId?: string | null,
+  id: string;
+  exerciseResultWorkoutId?: string | null;
+  exerciseResultExerciseId?: string | null;
 };
 
 export type DeleteExerciseResultInput = {
-  id?: string | null,
+  id?: string | null;
 };
 
 export type CreateSetInput = {
-  setNumber?: number | null,
-  repetitions?: number | null,
-  weightInKg?: number | null,
-  setExerciseResultId?: string | null,
+  setNumber?: number | null;
+  repetitions?: number | null;
+  weightInKg?: number | null;
+  setExerciseResultId?: string | null;
 };
 
 export type UpdateSetInput = {
-  setNumber?: number | null,
-  repetitions?: number | null,
-  weightInKg?: number | null,
-  setExerciseResultId?: string | null,
+  setNumber?: number | null;
+  repetitions?: number | null;
+  weightInKg?: number | null;
+  setExerciseResultId?: string | null;
 };
 
 export type DeleteSetInput = {
-  id?: string | null,
+  id?: string | null;
 };
 
 export type ModelRoutineFilterInput = {
-  id?: ModelIDFilterInput | null,
-  name?: ModelStringFilterInput | null,
-  and?: Array< ModelRoutineFilterInput | null > | null,
-  or?: Array< ModelRoutineFilterInput | null > | null,
-  not?: ModelRoutineFilterInput | null,
+  id?: ModelIDFilterInput | null;
+  name?: ModelStringFilterInput | null;
+  and?: Array<ModelRoutineFilterInput | null> | null;
+  or?: Array<ModelRoutineFilterInput | null> | null;
+  not?: ModelRoutineFilterInput | null;
 };
 
 export type ModelIDFilterInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
 };
 
 export type ModelStringFilterInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
 };
 
 export type ModelExerciseFilterInput = {
-  id?: ModelIDFilterInput | null,
-  name?: ModelStringFilterInput | null,
-  sets?: ModelIntFilterInput | null,
-  repetitions?: ModelIntFilterInput | null,
-  weightInKg?: ModelFloatFilterInput | null,
-  and?: Array< ModelExerciseFilterInput | null > | null,
-  or?: Array< ModelExerciseFilterInput | null > | null,
-  not?: ModelExerciseFilterInput | null,
+  id?: ModelIDFilterInput | null;
+  name?: ModelStringFilterInput | null;
+  sets?: ModelIntFilterInput | null;
+  repetitions?: ModelIntFilterInput | null;
+  weightInKg?: ModelFloatFilterInput | null;
+  and?: Array<ModelExerciseFilterInput | null> | null;
+  or?: Array<ModelExerciseFilterInput | null> | null;
+  not?: ModelExerciseFilterInput | null;
 };
 
 export type ModelIntFilterInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
 };
 
 export type ModelFloatFilterInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
 };
 
 export type ModelWorkoutFilterInput = {
-  id?: ModelIDFilterInput | null,
-  startedAt?: ModelStringFilterInput | null,
-  completedAt?: ModelStringFilterInput | null,
-  and?: Array< ModelWorkoutFilterInput | null > | null,
-  or?: Array< ModelWorkoutFilterInput | null > | null,
-  not?: ModelWorkoutFilterInput | null,
+  id?: ModelIDFilterInput | null;
+  startedAt?: ModelStringFilterInput | null;
+  completedAt?: ModelStringFilterInput | null;
+  and?: Array<ModelWorkoutFilterInput | null> | null;
+  or?: Array<ModelWorkoutFilterInput | null> | null;
+  not?: ModelWorkoutFilterInput | null;
 };
 
 export type ModelExerciseResultFilterInput = {
-  id?: ModelIDFilterInput | null,
-  and?: Array< ModelExerciseResultFilterInput | null > | null,
-  or?: Array< ModelExerciseResultFilterInput | null > | null,
-  not?: ModelExerciseResultFilterInput | null,
+  id?: ModelIDFilterInput | null;
+  and?: Array<ModelExerciseResultFilterInput | null> | null;
+  or?: Array<ModelExerciseResultFilterInput | null> | null;
+  not?: ModelExerciseResultFilterInput | null;
 };
 
 export type ModelSetFilterInput = {
-  setNumber?: ModelIntFilterInput | null,
-  repetitions?: ModelIntFilterInput | null,
-  weightInKg?: ModelFloatFilterInput | null,
-  and?: Array< ModelSetFilterInput | null > | null,
-  or?: Array< ModelSetFilterInput | null > | null,
-  not?: ModelSetFilterInput | null,
+  setNumber?: ModelIntFilterInput | null;
+  repetitions?: ModelIntFilterInput | null;
+  weightInKg?: ModelFloatFilterInput | null;
+  and?: Array<ModelSetFilterInput | null> | null;
+  or?: Array<ModelSetFilterInput | null> | null;
+  not?: ModelSetFilterInput | null;
 };
 
 export type CreateRoutineMutationVariables = {
-  input: CreateRoutineInput,
+  input: CreateRoutineInput;
 };
 
 export type CreateRoutineMutation = {
-  createRoutine:  {
-    __typename: "Routine",
-    id: string,
-    name: string | null,
-    exercises:  {
-      __typename: "ModelExerciseConnection",
-      items:  Array< {
-        __typename: "Exercise",
-        id: string,
-        name: string | null,
-        sets: number | null,
-        repetitions: number | null,
-        weightInKg: number | null,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        results:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-    workouts:  {
-      __typename: "ModelWorkoutConnection",
-      items:  Array< {
-        __typename: "Workout",
-        id: string,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        startedAt: string,
-        completedAt: string | null,
-        exerciseResults:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  createRoutine: {
+    __typename: 'Routine';
+    id: string;
+    name: string | null;
+    exercises: {
+      __typename: 'ModelExerciseConnection';
+      items: Array<{
+        __typename: 'Exercise';
+        id: string;
+        name: string | null;
+        sets: number | null;
+        repetitions: number | null;
+        weightInKg: number | null;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        results: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+    workouts: {
+      __typename: 'ModelWorkoutConnection';
+      items: Array<{
+        __typename: 'Workout';
+        id: string;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        startedAt: string;
+        completedAt: string | null;
+        exerciseResults: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type UpdateRoutineMutationVariables = {
-  input: UpdateRoutineInput,
+  input: UpdateRoutineInput;
 };
 
 export type UpdateRoutineMutation = {
-  updateRoutine:  {
-    __typename: "Routine",
-    id: string,
-    name: string | null,
-    exercises:  {
-      __typename: "ModelExerciseConnection",
-      items:  Array< {
-        __typename: "Exercise",
-        id: string,
-        name: string | null,
-        sets: number | null,
-        repetitions: number | null,
-        weightInKg: number | null,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        results:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-    workouts:  {
-      __typename: "ModelWorkoutConnection",
-      items:  Array< {
-        __typename: "Workout",
-        id: string,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        startedAt: string,
-        completedAt: string | null,
-        exerciseResults:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  updateRoutine: {
+    __typename: 'Routine';
+    id: string;
+    name: string | null;
+    exercises: {
+      __typename: 'ModelExerciseConnection';
+      items: Array<{
+        __typename: 'Exercise';
+        id: string;
+        name: string | null;
+        sets: number | null;
+        repetitions: number | null;
+        weightInKg: number | null;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        results: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+    workouts: {
+      __typename: 'ModelWorkoutConnection';
+      items: Array<{
+        __typename: 'Workout';
+        id: string;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        startedAt: string;
+        completedAt: string | null;
+        exerciseResults: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type DeleteRoutineMutationVariables = {
-  input: DeleteRoutineInput,
+  input: DeleteRoutineInput;
 };
 
 export type DeleteRoutineMutation = {
-  deleteRoutine:  {
-    __typename: "Routine",
-    id: string,
-    name: string | null,
-    exercises:  {
-      __typename: "ModelExerciseConnection",
-      items:  Array< {
-        __typename: "Exercise",
-        id: string,
-        name: string | null,
-        sets: number | null,
-        repetitions: number | null,
-        weightInKg: number | null,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        results:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-    workouts:  {
-      __typename: "ModelWorkoutConnection",
-      items:  Array< {
-        __typename: "Workout",
-        id: string,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        startedAt: string,
-        completedAt: string | null,
-        exerciseResults:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  deleteRoutine: {
+    __typename: 'Routine';
+    id: string;
+    name: string | null;
+    exercises: {
+      __typename: 'ModelExerciseConnection';
+      items: Array<{
+        __typename: 'Exercise';
+        id: string;
+        name: string | null;
+        sets: number | null;
+        repetitions: number | null;
+        weightInKg: number | null;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        results: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+    workouts: {
+      __typename: 'ModelWorkoutConnection';
+      items: Array<{
+        __typename: 'Workout';
+        id: string;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        startedAt: string;
+        completedAt: string | null;
+        exerciseResults: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type CreateExerciseMutationVariables = {
-  input: CreateExerciseInput,
+  input: CreateExerciseInput;
 };
 
 export type CreateExerciseMutation = {
-  createExercise:  {
-    __typename: "Exercise",
-    id: string,
-    name: string | null,
-    sets: number | null,
-    repetitions: number | null,
-    weightInKg: number | null,
-    routine:  {
-      __typename: "Routine",
-      id: string,
-      name: string | null,
-      exercises:  {
-        __typename: "ModelExerciseConnection",
-        items:  Array< {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      workouts:  {
-        __typename: "ModelWorkoutConnection",
-        items:  Array< {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    results:  {
-      __typename: "ModelExerciseResultConnection",
-      items:  Array< {
-        __typename: "ExerciseResult",
-        id: string,
-        workout:  {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        },
-        exercise:  {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        },
-        sets:  {
-          __typename: "ModelSetConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  createExercise: {
+    __typename: 'Exercise';
+    id: string;
+    name: string | null;
+    sets: number | null;
+    repetitions: number | null;
+    weightInKg: number | null;
+    routine: {
+      __typename: 'Routine';
+      id: string;
+      name: string | null;
+      exercises: {
+        __typename: 'ModelExerciseConnection';
+        items: Array<{
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+      workouts: {
+        __typename: 'ModelWorkoutConnection';
+        items: Array<{
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    results: {
+      __typename: 'ModelExerciseResultConnection';
+      items: Array<{
+        __typename: 'ExerciseResult';
+        id: string;
+        workout: {
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        };
+        exercise: {
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        };
+        sets: {
+          __typename: 'ModelSetConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type UpdateExerciseMutationVariables = {
-  input: UpdateExerciseInput,
+  input: UpdateExerciseInput;
 };
 
 export type UpdateExerciseMutation = {
-  updateExercise:  {
-    __typename: "Exercise",
-    id: string,
-    name: string | null,
-    sets: number | null,
-    repetitions: number | null,
-    weightInKg: number | null,
-    routine:  {
-      __typename: "Routine",
-      id: string,
-      name: string | null,
-      exercises:  {
-        __typename: "ModelExerciseConnection",
-        items:  Array< {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      workouts:  {
-        __typename: "ModelWorkoutConnection",
-        items:  Array< {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    results:  {
-      __typename: "ModelExerciseResultConnection",
-      items:  Array< {
-        __typename: "ExerciseResult",
-        id: string,
-        workout:  {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        },
-        exercise:  {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        },
-        sets:  {
-          __typename: "ModelSetConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  updateExercise: {
+    __typename: 'Exercise';
+    id: string;
+    name: string | null;
+    sets: number | null;
+    repetitions: number | null;
+    weightInKg: number | null;
+    routine: {
+      __typename: 'Routine';
+      id: string;
+      name: string | null;
+      exercises: {
+        __typename: 'ModelExerciseConnection';
+        items: Array<{
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+      workouts: {
+        __typename: 'ModelWorkoutConnection';
+        items: Array<{
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    results: {
+      __typename: 'ModelExerciseResultConnection';
+      items: Array<{
+        __typename: 'ExerciseResult';
+        id: string;
+        workout: {
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        };
+        exercise: {
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        };
+        sets: {
+          __typename: 'ModelSetConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type DeleteExerciseMutationVariables = {
-  input: DeleteExerciseInput,
+  input: DeleteExerciseInput;
 };
 
 export type DeleteExerciseMutation = {
-  deleteExercise:  {
-    __typename: "Exercise",
-    id: string,
-    name: string | null,
-    sets: number | null,
-    repetitions: number | null,
-    weightInKg: number | null,
-    routine:  {
-      __typename: "Routine",
-      id: string,
-      name: string | null,
-      exercises:  {
-        __typename: "ModelExerciseConnection",
-        items:  Array< {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      workouts:  {
-        __typename: "ModelWorkoutConnection",
-        items:  Array< {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    results:  {
-      __typename: "ModelExerciseResultConnection",
-      items:  Array< {
-        __typename: "ExerciseResult",
-        id: string,
-        workout:  {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        },
-        exercise:  {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        },
-        sets:  {
-          __typename: "ModelSetConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  deleteExercise: {
+    __typename: 'Exercise';
+    id: string;
+    name: string | null;
+    sets: number | null;
+    repetitions: number | null;
+    weightInKg: number | null;
+    routine: {
+      __typename: 'Routine';
+      id: string;
+      name: string | null;
+      exercises: {
+        __typename: 'ModelExerciseConnection';
+        items: Array<{
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+      workouts: {
+        __typename: 'ModelWorkoutConnection';
+        items: Array<{
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    results: {
+      __typename: 'ModelExerciseResultConnection';
+      items: Array<{
+        __typename: 'ExerciseResult';
+        id: string;
+        workout: {
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        };
+        exercise: {
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        };
+        sets: {
+          __typename: 'ModelSetConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type CreateWorkoutMutationVariables = {
-  input: CreateWorkoutInput,
+  input: CreateWorkoutInput;
 };
 
 export type CreateWorkoutMutation = {
-  createWorkout:  {
-    __typename: "Workout",
-    id: string,
-    routine:  {
-      __typename: "Routine",
-      id: string,
-      name: string | null,
-      exercises:  {
-        __typename: "ModelExerciseConnection",
-        items:  Array< {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      workouts:  {
-        __typename: "ModelWorkoutConnection",
-        items:  Array< {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    startedAt: string,
-    completedAt: string | null,
-    exerciseResults:  {
-      __typename: "ModelExerciseResultConnection",
-      items:  Array< {
-        __typename: "ExerciseResult",
-        id: string,
-        workout:  {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        },
-        exercise:  {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        },
-        sets:  {
-          __typename: "ModelSetConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  createWorkout: {
+    __typename: 'Workout';
+    id: string;
+    routine: {
+      __typename: 'Routine';
+      id: string;
+      name: string | null;
+      exercises: {
+        __typename: 'ModelExerciseConnection';
+        items: Array<{
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+      workouts: {
+        __typename: 'ModelWorkoutConnection';
+        items: Array<{
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    startedAt: string;
+    completedAt: string | null;
+    exerciseResults: {
+      __typename: 'ModelExerciseResultConnection';
+      items: Array<{
+        __typename: 'ExerciseResult';
+        id: string;
+        workout: {
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        };
+        exercise: {
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        };
+        sets: {
+          __typename: 'ModelSetConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type UpdateWorkoutMutationVariables = {
-  input: UpdateWorkoutInput,
+  input: UpdateWorkoutInput;
 };
 
 export type UpdateWorkoutMutation = {
-  updateWorkout:  {
-    __typename: "Workout",
-    id: string,
-    routine:  {
-      __typename: "Routine",
-      id: string,
-      name: string | null,
-      exercises:  {
-        __typename: "ModelExerciseConnection",
-        items:  Array< {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      workouts:  {
-        __typename: "ModelWorkoutConnection",
-        items:  Array< {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    startedAt: string,
-    completedAt: string | null,
-    exerciseResults:  {
-      __typename: "ModelExerciseResultConnection",
-      items:  Array< {
-        __typename: "ExerciseResult",
-        id: string,
-        workout:  {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        },
-        exercise:  {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        },
-        sets:  {
-          __typename: "ModelSetConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  updateWorkout: {
+    __typename: 'Workout';
+    id: string;
+    routine: {
+      __typename: 'Routine';
+      id: string;
+      name: string | null;
+      exercises: {
+        __typename: 'ModelExerciseConnection';
+        items: Array<{
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+      workouts: {
+        __typename: 'ModelWorkoutConnection';
+        items: Array<{
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    startedAt: string;
+    completedAt: string | null;
+    exerciseResults: {
+      __typename: 'ModelExerciseResultConnection';
+      items: Array<{
+        __typename: 'ExerciseResult';
+        id: string;
+        workout: {
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        };
+        exercise: {
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        };
+        sets: {
+          __typename: 'ModelSetConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type DeleteWorkoutMutationVariables = {
-  input: DeleteWorkoutInput,
+  input: DeleteWorkoutInput;
 };
 
 export type DeleteWorkoutMutation = {
-  deleteWorkout:  {
-    __typename: "Workout",
-    id: string,
-    routine:  {
-      __typename: "Routine",
-      id: string,
-      name: string | null,
-      exercises:  {
-        __typename: "ModelExerciseConnection",
-        items:  Array< {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      workouts:  {
-        __typename: "ModelWorkoutConnection",
-        items:  Array< {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    startedAt: string,
-    completedAt: string | null,
-    exerciseResults:  {
-      __typename: "ModelExerciseResultConnection",
-      items:  Array< {
-        __typename: "ExerciseResult",
-        id: string,
-        workout:  {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        },
-        exercise:  {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        },
-        sets:  {
-          __typename: "ModelSetConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  deleteWorkout: {
+    __typename: 'Workout';
+    id: string;
+    routine: {
+      __typename: 'Routine';
+      id: string;
+      name: string | null;
+      exercises: {
+        __typename: 'ModelExerciseConnection';
+        items: Array<{
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+      workouts: {
+        __typename: 'ModelWorkoutConnection';
+        items: Array<{
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    startedAt: string;
+    completedAt: string | null;
+    exerciseResults: {
+      __typename: 'ModelExerciseResultConnection';
+      items: Array<{
+        __typename: 'ExerciseResult';
+        id: string;
+        workout: {
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        };
+        exercise: {
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        };
+        sets: {
+          __typename: 'ModelSetConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type CreateExerciseResultMutationVariables = {
-  input: CreateExerciseResultInput,
+  input: CreateExerciseResultInput;
 };
 
 export type CreateExerciseResultMutation = {
-  createExerciseResult:  {
-    __typename: "ExerciseResult",
-    id: string,
-    workout:  {
-      __typename: "Workout",
-      id: string,
-      routine:  {
-        __typename: "Routine",
-        id: string,
-        name: string | null,
-        exercises:  {
-          __typename: "ModelExerciseConnection",
-          nextToken: string | null,
-        } | null,
-        workouts:  {
-          __typename: "ModelWorkoutConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      startedAt: string,
-      completedAt: string | null,
-      exerciseResults:  {
-        __typename: "ModelExerciseResultConnection",
-        items:  Array< {
-          __typename: "ExerciseResult",
-          id: string,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    exercise:  {
-      __typename: "Exercise",
-      id: string,
-      name: string | null,
-      sets: number | null,
-      repetitions: number | null,
-      weightInKg: number | null,
-      routine:  {
-        __typename: "Routine",
-        id: string,
-        name: string | null,
-        exercises:  {
-          __typename: "ModelExerciseConnection",
-          nextToken: string | null,
-        } | null,
-        workouts:  {
-          __typename: "ModelWorkoutConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      results:  {
-        __typename: "ModelExerciseResultConnection",
-        items:  Array< {
-          __typename: "ExerciseResult",
-          id: string,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    sets:  {
-      __typename: "ModelSetConnection",
-      items:  Array< {
-        __typename: "Set",
-        exerciseResult:  {
-          __typename: "ExerciseResult",
-          id: string,
-        } | null,
-        setNumber: number | null,
-        repetitions: number | null,
-        weightInKg: number | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  createExerciseResult: {
+    __typename: 'ExerciseResult';
+    id: string;
+    workout: {
+      __typename: 'Workout';
+      id: string;
+      routine: {
+        __typename: 'Routine';
+        id: string;
+        name: string | null;
+        exercises: {
+          __typename: 'ModelExerciseConnection';
+          nextToken: string | null;
+        } | null;
+        workouts: {
+          __typename: 'ModelWorkoutConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      startedAt: string;
+      completedAt: string | null;
+      exerciseResults: {
+        __typename: 'ModelExerciseResultConnection';
+        items: Array<{
+          __typename: 'ExerciseResult';
+          id: string;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    exercise: {
+      __typename: 'Exercise';
+      id: string;
+      name: string | null;
+      sets: number | null;
+      repetitions: number | null;
+      weightInKg: number | null;
+      routine: {
+        __typename: 'Routine';
+        id: string;
+        name: string | null;
+        exercises: {
+          __typename: 'ModelExerciseConnection';
+          nextToken: string | null;
+        } | null;
+        workouts: {
+          __typename: 'ModelWorkoutConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      results: {
+        __typename: 'ModelExerciseResultConnection';
+        items: Array<{
+          __typename: 'ExerciseResult';
+          id: string;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    sets: {
+      __typename: 'ModelSetConnection';
+      items: Array<{
+        __typename: 'Set';
+        exerciseResult: {
+          __typename: 'ExerciseResult';
+          id: string;
+        } | null;
+        setNumber: number | null;
+        repetitions: number | null;
+        weightInKg: number | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type UpdateExerciseResultMutationVariables = {
-  input: UpdateExerciseResultInput,
+  input: UpdateExerciseResultInput;
 };
 
 export type UpdateExerciseResultMutation = {
-  updateExerciseResult:  {
-    __typename: "ExerciseResult",
-    id: string,
-    workout:  {
-      __typename: "Workout",
-      id: string,
-      routine:  {
-        __typename: "Routine",
-        id: string,
-        name: string | null,
-        exercises:  {
-          __typename: "ModelExerciseConnection",
-          nextToken: string | null,
-        } | null,
-        workouts:  {
-          __typename: "ModelWorkoutConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      startedAt: string,
-      completedAt: string | null,
-      exerciseResults:  {
-        __typename: "ModelExerciseResultConnection",
-        items:  Array< {
-          __typename: "ExerciseResult",
-          id: string,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    exercise:  {
-      __typename: "Exercise",
-      id: string,
-      name: string | null,
-      sets: number | null,
-      repetitions: number | null,
-      weightInKg: number | null,
-      routine:  {
-        __typename: "Routine",
-        id: string,
-        name: string | null,
-        exercises:  {
-          __typename: "ModelExerciseConnection",
-          nextToken: string | null,
-        } | null,
-        workouts:  {
-          __typename: "ModelWorkoutConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      results:  {
-        __typename: "ModelExerciseResultConnection",
-        items:  Array< {
-          __typename: "ExerciseResult",
-          id: string,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    sets:  {
-      __typename: "ModelSetConnection",
-      items:  Array< {
-        __typename: "Set",
-        exerciseResult:  {
-          __typename: "ExerciseResult",
-          id: string,
-        } | null,
-        setNumber: number | null,
-        repetitions: number | null,
-        weightInKg: number | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  updateExerciseResult: {
+    __typename: 'ExerciseResult';
+    id: string;
+    workout: {
+      __typename: 'Workout';
+      id: string;
+      routine: {
+        __typename: 'Routine';
+        id: string;
+        name: string | null;
+        exercises: {
+          __typename: 'ModelExerciseConnection';
+          nextToken: string | null;
+        } | null;
+        workouts: {
+          __typename: 'ModelWorkoutConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      startedAt: string;
+      completedAt: string | null;
+      exerciseResults: {
+        __typename: 'ModelExerciseResultConnection';
+        items: Array<{
+          __typename: 'ExerciseResult';
+          id: string;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    exercise: {
+      __typename: 'Exercise';
+      id: string;
+      name: string | null;
+      sets: number | null;
+      repetitions: number | null;
+      weightInKg: number | null;
+      routine: {
+        __typename: 'Routine';
+        id: string;
+        name: string | null;
+        exercises: {
+          __typename: 'ModelExerciseConnection';
+          nextToken: string | null;
+        } | null;
+        workouts: {
+          __typename: 'ModelWorkoutConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      results: {
+        __typename: 'ModelExerciseResultConnection';
+        items: Array<{
+          __typename: 'ExerciseResult';
+          id: string;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    sets: {
+      __typename: 'ModelSetConnection';
+      items: Array<{
+        __typename: 'Set';
+        exerciseResult: {
+          __typename: 'ExerciseResult';
+          id: string;
+        } | null;
+        setNumber: number | null;
+        repetitions: number | null;
+        weightInKg: number | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type DeleteExerciseResultMutationVariables = {
-  input: DeleteExerciseResultInput,
+  input: DeleteExerciseResultInput;
 };
 
 export type DeleteExerciseResultMutation = {
-  deleteExerciseResult:  {
-    __typename: "ExerciseResult",
-    id: string,
-    workout:  {
-      __typename: "Workout",
-      id: string,
-      routine:  {
-        __typename: "Routine",
-        id: string,
-        name: string | null,
-        exercises:  {
-          __typename: "ModelExerciseConnection",
-          nextToken: string | null,
-        } | null,
-        workouts:  {
-          __typename: "ModelWorkoutConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      startedAt: string,
-      completedAt: string | null,
-      exerciseResults:  {
-        __typename: "ModelExerciseResultConnection",
-        items:  Array< {
-          __typename: "ExerciseResult",
-          id: string,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    exercise:  {
-      __typename: "Exercise",
-      id: string,
-      name: string | null,
-      sets: number | null,
-      repetitions: number | null,
-      weightInKg: number | null,
-      routine:  {
-        __typename: "Routine",
-        id: string,
-        name: string | null,
-        exercises:  {
-          __typename: "ModelExerciseConnection",
-          nextToken: string | null,
-        } | null,
-        workouts:  {
-          __typename: "ModelWorkoutConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      results:  {
-        __typename: "ModelExerciseResultConnection",
-        items:  Array< {
-          __typename: "ExerciseResult",
-          id: string,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    sets:  {
-      __typename: "ModelSetConnection",
-      items:  Array< {
-        __typename: "Set",
-        exerciseResult:  {
-          __typename: "ExerciseResult",
-          id: string,
-        } | null,
-        setNumber: number | null,
-        repetitions: number | null,
-        weightInKg: number | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  deleteExerciseResult: {
+    __typename: 'ExerciseResult';
+    id: string;
+    workout: {
+      __typename: 'Workout';
+      id: string;
+      routine: {
+        __typename: 'Routine';
+        id: string;
+        name: string | null;
+        exercises: {
+          __typename: 'ModelExerciseConnection';
+          nextToken: string | null;
+        } | null;
+        workouts: {
+          __typename: 'ModelWorkoutConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      startedAt: string;
+      completedAt: string | null;
+      exerciseResults: {
+        __typename: 'ModelExerciseResultConnection';
+        items: Array<{
+          __typename: 'ExerciseResult';
+          id: string;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    exercise: {
+      __typename: 'Exercise';
+      id: string;
+      name: string | null;
+      sets: number | null;
+      repetitions: number | null;
+      weightInKg: number | null;
+      routine: {
+        __typename: 'Routine';
+        id: string;
+        name: string | null;
+        exercises: {
+          __typename: 'ModelExerciseConnection';
+          nextToken: string | null;
+        } | null;
+        workouts: {
+          __typename: 'ModelWorkoutConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      results: {
+        __typename: 'ModelExerciseResultConnection';
+        items: Array<{
+          __typename: 'ExerciseResult';
+          id: string;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    sets: {
+      __typename: 'ModelSetConnection';
+      items: Array<{
+        __typename: 'Set';
+        exerciseResult: {
+          __typename: 'ExerciseResult';
+          id: string;
+        } | null;
+        setNumber: number | null;
+        repetitions: number | null;
+        weightInKg: number | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type CreateSetMutationVariables = {
-  input: CreateSetInput,
+  input: CreateSetInput;
 };
 
 export type CreateSetMutation = {
-  createSet:  {
-    __typename: "Set",
-    exerciseResult:  {
-      __typename: "ExerciseResult",
-      id: string,
-      workout:  {
-        __typename: "Workout",
-        id: string,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        startedAt: string,
-        completedAt: string | null,
-        exerciseResults:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      exercise:  {
-        __typename: "Exercise",
-        id: string,
-        name: string | null,
-        sets: number | null,
-        repetitions: number | null,
-        weightInKg: number | null,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        results:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      sets:  {
-        __typename: "ModelSetConnection",
-        items:  Array< {
-          __typename: "Set",
-          setNumber: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    } | null,
-    setNumber: number | null,
-    repetitions: number | null,
-    weightInKg: number | null,
-  } | null,
+  createSet: {
+    __typename: 'Set';
+    exerciseResult: {
+      __typename: 'ExerciseResult';
+      id: string;
+      workout: {
+        __typename: 'Workout';
+        id: string;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        startedAt: string;
+        completedAt: string | null;
+        exerciseResults: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      exercise: {
+        __typename: 'Exercise';
+        id: string;
+        name: string | null;
+        sets: number | null;
+        repetitions: number | null;
+        weightInKg: number | null;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        results: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      sets: {
+        __typename: 'ModelSetConnection';
+        items: Array<{
+          __typename: 'Set';
+          setNumber: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    } | null;
+    setNumber: number | null;
+    repetitions: number | null;
+    weightInKg: number | null;
+  } | null;
 };
 
 export type UpdateSetMutationVariables = {
-  input: UpdateSetInput,
+  input: UpdateSetInput;
 };
 
 export type UpdateSetMutation = {
-  updateSet:  {
-    __typename: "Set",
-    exerciseResult:  {
-      __typename: "ExerciseResult",
-      id: string,
-      workout:  {
-        __typename: "Workout",
-        id: string,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        startedAt: string,
-        completedAt: string | null,
-        exerciseResults:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      exercise:  {
-        __typename: "Exercise",
-        id: string,
-        name: string | null,
-        sets: number | null,
-        repetitions: number | null,
-        weightInKg: number | null,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        results:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      sets:  {
-        __typename: "ModelSetConnection",
-        items:  Array< {
-          __typename: "Set",
-          setNumber: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    } | null,
-    setNumber: number | null,
-    repetitions: number | null,
-    weightInKg: number | null,
-  } | null,
+  updateSet: {
+    __typename: 'Set';
+    exerciseResult: {
+      __typename: 'ExerciseResult';
+      id: string;
+      workout: {
+        __typename: 'Workout';
+        id: string;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        startedAt: string;
+        completedAt: string | null;
+        exerciseResults: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      exercise: {
+        __typename: 'Exercise';
+        id: string;
+        name: string | null;
+        sets: number | null;
+        repetitions: number | null;
+        weightInKg: number | null;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        results: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      sets: {
+        __typename: 'ModelSetConnection';
+        items: Array<{
+          __typename: 'Set';
+          setNumber: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    } | null;
+    setNumber: number | null;
+    repetitions: number | null;
+    weightInKg: number | null;
+  } | null;
 };
 
 export type DeleteSetMutationVariables = {
-  input: DeleteSetInput,
+  input: DeleteSetInput;
 };
 
 export type DeleteSetMutation = {
-  deleteSet:  {
-    __typename: "Set",
-    exerciseResult:  {
-      __typename: "ExerciseResult",
-      id: string,
-      workout:  {
-        __typename: "Workout",
-        id: string,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        startedAt: string,
-        completedAt: string | null,
-        exerciseResults:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      exercise:  {
-        __typename: "Exercise",
-        id: string,
-        name: string | null,
-        sets: number | null,
-        repetitions: number | null,
-        weightInKg: number | null,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        results:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      sets:  {
-        __typename: "ModelSetConnection",
-        items:  Array< {
-          __typename: "Set",
-          setNumber: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    } | null,
-    setNumber: number | null,
-    repetitions: number | null,
-    weightInKg: number | null,
-  } | null,
+  deleteSet: {
+    __typename: 'Set';
+    exerciseResult: {
+      __typename: 'ExerciseResult';
+      id: string;
+      workout: {
+        __typename: 'Workout';
+        id: string;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        startedAt: string;
+        completedAt: string | null;
+        exerciseResults: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      exercise: {
+        __typename: 'Exercise';
+        id: string;
+        name: string | null;
+        sets: number | null;
+        repetitions: number | null;
+        weightInKg: number | null;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        results: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      sets: {
+        __typename: 'ModelSetConnection';
+        items: Array<{
+          __typename: 'Set';
+          setNumber: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    } | null;
+    setNumber: number | null;
+    repetitions: number | null;
+    weightInKg: number | null;
+  } | null;
 };
 
 export type GetRoutineQueryVariables = {
-  id: string,
+  id: string;
 };
 
 export type GetRoutineQuery = {
-  getRoutine:  {
-    __typename: "Routine",
-    id: string,
-    name: string | null,
-    exercises:  {
-      __typename: "ModelExerciseConnection",
-      items:  Array< {
-        __typename: "Exercise",
-        id: string,
-        name: string | null,
-        sets: number | null,
-        repetitions: number | null,
-        weightInKg: number | null,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        results:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-    workouts:  {
-      __typename: "ModelWorkoutConnection",
-      items:  Array< {
-        __typename: "Workout",
-        id: string,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        startedAt: string,
-        completedAt: string | null,
-        exerciseResults:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  getRoutine: {
+    __typename: 'Routine';
+    id: string;
+    name: string | null;
+    exercises: {
+      __typename: 'ModelExerciseConnection';
+      items: Array<{
+        __typename: 'Exercise';
+        id: string;
+        name: string | null;
+        sets: number | null;
+        repetitions: number | null;
+        weightInKg: number | null;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        results: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+    workouts: {
+      __typename: 'ModelWorkoutConnection';
+      items: Array<{
+        __typename: 'Workout';
+        id: string;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        startedAt: string;
+        completedAt: string | null;
+        exerciseResults: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type ListRoutinesQueryVariables = {
-  filter?: ModelRoutineFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
+  filter?: ModelRoutineFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
 };
 
 export type ListRoutinesQuery = {
-  listRoutines:  {
-    __typename: "ModelRoutineConnection",
-    items:  Array< {
-      __typename: "Routine",
-      id: string,
-      name: string | null,
-      exercises:  {
-        __typename: "ModelExerciseConnection",
-        items:  Array< {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      workouts:  {
-        __typename: "ModelWorkoutConnection",
-        items:  Array< {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    } | null > | null,
-    nextToken: string | null,
-  } | null,
+  listRoutines: {
+    __typename: 'ModelRoutineConnection';
+    items: Array<{
+      __typename: 'Routine';
+      id: string;
+      name: string | null;
+      exercises: {
+        __typename: 'ModelExerciseConnection';
+        items: Array<{
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+      workouts: {
+        __typename: 'ModelWorkoutConnection';
+        items: Array<{
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
 };
 
 export type GetExerciseQueryVariables = {
-  id: string,
+  id: string;
 };
 
 export type GetExerciseQuery = {
-  getExercise:  {
-    __typename: "Exercise",
-    id: string,
-    name: string | null,
-    sets: number | null,
-    repetitions: number | null,
-    weightInKg: number | null,
-    routine:  {
-      __typename: "Routine",
-      id: string,
-      name: string | null,
-      exercises:  {
-        __typename: "ModelExerciseConnection",
-        items:  Array< {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      workouts:  {
-        __typename: "ModelWorkoutConnection",
-        items:  Array< {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    results:  {
-      __typename: "ModelExerciseResultConnection",
-      items:  Array< {
-        __typename: "ExerciseResult",
-        id: string,
-        workout:  {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        },
-        exercise:  {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        },
-        sets:  {
-          __typename: "ModelSetConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  getExercise: {
+    __typename: 'Exercise';
+    id: string;
+    name: string | null;
+    sets: number | null;
+    repetitions: number | null;
+    weightInKg: number | null;
+    routine: {
+      __typename: 'Routine';
+      id: string;
+      name: string | null;
+      exercises: {
+        __typename: 'ModelExerciseConnection';
+        items: Array<{
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+      workouts: {
+        __typename: 'ModelWorkoutConnection';
+        items: Array<{
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    results: {
+      __typename: 'ModelExerciseResultConnection';
+      items: Array<{
+        __typename: 'ExerciseResult';
+        id: string;
+        workout: {
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        };
+        exercise: {
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        };
+        sets: {
+          __typename: 'ModelSetConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type ListExercisesQueryVariables = {
-  filter?: ModelExerciseFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
+  filter?: ModelExerciseFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
 };
 
 export type ListExercisesQuery = {
-  listExercises:  {
-    __typename: "ModelExerciseConnection",
-    items:  Array< {
-      __typename: "Exercise",
-      id: string,
-      name: string | null,
-      sets: number | null,
-      repetitions: number | null,
-      weightInKg: number | null,
-      routine:  {
-        __typename: "Routine",
-        id: string,
-        name: string | null,
-        exercises:  {
-          __typename: "ModelExerciseConnection",
-          nextToken: string | null,
-        } | null,
-        workouts:  {
-          __typename: "ModelWorkoutConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      results:  {
-        __typename: "ModelExerciseResultConnection",
-        items:  Array< {
-          __typename: "ExerciseResult",
-          id: string,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    } | null > | null,
-    nextToken: string | null,
-  } | null,
+  listExercises: {
+    __typename: 'ModelExerciseConnection';
+    items: Array<{
+      __typename: 'Exercise';
+      id: string;
+      name: string | null;
+      sets: number | null;
+      repetitions: number | null;
+      weightInKg: number | null;
+      routine: {
+        __typename: 'Routine';
+        id: string;
+        name: string | null;
+        exercises: {
+          __typename: 'ModelExerciseConnection';
+          nextToken: string | null;
+        } | null;
+        workouts: {
+          __typename: 'ModelWorkoutConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      results: {
+        __typename: 'ModelExerciseResultConnection';
+        items: Array<{
+          __typename: 'ExerciseResult';
+          id: string;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
 };
 
 export type GetWorkoutQueryVariables = {
-  id: string,
+  id: string;
 };
 
 export type GetWorkoutQuery = {
-  getWorkout:  {
-    __typename: "Workout",
-    id: string,
-    routine:  {
-      __typename: "Routine",
-      id: string,
-      name: string | null,
-      exercises:  {
-        __typename: "ModelExerciseConnection",
-        items:  Array< {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      workouts:  {
-        __typename: "ModelWorkoutConnection",
-        items:  Array< {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    startedAt: string,
-    completedAt: string | null,
-    exerciseResults:  {
-      __typename: "ModelExerciseResultConnection",
-      items:  Array< {
-        __typename: "ExerciseResult",
-        id: string,
-        workout:  {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        },
-        exercise:  {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        },
-        sets:  {
-          __typename: "ModelSetConnection",
-          nextToken: string | null,
-        } | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  getWorkout: {
+    __typename: 'Workout';
+    id: string;
+    routine: {
+      __typename: 'Routine';
+      id: string;
+      name: string | null;
+      exercises: {
+        __typename: 'ModelExerciseConnection';
+        items: Array<{
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+      workouts: {
+        __typename: 'ModelWorkoutConnection';
+        items: Array<{
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    startedAt: string;
+    completedAt: string | null;
+    exerciseResults: {
+      __typename: 'ModelExerciseResultConnection';
+      items: Array<{
+        __typename: 'ExerciseResult';
+        id: string;
+        workout: {
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        };
+        exercise: {
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        };
+        sets: {
+          __typename: 'ModelSetConnection';
+          nextToken: string | null;
+        } | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type ListWorkoutsQueryVariables = {
-  filter?: ModelWorkoutFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
+  filter?: ModelWorkoutFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
 };
 
 export type ListWorkoutsQuery = {
-  listWorkouts:  {
-    __typename: "ModelWorkoutConnection",
-    items:  Array< {
-      __typename: "Workout",
-      id: string,
-      routine:  {
-        __typename: "Routine",
-        id: string,
-        name: string | null,
-        exercises:  {
-          __typename: "ModelExerciseConnection",
-          nextToken: string | null,
-        } | null,
-        workouts:  {
-          __typename: "ModelWorkoutConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      startedAt: string,
-      completedAt: string | null,
-      exerciseResults:  {
-        __typename: "ModelExerciseResultConnection",
-        items:  Array< {
-          __typename: "ExerciseResult",
-          id: string,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    } | null > | null,
-    nextToken: string | null,
-  } | null,
+  listWorkouts: {
+    __typename: 'ModelWorkoutConnection';
+    items: Array<{
+      __typename: 'Workout';
+      id: string;
+      routine: {
+        __typename: 'Routine';
+        id: string;
+        name: string | null;
+        exercises: {
+          __typename: 'ModelExerciseConnection';
+          nextToken: string | null;
+        } | null;
+        workouts: {
+          __typename: 'ModelWorkoutConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      startedAt: string;
+      completedAt: string | null;
+      exerciseResults: {
+        __typename: 'ModelExerciseResultConnection';
+        items: Array<{
+          __typename: 'ExerciseResult';
+          id: string;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
 };
 
 export type GetExerciseResultQueryVariables = {
-  id: string,
+  id: string;
 };
 
 export type GetExerciseResultQuery = {
-  getExerciseResult:  {
-    __typename: "ExerciseResult",
-    id: string,
-    workout:  {
-      __typename: "Workout",
-      id: string,
-      routine:  {
-        __typename: "Routine",
-        id: string,
-        name: string | null,
-        exercises:  {
-          __typename: "ModelExerciseConnection",
-          nextToken: string | null,
-        } | null,
-        workouts:  {
-          __typename: "ModelWorkoutConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      startedAt: string,
-      completedAt: string | null,
-      exerciseResults:  {
-        __typename: "ModelExerciseResultConnection",
-        items:  Array< {
-          __typename: "ExerciseResult",
-          id: string,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    exercise:  {
-      __typename: "Exercise",
-      id: string,
-      name: string | null,
-      sets: number | null,
-      repetitions: number | null,
-      weightInKg: number | null,
-      routine:  {
-        __typename: "Routine",
-        id: string,
-        name: string | null,
-        exercises:  {
-          __typename: "ModelExerciseConnection",
-          nextToken: string | null,
-        } | null,
-        workouts:  {
-          __typename: "ModelWorkoutConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      results:  {
-        __typename: "ModelExerciseResultConnection",
-        items:  Array< {
-          __typename: "ExerciseResult",
-          id: string,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-    sets:  {
-      __typename: "ModelSetConnection",
-      items:  Array< {
-        __typename: "Set",
-        exerciseResult:  {
-          __typename: "ExerciseResult",
-          id: string,
-        } | null,
-        setNumber: number | null,
-        repetitions: number | null,
-        weightInKg: number | null,
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-  } | null,
+  getExerciseResult: {
+    __typename: 'ExerciseResult';
+    id: string;
+    workout: {
+      __typename: 'Workout';
+      id: string;
+      routine: {
+        __typename: 'Routine';
+        id: string;
+        name: string | null;
+        exercises: {
+          __typename: 'ModelExerciseConnection';
+          nextToken: string | null;
+        } | null;
+        workouts: {
+          __typename: 'ModelWorkoutConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      startedAt: string;
+      completedAt: string | null;
+      exerciseResults: {
+        __typename: 'ModelExerciseResultConnection';
+        items: Array<{
+          __typename: 'ExerciseResult';
+          id: string;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    exercise: {
+      __typename: 'Exercise';
+      id: string;
+      name: string | null;
+      sets: number | null;
+      repetitions: number | null;
+      weightInKg: number | null;
+      routine: {
+        __typename: 'Routine';
+        id: string;
+        name: string | null;
+        exercises: {
+          __typename: 'ModelExerciseConnection';
+          nextToken: string | null;
+        } | null;
+        workouts: {
+          __typename: 'ModelWorkoutConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      results: {
+        __typename: 'ModelExerciseResultConnection';
+        items: Array<{
+          __typename: 'ExerciseResult';
+          id: string;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    };
+    sets: {
+      __typename: 'ModelSetConnection';
+      items: Array<{
+        __typename: 'Set';
+        exerciseResult: {
+          __typename: 'ExerciseResult';
+          id: string;
+        } | null;
+        setNumber: number | null;
+        repetitions: number | null;
+        weightInKg: number | null;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+  } | null;
 };
 
 export type ListExerciseResultsQueryVariables = {
-  filter?: ModelExerciseResultFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
+  filter?: ModelExerciseResultFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
 };
 
 export type ListExerciseResultsQuery = {
-  listExerciseResults:  {
-    __typename: "ModelExerciseResultConnection",
-    items:  Array< {
-      __typename: "ExerciseResult",
-      id: string,
-      workout:  {
-        __typename: "Workout",
-        id: string,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        startedAt: string,
-        completedAt: string | null,
-        exerciseResults:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      exercise:  {
-        __typename: "Exercise",
-        id: string,
-        name: string | null,
-        sets: number | null,
-        repetitions: number | null,
-        weightInKg: number | null,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        results:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      sets:  {
-        __typename: "ModelSetConnection",
-        items:  Array< {
-          __typename: "Set",
-          setNumber: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    } | null > | null,
-    nextToken: string | null,
-  } | null,
+  listExerciseResults: {
+    __typename: 'ModelExerciseResultConnection';
+    items: Array<{
+      __typename: 'ExerciseResult';
+      id: string;
+      workout: {
+        __typename: 'Workout';
+        id: string;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        startedAt: string;
+        completedAt: string | null;
+        exerciseResults: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      exercise: {
+        __typename: 'Exercise';
+        id: string;
+        name: string | null;
+        sets: number | null;
+        repetitions: number | null;
+        weightInKg: number | null;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        results: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      sets: {
+        __typename: 'ModelSetConnection';
+        items: Array<{
+          __typename: 'Set';
+          setNumber: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
 };
 
 export type GetSetQueryVariables = {
-  id: string,
+  id: string;
 };
 
 export type GetSetQuery = {
-  getSet:  {
-    __typename: "Set",
-    exerciseResult:  {
-      __typename: "ExerciseResult",
-      id: string,
-      workout:  {
-        __typename: "Workout",
-        id: string,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        startedAt: string,
-        completedAt: string | null,
-        exerciseResults:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      exercise:  {
-        __typename: "Exercise",
-        id: string,
-        name: string | null,
-        sets: number | null,
-        repetitions: number | null,
-        weightInKg: number | null,
-        routine:  {
-          __typename: "Routine",
-          id: string,
-          name: string | null,
-        },
-        results:  {
-          __typename: "ModelExerciseResultConnection",
-          nextToken: string | null,
-        } | null,
-      },
-      sets:  {
-        __typename: "ModelSetConnection",
-        items:  Array< {
-          __typename: "Set",
-          setNumber: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    } | null,
-    setNumber: number | null,
-    repetitions: number | null,
-    weightInKg: number | null,
-  } | null,
+  getSet: {
+    __typename: 'Set';
+    exerciseResult: {
+      __typename: 'ExerciseResult';
+      id: string;
+      workout: {
+        __typename: 'Workout';
+        id: string;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        startedAt: string;
+        completedAt: string | null;
+        exerciseResults: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      exercise: {
+        __typename: 'Exercise';
+        id: string;
+        name: string | null;
+        sets: number | null;
+        repetitions: number | null;
+        weightInKg: number | null;
+        routine: {
+          __typename: 'Routine';
+          id: string;
+          name: string | null;
+        };
+        results: {
+          __typename: 'ModelExerciseResultConnection';
+          nextToken: string | null;
+        } | null;
+      };
+      sets: {
+        __typename: 'ModelSetConnection';
+        items: Array<{
+          __typename: 'Set';
+          setNumber: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        } | null> | null;
+        nextToken: string | null;
+      } | null;
+    } | null;
+    setNumber: number | null;
+    repetitions: number | null;
+    weightInKg: number | null;
+  } | null;
 };
 
 export type ListSetsQueryVariables = {
-  filter?: ModelSetFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
+  filter?: ModelSetFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
 };
 
 export type ListSetsQuery = {
-  listSets:  {
-    __typename: "ModelSetConnection",
-    items:  Array< {
-      __typename: "Set",
-      exerciseResult:  {
-        __typename: "ExerciseResult",
-        id: string,
-        workout:  {
-          __typename: "Workout",
-          id: string,
-          startedAt: string,
-          completedAt: string | null,
-        },
-        exercise:  {
-          __typename: "Exercise",
-          id: string,
-          name: string | null,
-          sets: number | null,
-          repetitions: number | null,
-          weightInKg: number | null,
-        },
-        sets:  {
-          __typename: "ModelSetConnection",
-          nextToken: string | null,
-        } | null,
-      } | null,
-      setNumber: number | null,
-      repetitions: number | null,
-      weightInKg: number | null,
-    } | null > | null,
-    nextToken: string | null,
-  } | null,
+  listSets: {
+    __typename: 'ModelSetConnection';
+    items: Array<{
+      __typename: 'Set';
+      exerciseResult: {
+        __typename: 'ExerciseResult';
+        id: string;
+        workout: {
+          __typename: 'Workout';
+          id: string;
+          startedAt: string;
+          completedAt: string | null;
+        };
+        exercise: {
+          __typename: 'Exercise';
+          id: string;
+          name: string | null;
+          sets: number | null;
+          repetitions: number | null;
+          weightInKg: number | null;
+        };
+        sets: {
+          __typename: 'ModelSetConnection';
+          nextToken: string | null;
+        } | null;
+      } | null;
+      setNumber: number | null;
+      repetitions: number | null;
+      weightInKg: number | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
 };

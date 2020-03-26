@@ -1,7 +1,7 @@
-import { Linking } from "expo";
-import * as WebBrowser from "expo-web-browser";
-import { Platform } from "react-native";
-import awsconfig from "../../aws-exports";
+import { Linking } from 'expo';
+import * as WebBrowser from 'expo-web-browser';
+import { Platform } from 'react-native';
+import awsconfig from '../../aws-exports';
 
 // Use expo web browser to open the Hosted UI
 // Amplify auth currently does not work well with expo:
@@ -14,31 +14,31 @@ const amplifyConfig = {
     urlOpener: async (url, redirectUrl) => {
       const { type, url: newUrl } = (await WebBrowser.openAuthSessionAsync(url, redirectUrl)) as any;
 
-      if (type === "success") {
+      if (type === 'success') {
         await WebBrowser.dismissBrowser();
 
-        if (Platform.OS === "ios") {
+        if (Platform.OS === 'ios') {
           return Linking.openURL(newUrl);
         }
       }
-    }
-  }
+    },
+  },
 };
 
-const expoScheme = "workouttracker://";
+const expoScheme = 'workouttracker://';
 // Need to pass the correct redirectUrl to the web browser.
-let redirectUrl = Linking.makeUrl();
-if (redirectUrl.startsWith("exp://1")) {
+let createdRedirectUrl = Linking.makeUrl();
+if (createdRedirectUrl.startsWith('exp://1')) {
   // handle simulator(localhost) and device(Lan)
-  redirectUrl = redirectUrl + "/--/";
-} else if (redirectUrl === expoScheme) {
+  createdRedirectUrl = createdRedirectUrl + '/--/';
+} else if (createdRedirectUrl === expoScheme) {
   // dont do anything
 } else {
   // handle the expo client
-  redirectUrl = redirectUrl + "/";
+  createdRedirectUrl = createdRedirectUrl + '/';
 }
 
-amplifyConfig.oauth.redirectSignIn = redirectUrl;
-amplifyConfig.oauth.redirectSignOut = redirectUrl;
+amplifyConfig.oauth.redirectSignIn = createdRedirectUrl;
+amplifyConfig.oauth.redirectSignOut = createdRedirectUrl;
 
 export default amplifyConfig;

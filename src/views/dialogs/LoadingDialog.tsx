@@ -1,5 +1,5 @@
-import { Portal, Theme, Dialog, Paragraph, Button, withTheme, ActivityIndicator } from "react-native-paper";
-import React, { useEffect } from "react";
+import { Portal, Theme, Dialog, Paragraph, Button, withTheme, ActivityIndicator } from 'react-native-paper';
+import React, { useEffect } from 'react';
 
 export interface ILoadingDialogProps {
   theme: Theme;
@@ -10,7 +10,13 @@ export interface ILoadingDialogProps {
   messageOnComplete: string;
 }
 
-const LoadingDialog: React.FC<ILoadingDialogProps> = ({ visible, onDismiss, loading, titleOnComplete, messageOnComplete }) => {
+const LoadingDialog: React.FC<ILoadingDialogProps> = ({
+  visible,
+  onDismiss,
+  loading,
+  titleOnComplete,
+  messageOnComplete,
+}) => {
   return (
     <Portal>
       <Dialog visible={visible} dismissable={false}>
@@ -24,7 +30,7 @@ const LoadingDialog: React.FC<ILoadingDialogProps> = ({ visible, onDismiss, load
             <Dialog.Content>
               <Paragraph>{messageOnComplete}</Paragraph>
             </Dialog.Content>
-            <Dialog.Actions style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+            <Dialog.Actions style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
               <Button onPress={() => onDismiss()}>Okay</Button>
             </Dialog.Actions>
           </>

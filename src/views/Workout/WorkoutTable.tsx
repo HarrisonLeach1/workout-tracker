@@ -1,14 +1,14 @@
-import { SectionList, TextInput, Text, StyleSheet, View, ViewStyle, StyleProp, TextStyle } from "react-native";
-import { Divider, Button, Title, Subheading, Caption, Theme, Checkbox } from "react-native-paper";
-import React, { useState } from "react";
-import { Formik, FormikProps } from "formik";
-import { useCreateWorkout } from "../../customGraphql/HandleCreateWorkout";
-import { GetRoutineQuery, CreateSetInput } from "../../API";
-import { mapRoutinetoWorkoutInputs } from "../../mapping/MapRoutineToWorkoutInputs";
-import { Exercise } from "../../types/WorkoutTypes";
-import { RouteComponentProps } from "react-router-native";
-import { WorkoutInputs } from "../../types/FormInputTypes";
-import LoadingDialog from "../dialogs/LoadingDialog";
+import { SectionList, TextInput, Text, StyleSheet, View, ViewStyle, StyleProp, TextStyle } from 'react-native';
+import { Divider, Button, Title, Subheading, Caption, Theme, Checkbox } from 'react-native-paper';
+import React, { useState } from 'react';
+import { Formik, FormikProps } from 'formik';
+import { useCreateWorkout } from '../../customGraphql/HandleCreateWorkout';
+import { GetRoutineQuery, CreateSetInput } from '../../API';
+import { mapRoutinetoWorkoutInputs } from '../../mapping/MapRoutineToWorkoutInputs';
+import { Exercise } from '../../types/WorkoutTypes';
+import { RouteComponentProps } from 'react-router-native';
+import { WorkoutInputs } from '../../types/FormInputTypes';
+import LoadingDialog from '../dialogs/LoadingDialog';
 
 export interface IWorkoutTableProps extends RouteComponentProps {
   theme: Theme;
@@ -37,11 +37,13 @@ const WorkoutTable: React.FC<IWorkoutTableProps> = ({ routineData, history, them
   };
 
   // This is needed to map the routine data to the format required by a SectionList component
-  const exerciseData: ExerciseSection[] = routineData.getRoutine.exercises.items.map<ExerciseSection>((item: Exercise, index) => ({
-    title: item.name,
-    exerciseNumber: index,
-    data: initialValues.exerciseResultInputs[index].createSetInputs
-  }));
+  const exerciseData: ExerciseSection[] = routineData.getRoutine.exercises.items.map<ExerciseSection>(
+    (item: Exercise, index) => ({
+      title: item.name,
+      exerciseNumber: index,
+      data: initialValues.exerciseResultInputs[index].createSetInputs,
+    })
+  );
   return (
     <>
       {/* TODO: using the loading variable of multiple mutations causes a lot of rerenders, fix once amplify issue is addressed. */}
@@ -62,7 +64,13 @@ const WorkoutTable: React.FC<IWorkoutTableProps> = ({ routineData, history, them
               keyExtractor={(item, index) => item + index.toString()}
               ItemSeparatorComponent={Divider}
               SectionSeparatorComponent={Divider}
-              renderItem={({ item, section }) => <SetListItem exerciseNumber={section.exerciseNumber} setNumber={item.setNumber} formikProps={formikProps} />}
+              renderItem={({ item, section }) => (
+                <SetListItem
+                  exerciseNumber={section.exerciseNumber}
+                  setNumber={item.setNumber}
+                  formikProps={formikProps}
+                />
+              )}
               renderSectionHeader={({ section: { title } }) => {
                 return (
                   <React.Fragment>
@@ -79,7 +87,11 @@ const WorkoutTable: React.FC<IWorkoutTableProps> = ({ routineData, history, them
                 );
               }}
             />
-            <Button mode="contained" onPress={formikProps.handleSubmit as any} style={{ marginHorizontal: 25, marginTop: 20, marginBottom: 30 }}>
+            <Button
+              mode="contained"
+              onPress={formikProps.handleSubmit as any}
+              style={{ marginHorizontal: 25, marginTop: 20, marginBottom: 30 }}
+            >
               Finish Workout
             </Button>
           </React.Fragment>
@@ -95,38 +107,38 @@ export interface ISetListItemProps extends CreateSetInput {
   formikProps?: FormikProps<WorkoutInputs>;
 }
 
-const SetListItem: React.FC<ISetListItemProps> = props => {
+const SetListItem: React.FC<ISetListItemProps> = (props) => {
   const { setNumber, exerciseNumber, formikProps } = props;
   const createSetInput = formikProps.values.exerciseResultInputs[exerciseNumber].createSetInputs[setNumber - 1];
   const setStringIdentifier = `exerciseResultInputs[${exerciseNumber}].createSetInputs[${setNumber - 1}]`;
 
   const [completed, setCompleted] = useState<boolean>(false);
-  const backgroundColorStyle: StyleProp<ViewStyle> = completed ? { backgroundColor: "#d7f5df" } : {};
+  const backgroundColorStyle: StyleProp<ViewStyle> = completed ? { backgroundColor: '#d7f5df' } : {};
 
   return (
     <View style={{ ...styles.rowStyle, ...backgroundColorStyle }}>
       <Text>{setNumber}</Text>
       <TextInput
         maxLength={6}
-        placeholder={createSetInput.targetRepetitions ? createSetInput.targetRepetitions.toString() : "0"}
+        placeholder={createSetInput.targetRepetitions ? createSetInput.targetRepetitions.toString() : '0'}
         style={{ ...styles.TextInputStyle, ...styles.repsPositionInRow }}
-        keyboardType={"numeric"}
+        keyboardType={'numeric'}
         onChangeText={formikProps.handleChange(`${setStringIdentifier}.repetitions`)}
         onBlur={formikProps.handleBlur(`${setStringIdentifier}.repetitions`)}
-        value={createSetInput.repetitions ? createSetInput.repetitions.toString() : ""}
+        value={createSetInput.repetitions ? createSetInput.repetitions.toString() : ''}
       />
       <TextInput
         maxLength={6}
-        placeholder={createSetInput.targetWeightInKg ? createSetInput.targetWeightInKg.toString() : "0"}
+        placeholder={createSetInput.targetWeightInKg ? createSetInput.targetWeightInKg.toString() : '0'}
         style={{ ...styles.TextInputStyle, ...styles.weightPositionInRow }}
-        keyboardType={"numeric"}
+        keyboardType={'numeric'}
         onChangeText={formikProps.handleChange(`${setStringIdentifier}.weightInKg`)}
         onBlur={formikProps.handleBlur(`${setStringIdentifier}.weightInKg`)}
-        value={createSetInput.weightInKg ? createSetInput.weightInKg.toString() : ""}
+        value={createSetInput.weightInKg ? createSetInput.weightInKg.toString() : ''}
       />
-      <View style={{ position: "absolute", right: "10%" }}>
+      <View style={{ position: 'absolute', right: '10%' }}>
         <Checkbox.Android
-          status={completed ? "checked" : "unchecked"}
+          status={completed ? 'checked' : 'unchecked'}
           onPress={() => {
             // set weight and reps to target values if they have not been input
             createSetInput.weightInKg = createSetInput.weightInKg || createSetInput.targetWeightInKg;
@@ -141,23 +153,23 @@ const SetListItem: React.FC<ISetListItemProps> = props => {
 
 const styles = StyleSheet.create({
   TextInputStyle: {
-    textAlign: "center",
+    textAlign: 'center',
     height: 25,
     borderRadius: 15,
     borderWidth: 2,
-    backgroundColor: "lightgrey",
-    borderColor: "lightgrey",
-    width: 70
+    backgroundColor: 'lightgrey',
+    borderColor: 'lightgrey',
+    width: 70,
   },
   rowStyle: {
     paddingHorizontal: 16,
     paddingVertical: 16,
-    flexDirection: "row",
-    alignItems: "center"
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  weightPositionInRow: { position: "absolute", left: "20%" },
-  repsPositionInRow: { position: "absolute", left: "50%" },
-  completedPositionInRow: { position: "absolute", right: "5%" }
+  weightPositionInRow: { position: 'absolute', left: '20%' },
+  repsPositionInRow: { position: 'absolute', left: '50%' },
+  completedPositionInRow: { position: 'absolute', right: '5%' },
 });
 
 export default WorkoutTable;

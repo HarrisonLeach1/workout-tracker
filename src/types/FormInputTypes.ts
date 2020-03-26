@@ -1,4 +1,10 @@
-import { CreateExerciseResultInput, CreateWorkoutInput, CreateSetInput, CreateRoutineInput, CreateExerciseInput } from "../API";
+import {
+  CreateExerciseResultInput,
+  CreateWorkoutInput,
+  CreateSetInput,
+  CreateRoutineInput,
+  CreateExerciseInput,
+} from '../API';
 
 export interface WorkoutInputs {
   createWorkoutInput: CreateWorkoutInput;

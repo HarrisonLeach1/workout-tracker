@@ -43,11 +43,7 @@ export const getRoutine = /* GraphQL */ `
   }
 `;
 export const listRoutines = /* GraphQL */ `
-  query ListRoutines(
-    $filter: ModelRoutineFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListRoutines($filter: ModelRoutineFilterInput, $limit: Int, $nextToken: String) {
     listRoutines(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -130,11 +126,7 @@ export const getExercise = /* GraphQL */ `
   }
 `;
 export const listExercises = /* GraphQL */ `
-  query ListExercises(
-    $filter: ModelExerciseFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListExercises($filter: ModelExerciseFilterInput, $limit: Int, $nextToken: String) {
     listExercises(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -216,11 +208,7 @@ export const getWorkout = /* GraphQL */ `
   }
 `;
 export const listWorkouts = /* GraphQL */ `
-  query ListWorkouts(
-    $filter: ModelWorkoutFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListWorkouts($filter: ModelWorkoutFilterInput, $limit: Int, $nextToken: String) {
     listWorkouts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -310,11 +298,7 @@ export const getExerciseResult = /* GraphQL */ `
   }
 `;
 export const listExerciseResults = /* GraphQL */ `
-  query ListExerciseResults(
-    $filter: ModelExerciseResultFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListExerciseResults($filter: ModelExerciseResultFilterInput, $limit: Int, $nextToken: String) {
     listExerciseResults(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -404,11 +388,7 @@ export const getSet = /* GraphQL */ `
   }
 `;
 export const listSets = /* GraphQL */ `
-  query ListSets(
-    $filter: ModelSetFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListSets($filter: ModelSetFilterInput, $limit: Int, $nextToken: String) {
     listSets(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         exerciseResult {

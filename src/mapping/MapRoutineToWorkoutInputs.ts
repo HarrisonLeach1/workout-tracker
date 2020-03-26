@@ -1,6 +1,6 @@
-import { GetRoutineQuery } from "../API";
-import { Exercise } from "../types/WorkoutTypes";
-import { ExerciseResultInput, CreateSetFormInput, WorkoutInputs } from "../types/FormInputTypes";
+import { GetRoutineQuery } from '../API';
+import { Exercise } from '../types/WorkoutTypes';
+import { ExerciseResultInput, CreateSetFormInput, WorkoutInputs } from '../types/FormInputTypes';
 
 export const mapRoutinetoWorkoutInputs = (routineData: GetRoutineQuery): WorkoutInputs => {
   const routine = routineData.getRoutine;
@@ -8,9 +8,9 @@ export const mapRoutinetoWorkoutInputs = (routineData: GetRoutineQuery): Workout
   const workoutInputs: WorkoutInputs = {
     createWorkoutInput: {
       startedAt: new Date().toISOString(),
-      workoutRoutineId: routine.id
+      workoutRoutineId: routine.id,
     },
-    exerciseResultInputs: getExerciseResultInputs(routine.exercises.items)
+    exerciseResultInputs: getExerciseResultInputs(routine.exercises.items),
   };
 
   return workoutInputs;
@@ -20,9 +20,9 @@ const getExerciseResultInputs = (exercises: Exercise[]): ExerciseResultInput[] =
   return exercises.map<ExerciseResultInput>((exercise: Exercise) => ({
     createExerciseResultInput: {
       exerciseResultExerciseId: exercise.id,
-      exerciseResultWorkoutId: null
+      exerciseResultWorkoutId: null,
     },
-    createSetInputs: getCreateSetInputs(exercise)
+    createSetInputs: getCreateSetInputs(exercise),
   }));
 };
 
@@ -34,7 +34,7 @@ const getCreateSetInputs = (exercise: Exercise): CreateSetFormInput[] => {
       // TODO: Make target weight and sets equal to previous exercise result OR previous
       // exercise result + prediction
       targetWeightInKg: exercise.weightInKg,
-      targetRepetitions: exercise.repetitions
+      targetRepetitions: exercise.repetitions,
     });
   }
   return sets;

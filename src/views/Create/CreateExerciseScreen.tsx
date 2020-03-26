@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { StyleSheet, KeyboardAvoidingView, ScrollView, View } from "react-native";
-import { TextInput, Button, Appbar, withTheme, Theme, HelperText } from "react-native-paper";
-import { Formik, FormikProps, FormikActions, ErrorMessage } from "formik";
-import { CreateRoutineContext, CreateRoutineContextProps } from "../../contexts/RoutineContext";
-import { CreateExerciseInput } from "../../API";
-import { RouteComponentProps } from "react-router";
-import * as Yup from "yup";
+import React, { useContext } from 'react';
+import { StyleSheet, KeyboardAvoidingView, ScrollView, View } from 'react-native';
+import { TextInput, Button, Appbar, withTheme, Theme, HelperText } from 'react-native-paper';
+import { Formik, FormikProps, FormikActions, ErrorMessage } from 'formik';
+import { CreateRoutineContext, CreateRoutineContextProps } from '../../contexts/RoutineContext';
+import { CreateExerciseInput } from '../../API';
+import { RouteComponentProps } from 'react-router';
+import * as Yup from 'yup';
 
 interface ICreateExerciseScreenProps extends RouteComponentProps {
   theme: Theme;
@@ -22,28 +22,28 @@ const CreateExerciseScreen: React.FC<ICreateExerciseScreenProps> = ({ history, t
   const { routine, setRoutine } = useContext<CreateRoutineContextProps>(CreateRoutineContext);
 
   const numberValidationSchema = Yup.number()
-    .typeError("Must be a number")
-    .required("Required")
-    .positive("Must be positive")
-    .test("len", "Max length exceeded", val => val && val.toString().length <= 6);
+    .typeError('Must be a number')
+    .required('Required')
+    .positive('Must be positive')
+    .test('len', 'Max length exceeded', (val) => val && val.toString().length <= 6);
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Exercise name is required"),
+    name: Yup.string().required('Exercise name is required'),
     sets: numberValidationSchema,
     repetitions: numberValidationSchema,
-    weightInKg: numberValidationSchema
+    weightInKg: numberValidationSchema,
   });
 
-  const handleSubmit = (values: ExerciseFormValues, actions: FormikActions<ExerciseFormValues>) => {
+  const handleCreateExercise = (values: ExerciseFormValues, actions: FormikActions<ExerciseFormValues>) => {
     const exercise: CreateExerciseInput = {
       name: values.name,
       sets: +values.sets,
       repetitions: +values.repetitions,
       weightInKg: +values.weightInKg,
-      exerciseRoutineId: null
+      exerciseRoutineId: null,
     };
 
-    setRoutine(prev => {
+    setRoutine((prev) => {
       prev.createExercisesInput.push(exercise);
       return prev;
     });
@@ -59,15 +59,15 @@ const CreateExerciseScreen: React.FC<ICreateExerciseScreenProps> = ({ history, t
       </Appbar.Header>
 
       <KeyboardAvoidingView style={styles.wrapper} behavior="padding" keyboardVerticalOffset={0}>
-        <ScrollView style={styles.container} keyboardShouldPersistTaps={"always"} removeClippedSubviews={false}>
+        <ScrollView style={styles.container} keyboardShouldPersistTaps={'always'} removeClippedSubviews={false}>
           <Formik
             initialValues={{
-              name: "",
-              sets: "",
-              repetitions: "",
-              weightInKg: ""
+              name: '',
+              sets: '',
+              repetitions: '',
+              weightInKg: '',
             }}
-            onSubmit={handleSubmit}
+            onSubmit={handleCreateExercise}
             validationSchema={validationSchema}
           >
             {({ handleChange, handleBlur, errors, touched, values, handleSubmit }: FormikProps<ExerciseFormValues>) => (
@@ -76,8 +76,8 @@ const CreateExerciseScreen: React.FC<ICreateExerciseScreenProps> = ({ history, t
                   style={styles.inputContainerStyle}
                   label="Exercise Name"
                   placeholder=""
-                  onChangeText={handleChange("name")}
-                  onBlur={handleBlur("name")}
+                  onChangeText={handleChange('name')}
+                  onBlur={handleBlur('name')}
                   value={values.name}
                   error={errors.name && touched.name}
                 />
@@ -88,8 +88,8 @@ const CreateExerciseScreen: React.FC<ICreateExerciseScreenProps> = ({ history, t
                   style={styles.inputContainerStyle}
                   label="Number of Sets"
                   placeholder=""
-                  onChangeText={handleChange("sets")}
-                  onBlur={handleBlur("sets")}
+                  onChangeText={handleChange('sets')}
+                  onBlur={handleBlur('sets')}
                   value={values.sets}
                   error={errors.sets && touched.sets}
                 />
@@ -100,8 +100,8 @@ const CreateExerciseScreen: React.FC<ICreateExerciseScreenProps> = ({ history, t
                   style={styles.inputContainerStyle}
                   label="Goal Weight (Kg)"
                   placeholder=""
-                  onChangeText={handleChange("weightInKg")}
-                  onBlur={handleBlur("weightInKg")}
+                  onChangeText={handleChange('weightInKg')}
+                  onBlur={handleBlur('weightInKg')}
                   value={values.weightInKg}
                   error={errors.weightInKg && touched.weightInKg}
                 />
@@ -112,8 +112,8 @@ const CreateExerciseScreen: React.FC<ICreateExerciseScreenProps> = ({ history, t
                   style={styles.inputContainerStyle}
                   label="Goal Repetitions"
                   placeholder=""
-                  onChangeText={handleChange("repetitions")}
-                  onBlur={handleBlur("repetitions")}
+                  onChangeText={handleChange('repetitions')}
+                  onBlur={handleBlur('repetitions')}
                   value={values.repetitions}
                   error={errors.repetitions && touched.repetitions}
                 />
@@ -143,18 +143,18 @@ export default withTheme(CreateExerciseScreen);
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "flex-start"
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
   },
   container: {
     flex: 1,
-    padding: 8
+    padding: 8,
   },
   wrapper: {
     flex: 1,
-    marginTop: 16
+    marginTop: 16,
   },
   inputContainerStyle: {
-    margin: 8
-  }
+    margin: 8,
+  },
 });
