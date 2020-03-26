@@ -84,7 +84,6 @@ const CreateExerciseScreen: React.FC<ICreateExerciseScreenProps> = ({ history, t
                 <HelperText type="error" visible={errors.name && touched.name}>
                   {touched.name && errors.name}
                 </HelperText>
-                {console.log("errors: " + JSON.stringify(errors))}
                 <TextInput
                   style={styles.inputContainerStyle}
                   label="Number of Sets"

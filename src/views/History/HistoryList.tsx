@@ -13,11 +13,7 @@ export interface IHistoryListProps {
 }
 
 const HistoryList: React.FC<IHistoryListProps> = ({ theme }) => {
-  const { data, loading, error } = useQuery<ListWorkoutsQuery, ListWorkoutsQueryVariables>(gql(listWorkouts), {
-    variables: {
-      limit: 10
-    }
-  });
+  const { data, loading, error } = useQuery<ListWorkoutsQuery, ListWorkoutsQueryVariables>(gql(listWorkouts));
 
   return (
     <>
@@ -27,7 +23,9 @@ const HistoryList: React.FC<IHistoryListProps> = ({ theme }) => {
             renderItem={({ item }) => <HistoricalWorkoutAccordion theme={theme} workout={item} />}
             keyExtractor={item => item.id}
             data={data.listWorkouts.items}
-            ListEmptyComponent={<CallToAction icon="clipboard-alert-outline" message={"You have no workout history\n Start a workout then view your progress here"}/>}
+            ListEmptyComponent={
+              <CallToAction icon="clipboard-alert-outline" message={"You have no workout history\n Start a workout then view your progress here"} />
+            }
           />
         ))}
     </>

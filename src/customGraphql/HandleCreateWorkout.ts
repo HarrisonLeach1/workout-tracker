@@ -17,7 +17,11 @@ import { createWorkout, createExerciseResult, createSet } from "../graphql/mutat
 import { Exercise } from "../types/WorkoutTypes";
 import { ApolloError } from "apollo-boost";
 import { WorkoutInputs, ExerciseResultInput } from "../types/FormInputTypes";
+import { listWorkouts } from "../graphql/queries";
 
+// TODO: This is very inefficient.
+// There is currently a limitation in amplify that arrays cannot be added as mutation inputs
+// thus each exercise must be added one by one.
 export const useCreateWorkout = (): [(values: WorkoutInputs, exercises: Exercise[]) => Promise<void>, { loading: boolean; errors: ApolloError[] }] => {
   const [addWorkout, { loading: addWorkoutLoading, error: addWorkoutError }] = useMutation<CreateWorkoutMutation, CreateWorkoutMutationVariables>(
     gql(createWorkout)
@@ -31,12 +35,16 @@ export const useCreateWorkout = (): [(values: WorkoutInputs, exercises: Exercise
   const handleCreateWorkout = async (values: WorkoutInputs, exercises: Exercise[]): Promise<void> => {
     values.createWorkoutInput.completedAt = new Date().toISOString();
 
-    console.log("sent values: " + JSON.stringify(values));
+    console.log("Creating workout with form inputs: " + JSON.stringify(values));
 
     const createdWorkout = await addWorkout({
       variables: {
         input: values.createWorkoutInput
-      }
+      },
+      // TODO: Very inefficient doubles the number of requests, which is already high. Must fix once the amplify issue is addressed
+      refetchQueries: [
+        {query: gql(listWorkouts)}
+      ]
     });
 
     await addExerciseResults(values.exerciseResultInputs, createdWorkout.data.createWorkout.id, exercises);

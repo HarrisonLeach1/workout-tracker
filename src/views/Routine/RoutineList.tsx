@@ -15,13 +15,10 @@ interface IRoutineListProps extends RouteComponentProps {
 }
 
 const RoutineList: React.FC<IRoutineListProps> = ({ history, theme }: IRoutineListProps) => {
-  const { loading, data, error } = useQuery<ListRoutinesQuery, ListRoutinesQueryVariables>(gql(listRoutines), {
-    variables: { limit: 5 }
-  });
+  const { loading, data, error } = useQuery<ListRoutinesQuery, ListRoutinesQueryVariables>(gql(listRoutines));
 
   const { setRoutineID } = useContext(SelectedRoutineContext);
-  console.log("error: " + JSON.stringify(error));
-
+  console.log(" renderin my datta bith: " + JSON.stringify(data));
   return (
     <View style={styles.container}>
       {loading ? (
@@ -41,7 +38,7 @@ const RoutineList: React.FC<IRoutineListProps> = ({ history, theme }: IRoutineLi
             )}
             keyExtractor={item => item.id}
             ItemSeparatorComponent={Divider}
-            ListEmptyComponent={<CallToAction icon="clipboard-alert-outline" message={"You have no routines\n Create one to start a workout"}/>}
+            ListEmptyComponent={<CallToAction icon="clipboard-alert-outline" message={"You have no routines\n Create one to start a workout"} />}
             data={data.listRoutines.items}
           />
           <FAB style={styles.fab} icon="plus" onPress={() => history.push("/CreateRoutine")} />

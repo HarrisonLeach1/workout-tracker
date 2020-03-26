@@ -11,6 +11,7 @@ import { RouteComponentProps } from "react-router";
 import CreateRoutineHeader from "./CreateRoutineHeader";
 import { CreateRoutineContextProps, CreateRoutineContext } from "../../contexts/RoutineContext";
 import CallToAction from "./CallToAction";
+import { listRoutines, listExercises } from "../../graphql/queries";
 
 interface ICreateRoutineScreenProps extends RouteComponentProps {
   theme: Theme;
@@ -28,7 +29,8 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (props: ICreate
       input: {
         name: routine.createRoutineInput.name
       }
-    }
+    },
+    refetchQueries: [{ query: gql(listRoutines) }]
   });
 
   const [addExercise] = useMutation<CreateExerciseMutation, CreateExerciseMutationVariables>(gql(createExercise));
@@ -38,7 +40,6 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (props: ICreate
   // thus each exercise must be added one by one.
   const addExercises = (newRoutineMutation: ExecutionResult<CreateRoutineMutation>) => {
     const routineId = newRoutineMutation.data.createRoutine.id;
-    console.log("Adding exercises for routine: " + routineId);
     routine.createExercisesInput.forEach(createExerciseInput => {
       addExercise({
         variables: {
@@ -46,7 +47,9 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (props: ICreate
             ...createExerciseInput,
             exerciseRoutineId: routineId
           }
-        }
+        },
+        // TODO: Very inefficient doubles the number of requests, which is already high. Must fix once the amplify issue is addressed
+        refetchQueries: [{ query: gql(listExercises) }]
       });
     });
   };
@@ -59,7 +62,7 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (props: ICreate
 
     const newRoutineMutation = await addRoutine();
 
-    await addExercises(newRoutineMutation);
+    addExercises(newRoutineMutation);
 
     props.history.goBack();
   };
