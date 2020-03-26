@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
 export type CreateRoutineInput = {
@@ -141,8 +142,6 @@ export type ModelIntFilterInput = {
   lt?: number | null,
   ge?: number | null,
   gt?: number | null,
-  contains?: number | null,
-  notContains?: number | null,
   between?: Array< number | null > | null,
 };
 

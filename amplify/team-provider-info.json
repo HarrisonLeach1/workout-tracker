@@ -8,7 +8,15 @@
             "DeploymentBucketName": "workout-tracker-dev-20190902143322-deployment",
             "UnauthRoleName": "workout-tracker-dev-20190902143322-unauthRole",
             "StackName": "workout-tracker-dev-20190902143322",
-            "StackId": "arn:aws:cloudformation:ap-southeast-2:913183801345:stack/workout-tracker-dev-20190902143322/0868b0b0-cd2a-11e9-960b-0a17fa7d4b76"
+            "StackId": "arn:aws:cloudformation:ap-southeast-2:913183801345:stack/workout-tracker-dev-20190902143322/0868b0b0-cd2a-11e9-960b-0a17fa7d4b76",
+            "AmplifyAppId": "d322ipsquttkc8"
+        },
+        "categories": {
+            "auth": {
+                "workouttrackerddc4b468": {
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\",\"client_id\":\"243830190476-mrlbvjvmtc26rlefb9thv580etrihove.apps.googleusercontent.com\",\"client_secret\":\"q0uH7a3RQNVyqo0xr0NX1l9X\"}]"
+                }
+            }
         }
     }
 }

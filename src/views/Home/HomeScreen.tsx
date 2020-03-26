@@ -1,10 +1,10 @@
 import { RouteComponentProps } from "react-router";
 import { Theme, BottomNavigation, withTheme } from "react-native-paper";
-import RoutineScreen from "./Routine/RoutineScreen";
+import RoutineScreen from "../Routine/RoutineScreen";
 import React, { useState } from "react";
-import ExerciseScreen from "./Exercise/ExerciseScreen";
-import HistoryScreen from "./History/HistoryScreen";
-import ProfileScreen from "./Profile/ProfileScreen";
+import ExerciseScreen from "../Exercise/ExerciseScreen";
+import HistoryScreen from "../History/HistoryScreen";
+import ProfileScreen from "../Profile/ProfileScreen";
 
 export interface IHomeScreenProps extends RouteComponentProps {
   theme: Theme;
