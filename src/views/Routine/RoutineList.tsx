@@ -16,9 +16,8 @@ interface IRoutineListProps extends RouteComponentProps {
 
 const RoutineList: React.FC<IRoutineListProps> = ({ history, theme }: IRoutineListProps) => {
   const { loading, data, error } = useQuery<ListRoutinesQuery, ListRoutinesQueryVariables>(gql(listRoutines));
-
   const { setRoutineID } = useContext(SelectedRoutineContext);
-  console.log(" renderin my datta bith: " + JSON.stringify(data));
+
   return (
     <View style={styles.container}>
       {loading ? (

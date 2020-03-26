@@ -8,22 +8,33 @@ import { mapRoutinetoWorkoutInputs } from "../../mapping/MapRoutineToWorkoutInpu
 import { Exercise } from "../../types/WorkoutTypes";
 import { RouteComponentProps } from "react-router-native";
 import { WorkoutInputs } from "../../types/FormInputTypes";
+import LoadingDialog from "../dialogs/LoadingDialog";
 
 export interface IWorkoutTableProps extends RouteComponentProps {
   theme: Theme;
   routineData: GetRoutineQuery;
 }
 
-const WorkoutTable: React.FC<IWorkoutTableProps> = ({ routineData }: IWorkoutTableProps) => {
+interface ExerciseSection {
+  title: string;
+  exerciseNumber: number;
+  data: ISetListItemProps[];
+}
+
+const WorkoutTable: React.FC<IWorkoutTableProps> = ({ routineData, history, theme }: IWorkoutTableProps) => {
   const initialValues: WorkoutInputs = mapRoutinetoWorkoutInputs(routineData);
 
   const [handleCreateWorkout, { loading: loadingCreateWorkout, errors }] = useCreateWorkout();
+  const [finishDialogVisible, setFinishDialogVisible] = useState<boolean>(false);
+  const handleFinishWorkoutDismiss = () => {
+    setFinishDialogVisible(false);
+    history.goBack();
+  };
 
-  interface ExerciseSection {
-    title: string;
-    exerciseNumber: number;
-    data: ISetListItemProps[];
-  }
+  const handleSubmit = (values: WorkoutInputs) => {
+    handleCreateWorkout(values, routineData.getRoutine.exercises.items);
+    setFinishDialogVisible(true);
+  };
 
   // This is needed to map the routine data to the format required by a SectionList component
   const exerciseData: ExerciseSection[] = routineData.getRoutine.exercises.items.map<ExerciseSection>((item: Exercise, index) => ({
@@ -31,40 +42,50 @@ const WorkoutTable: React.FC<IWorkoutTableProps> = ({ routineData }: IWorkoutTab
     exerciseNumber: index,
     data: initialValues.exerciseResultInputs[index].createSetInputs
   }));
-
   return (
-    <Formik initialValues={initialValues} onSubmit={values => handleCreateWorkout(values, routineData.getRoutine.exercises.items)}>
-      {(formikProps: FormikProps<WorkoutInputs>) => (
-        <React.Fragment>
-          <Title style={{ marginHorizontal: 12, marginVertical: 12 }}>{routineData.getRoutine.name}</Title>
-          <SectionList
-            sections={exerciseData}
-            keyExtractor={(item, index) => item + index.toString()}
-            ItemSeparatorComponent={Divider}
-            SectionSeparatorComponent={Divider}
-            renderItem={({ item, section }) => <SetListItem exerciseNumber={section.exerciseNumber} setNumber={item.setNumber} formikProps={formikProps} />}
-            renderSectionHeader={({ section: { title } }) => {
-              return (
-                <React.Fragment>
-                  <Subheading style={{ marginHorizontal: 12, marginTop: 12 }} numberOfLines={1}>
-                    {title}
-                  </Subheading>
-                  <View style={styles.rowStyle}>
-                    <Caption>Set</Caption>
-                    <Caption style={styles.repsPositionInRow}>Reps</Caption>
-                    <Caption style={styles.weightPositionInRow}>Weight (Kg)</Caption>
-                    <Caption style={styles.completedPositionInRow}>Completed</Caption>
-                  </View>
-                </React.Fragment>
-              );
-            }}
-          />
-          <Button mode="contained" onPress={formikProps.handleSubmit as any} style={{ marginHorizontal: 25, marginTop: 20, marginBottom: 30 }}>
-            Finish Workout
-          </Button>
-        </React.Fragment>
-      )}
-    </Formik>
+    <>
+      {/* TODO: using the loading variable of multiple mutations causes a lot of rerenders, fix once amplify issue is addressed. */}
+      <LoadingDialog
+        theme={theme}
+        loading={loadingCreateWorkout}
+        visible={finishDialogVisible}
+        onDismiss={handleFinishWorkoutDismiss}
+        titleOnComplete="Workout complete"
+        messageOnComplete={`Well done for completing the ${routineData.getRoutine.name} routine!`}
+      />
+      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        {(formikProps: FormikProps<WorkoutInputs>) => (
+          <React.Fragment>
+            <Title style={{ marginHorizontal: 12, marginVertical: 12 }}>{routineData.getRoutine.name}</Title>
+            <SectionList
+              sections={exerciseData}
+              keyExtractor={(item, index) => item + index.toString()}
+              ItemSeparatorComponent={Divider}
+              SectionSeparatorComponent={Divider}
+              renderItem={({ item, section }) => <SetListItem exerciseNumber={section.exerciseNumber} setNumber={item.setNumber} formikProps={formikProps} />}
+              renderSectionHeader={({ section: { title } }) => {
+                return (
+                  <React.Fragment>
+                    <Subheading style={{ marginHorizontal: 12, marginTop: 12 }} numberOfLines={1}>
+                      {title}
+                    </Subheading>
+                    <View style={styles.rowStyle}>
+                      <Caption>Set</Caption>
+                      <Caption style={styles.repsPositionInRow}>Reps</Caption>
+                      <Caption style={styles.weightPositionInRow}>Weight (Kg)</Caption>
+                      <Caption style={styles.completedPositionInRow}>Completed</Caption>
+                    </View>
+                  </React.Fragment>
+                );
+              }}
+            />
+            <Button mode="contained" onPress={formikProps.handleSubmit as any} style={{ marginHorizontal: 25, marginTop: 20, marginBottom: 30 }}>
+              Finish Workout
+            </Button>
+          </React.Fragment>
+        )}
+      </Formik>
+    </>
   );
 };
 
@@ -134,7 +155,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center"
   },
-  setHeadingText: {},
   weightPositionInRow: { position: "absolute", left: "20%" },
   repsPositionInRow: { position: "absolute", left: "50%" },
   completedPositionInRow: { position: "absolute", right: "5%" }

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, FlatList, View } from "react-native";
 import { List, Divider, Theme, withTheme, FAB, TextInput, Title, Caption } from "react-native-paper";
 import { useMutation } from "@apollo/react-hooks";
@@ -12,6 +12,7 @@ import CreateRoutineHeader from "./CreateRoutineHeader";
 import { CreateRoutineContextProps, CreateRoutineContext } from "../../contexts/RoutineContext";
 import CallToAction from "./CallToAction";
 import { listRoutines, listExercises } from "../../graphql/queries";
+import LoadingDialog from "../dialogs/LoadingDialog";
 
 interface ICreateRoutineScreenProps extends RouteComponentProps {
   theme: Theme;
@@ -24,7 +25,7 @@ export interface RoutineFormValues {
 const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (props: ICreateRoutineScreenProps) => {
   const { routine, setRoutine } = useContext<CreateRoutineContextProps>(CreateRoutineContext);
 
-  const [addRoutine, { error, data }] = useMutation<CreateRoutineMutation, CreateRoutineMutationVariables>(gql(createRoutine), {
+  const [addRoutine, { loading: loadingCreateRoutine, data }] = useMutation<CreateRoutineMutation, CreateRoutineMutationVariables>(gql(createRoutine), {
     variables: {
       input: {
         name: routine.createRoutineInput.name
@@ -33,7 +34,13 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (props: ICreate
     refetchQueries: [{ query: gql(listRoutines) }]
   });
 
-  const [addExercise] = useMutation<CreateExerciseMutation, CreateExerciseMutationVariables>(gql(createExercise));
+  const [addExercise, { loading: loadingCreateExercise }] = useMutation<CreateExerciseMutation, CreateExerciseMutationVariables>(gql(createExercise));
+
+  const [loadingDialogVisible, setLoadingDialogVisible] = useState<boolean>(false);
+  const handleLoadingDismiss = () => {
+    setLoadingDialogVisible(false);
+    props.history.goBack();
+  };
 
   // TODO: Refactor creating routines to be in custom hook
   // There is currently a limitation in amplify that arrays cannot be added as mutation inputs
@@ -60,53 +67,63 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (props: ICreate
       return prev;
     });
 
+    setLoadingDialogVisible(true);
+
     const newRoutineMutation = await addRoutine();
 
     addExercises(newRoutineMutation);
-
-    props.history.goBack();
   };
 
   return (
-    <Formik
-      initialValues={{
-        name: ""
-      }}
-      onSubmit={values => handleCreate(values)}
-    >
-      {(formikProps: FormikProps<RoutineFormValues>) => (
-        <View style={styles.screen}>
-          <CreateRoutineHeader {...props} formikProps={formikProps} />
-          <TextInput
-            enablesReturnKeyAutomatically={true}
-            placeholder="Enter Routine Name"
-            onChangeText={formikProps.handleChange("name")}
-            onBlur={formikProps.handleBlur("name")}
-            value={formikProps.values.name}
-            style={styles.textInput}
-          />
-          <Title style={{ margin: 24 }}>Exercises</Title>
-          <Divider style={{ marginTop: 12 }} />
-          <View>
-            <FlatList
-              renderItem={({ item }) => <List.Item title={item.name} />}
-              keyExtractor={item => item.name}
-              ItemSeparatorComponent={Divider}
-              data={routine.createExercisesInput}
-              ListEmptyComponent={<CallToAction icon="dumbbell" message="Add an exercise to your routine" />}
+    <>
+      <LoadingDialog
+        theme={props.theme}
+        loading={loadingCreateRoutine || loadingCreateExercise}
+        visible={loadingDialogVisible}
+        onDismiss={handleLoadingDismiss}
+        titleOnComplete="Routine created"
+        messageOnComplete={`Successfully created the routine: ${routine.createRoutineInput.name}`}
+      />
+      <Formik
+        initialValues={{
+          name: ""
+        }}
+        onSubmit={values => handleCreate(values)}
+      >
+        {(formikProps: FormikProps<RoutineFormValues>) => (
+          <View style={styles.screen}>
+            <CreateRoutineHeader {...props} formikProps={formikProps} />
+            <TextInput
+              enablesReturnKeyAutomatically={true}
+              placeholder="Enter Routine Name"
+              onChangeText={formikProps.handleChange("name")}
+              onBlur={formikProps.handleBlur("name")}
+              value={formikProps.values.name}
+              style={styles.textInput}
+            />
+            <Title style={{ margin: 24 }}>Exercises</Title>
+            <Divider style={{ marginTop: 12 }} />
+            <View>
+              <FlatList
+                renderItem={({ item }) => <List.Item title={item.name}/>}
+                keyExtractor={(item, index) => item.name + index}
+                ItemSeparatorComponent={Divider}
+                data={routine.createExercisesInput}
+                ListEmptyComponent={<CallToAction icon="dumbbell" message="Add an exercise to your routine" />}
+              />
+            </View>
+
+            <FAB
+              style={styles.fab}
+              icon="plus"
+              onPress={() => {
+                props.history.push("/CreateExercise");
+              }}
             />
           </View>
-
-          <FAB
-            style={styles.fab}
-            icon="plus"
-            onPress={() => {
-              props.history.push("/CreateExercise");
-            }}
-          />
-        </View>
-      )}
-    </Formik>
+        )}
+      </Formik>
+    </>
   );
 };
 const styles = StyleSheet.create({
