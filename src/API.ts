@@ -129,13 +129,23 @@ export type ModelExerciseFilterInput = {
   name?: ModelStringFilterInput | null,
   sets?: ModelIntFilterInput | null,
   repetitions?: ModelIntFilterInput | null,
-  weightInKg?: ModelIntFilterInput | null,
+  weightInKg?: ModelFloatFilterInput | null,
   and?: Array< ModelExerciseFilterInput | null > | null,
   or?: Array< ModelExerciseFilterInput | null > | null,
   not?: ModelExerciseFilterInput | null,
 };
 
 export type ModelIntFilterInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+};
+
+export type ModelFloatFilterInput = {
   ne?: number | null,
   eq?: number | null,
   le?: number | null,
@@ -164,7 +174,7 @@ export type ModelExerciseResultFilterInput = {
 export type ModelSetFilterInput = {
   setNumber?: ModelIntFilterInput | null,
   repetitions?: ModelIntFilterInput | null,
-  weightInKg?: ModelIntFilterInput | null,
+  weightInKg?: ModelFloatFilterInput | null,
   and?: Array< ModelSetFilterInput | null > | null,
   or?: Array< ModelSetFilterInput | null > | null,
   not?: ModelSetFilterInput | null,
