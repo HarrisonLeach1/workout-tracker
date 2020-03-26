@@ -8,6 +8,7 @@ import { listRoutines } from "../../graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
 import { SelectedRoutineContext } from "../../contexts/SelectedRoutineContext";
 import RoutinePreviewCard from "./RoutinePreviewCard";
+import CallToAction from "../Create/CallToAction";
 
 interface IRoutineListProps extends RouteComponentProps {
   theme: Theme;
@@ -40,6 +41,7 @@ const RoutineList: React.FC<IRoutineListProps> = ({ history, theme }: IRoutineLi
             )}
             keyExtractor={item => item.id}
             ItemSeparatorComponent={Divider}
+            ListEmptyComponent={<CallToAction icon="clipboard-alert-outline" message={"You have no routines\n Create one to start a workout"}/>}
             data={data.listRoutines.items}
           />
           <FAB style={styles.fab} icon="plus" onPress={() => history.push("/CreateRoutine")} />

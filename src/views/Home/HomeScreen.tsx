@@ -22,7 +22,7 @@ const HomeScreen: React.FC<IHomeScreenProps> = props => {
   const initialRouteState = {
     index: 0,
     routes: [
-      { key: "routine", title: "Routines", icon: "play" },
+      { key: "routine", title: "Routines", icon: "clipboard-text-play" },
       { key: "exercise", title: "Exercises", icon: "dumbbell" },
       { key: "history", title: "History", icon: "history" },
       { key: "profile", title: "Profile", icon: "account" }

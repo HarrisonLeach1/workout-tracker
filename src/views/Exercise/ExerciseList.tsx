@@ -6,6 +6,7 @@ import { ListExercisesQuery, ListExercisesQueryVariables } from "../../API";
 import { listExercises } from "../../graphql/queries";
 import gql from "graphql-tag";
 import ExercisePreviewCard from "./ExercisePreviewCard";
+import CallToAction from "../Create/CallToAction";
 
 export interface IExerciseListProps {
   theme: Theme;
@@ -38,6 +39,7 @@ const ExerciseList: React.FC<IExerciseListProps> = ({ theme }) => {
               renderItem={({ item }) => <ExercisePreviewCard theme={theme} exercise={item} />}
               keyExtractor={item => item.id}
               data={data.listExercises.items}
+              ListEmptyComponent={<CallToAction icon="dumbbell" message={"You have no exercises\n You can add some by creating a routine"}/>}
             />
           ))}
       </ScrollView>

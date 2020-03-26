@@ -10,7 +10,7 @@ import { ExecutionResult } from "apollo-link";
 import { RouteComponentProps } from "react-router";
 import CreateRoutineHeader from "./CreateRoutineHeader";
 import { CreateRoutineContextProps, CreateRoutineContext } from "../../contexts/RoutineContext";
-import ExerciseCallToAction from "./ExerciseCallToAction";
+import CallToAction from "./CallToAction";
 
 interface ICreateRoutineScreenProps extends RouteComponentProps {
   theme: Theme;
@@ -83,14 +83,14 @@ const CreateRoutineScreen: React.FC<ICreateRoutineScreenProps> = (props: ICreate
             style={styles.textInput}
           />
           <Title style={{ margin: 24 }}>Exercises</Title>
-          <Divider style={{ marginTop: 12}}/>
+          <Divider style={{ marginTop: 12 }} />
           <View>
             <FlatList
               renderItem={({ item }) => <List.Item title={item.name} />}
               keyExtractor={item => item.name}
               ItemSeparatorComponent={Divider}
               data={routine.createExercisesInput}
-              ListEmptyComponent={<ExerciseCallToAction/>}
+              ListEmptyComponent={<CallToAction icon="dumbbell" message="Add an exercise to your routine" />}
             />
           </View>
 
