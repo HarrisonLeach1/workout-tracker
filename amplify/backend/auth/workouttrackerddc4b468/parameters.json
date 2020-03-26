@@ -51,7 +51,7 @@
         "Google"
     ],
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://127.0.0.1:19000/--/\",\"exp://192.168.178.83:19000/--/\",\"exp://exp.host//@harrisonleach1/workout-tracker/\",\"workouttracker://\"],\"LogoutURLs\":[\"exp://127.0.0.1:19000/--/\",\"exp://192.168.178.83:19000/--/\",\"exp://exp.host//@harrisonleach1/workout-tracker/\",\"workouttracker://\"]}",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://127.0.0.1:19000/--/\",\"exp://192.168.178.83:19000/--/\",\"exp://exp.host/@harrisonleach1/workout-tracker/\",\"workouttracker://\"],\"LogoutURLs\":[\"exp://127.0.0.1:19000/--/\",\"exp://192.168.178.83:19000/--/\",\"exp://exp.host/@harrisonleach1/workout-tracker/\",\"workouttracker://\"]}",
     "userPoolGroupList": [],
     "dependsOn": []
 }
