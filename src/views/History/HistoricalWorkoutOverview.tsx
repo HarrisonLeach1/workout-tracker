@@ -19,7 +19,7 @@ const HistoricalWorkoutOverview: React.FC<IHistoricalWorkoutOverviewProps> = ({
   const startedMoment = moment(startedAt);
   const completedMoment = moment(completedAt);
 
-  const formattedStartedTime = startedMoment.format('dddd, D MMM h:m A');
+  const formattedStartedTime = startedMoment.format('dddd, D MMM hh:mm A');
   const duration = moment
     .utc(moment.duration(completedMoment.diff(startedMoment)).asSeconds() * 1000)
     .format('H [h] m [m]');
