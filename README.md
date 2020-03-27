@@ -1,8 +1,8 @@
-<div style="text-align:center"><img src="./docs/images/workout-tracker-logo.png" width="150px" height="150px"/>
-</div>
+<p align="center">
+  <img src="./docs/images/workout-tracker-logo.png" width="200px" height="200px"/>
+</p>
 
 # Workout Tracker
-
 An app to create workout routines and exercises to track your workout progress during self-isolation.
 
 ## Motivation
