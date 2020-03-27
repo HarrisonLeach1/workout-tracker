@@ -35,9 +35,9 @@ You can try out the app [here](https://expo.io/@harrisonleach1/workout-tracker) 
 ## Future work
 
 - Ability to edit and delete routines and exercises
-- Add offline first capability. Currently there is limited offline functionality
+- Add offline first capability. Currently, there is limited offline functionality
 - Ability to add existing exercises to routines
 - Add a collection of default exercises and routines
-- Add workout history graphs e.g. estimated 1RM progression for an exercise
+- Add workout history graphs, e.g. estimated 1RM progression for an exercise
 - Fix performance issues once Amplify limitations have been addressed
 - Fix bugs

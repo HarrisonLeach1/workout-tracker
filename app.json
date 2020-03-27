@@ -4,6 +4,7 @@
     "slug": "workout-tracker",
     "scheme": "workouttracker",
     "privacy": "unlisted",
+    "description": "An app to create workout routines and exercises to track your workout progress during self-isolation.",
     "platforms": ["ios", "android", "web"],
     "androidStatusBar": {
       "hidden": true
