@@ -27,9 +27,11 @@ const CreateExerciseScreen: React.FC<ICreateExerciseScreenProps> = ({ history, t
     .positive('Must be positive')
     .test('len', 'Max length exceeded', (val) => val && val.toString().length <= 6);
 
+  const setValidationSchema = numberValidationSchema.test('len', 'Max number of sets exceeded', (val) => val <= 5);
+
   const validationSchema = Yup.object({
     name: Yup.string().required('Exercise name is required'),
-    sets: numberValidationSchema,
+    sets: setValidationSchema,
     repetitions: numberValidationSchema,
     weightInKg: numberValidationSchema,
   });
