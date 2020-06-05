@@ -32,11 +32,11 @@ You can try out the app [here](https://expo.io/@harrisonleach1/workout-tracker) 
 
 #### Creating a routine
 
-![creating-a-routine](./docs/images/create-routine.gif)
+  <img src="./docs/images/create-routine.gif" width="200px"/>
 
 #### Performing a workout
 
-![performing-a-workout](./docs/images/performing-a-workout.gif)
+  <img src="./docs/images/performing-a-workout.gif" width="200px"/>
 
 ## Application Architecture Overview
 
