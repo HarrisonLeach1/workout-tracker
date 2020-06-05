@@ -28,6 +28,16 @@ You can try out the app [here](https://expo.io/@harrisonleach1/workout-tracker) 
 - View your past workout history
 - View and search your created exercises
 
+## Demo
+
+#### Creating a routine
+
+![creating-a-routine](./docs/images/create-routine.gif)
+
+#### Performing a workout
+
+![performing-a-workout](./docs/images/performing-a-workout.gif)
+
 ## Application Architecture Overview
 
 ![workout-tracker-architecture](./docs/images/workout-tracker-architecture.png)
