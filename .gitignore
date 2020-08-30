@@ -24,3 +24,6 @@ awsconfiguration.json
 
 #vscode
 .vscode/
+
+#android studio
+.idea/ 
