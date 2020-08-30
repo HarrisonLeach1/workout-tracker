@@ -1,17 +1,17 @@
-import React, { useContext, useState } from 'react';
-import { RouteComponentProps } from 'react-router';
-import { View, FlatList, StyleSheet, Text } from 'react-native';
-import { FAB, ActivityIndicator, Theme, Divider, withTheme } from 'react-native-paper';
-import { ListRoutinesQueryVariables, ListRoutinesQuery } from '../../API';
-import gql from 'graphql-tag';
-import { listRoutines } from '../../graphql/queries';
 import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import React, { useContext, useState } from 'react';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Divider, FAB, Theme, withTheme } from 'react-native-paper';
+import { RouteComponentProps } from 'react-router';
+import { ListRoutinesQuery, ListRoutinesQueryVariables } from '../../API';
 import { SelectedRoutineContext } from '../../contexts/SelectedRoutineContext';
-import RoutinePreviewCard from './RoutinePreviewCard';
+import { listRoutines } from '../../graphql/queries';
 import CallToAction from '../Create/CallToAction';
 import ExplanatoryDialog from '../dialogs/ExplanatoryDialog';
+import RoutinePreviewCard from './RoutinePreviewCard';
 // TODO: Find a more sophisticated way of handling limits
-const ROUTINE_LIMIT = 5;
+const ROUTINE_LIMIT = 8;
 
 interface IRoutineListProps extends RouteComponentProps {
   theme: Theme;
@@ -40,7 +40,7 @@ const RoutineList: React.FC<IRoutineListProps> = ({ history, theme }: IRoutineLi
         visible={limitDialogVisible}
         onDismiss={handleLimitDialogDismiss}
         title="Routine Count Exceeded"
-        message="You cannot create more than 5 routines using the free version of Workout Tracker. Upgrade to create more."
+        message={`You cannot create more than ${ROUTINE_LIMIT} routines using the free version of Workout Tracker. Upgrade to create more.`}
       />
       {loading ? (
         <ActivityIndicator size={'large'} animating={true} color={theme.colors.primary} />
